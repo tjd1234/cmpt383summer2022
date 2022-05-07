@@ -2,9 +2,6 @@
 
 Welcome to CMPT 383, Comparative Programming Languages!
 
-Grades, announcements, discussions, etc. will be done on
-[Canvas](https://canvas.sfu.ca/courses/70067).
-
 - [Lecture notes](lectures): weekly lecture notes and files are here.
 - [Assignments](assignments)
 - [Grades, announcements, discussions
