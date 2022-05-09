@@ -24,7 +24,7 @@ easiest way to get access to a Linux machine (it's what I use).
 
 You can also set up a virtual machine (VM) using a tool
 like[VirtualBox](https://www.virtualbox.org/) or
-[VMware](https://www.vmware.com/ca.html). This is probably more work than
+[VMware](https://www.vmware.com/ca.html). This is more work than
 [WSL](https://docs.microsoft.com/en-us/windows/wsl/install), but may give you
 more flexibility.
 

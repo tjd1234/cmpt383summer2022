@@ -10,12 +10,13 @@ submit your work on Canvas.
 [Weekly lecture notes are here](../languages/).
 
 
-## Create a Rational Type
+## Part 1: Create a Rational Type
 
-See [rationals.md](rationals.md).
+See [creating a rational package](rationals.md). Details specific to the
+language you are using are given on that page.
 
 
-## Linear Insertion Sort
+## Part 2: Linear Insertion Sort
 
 Implement a version of [linear insertion
 sort](https://en.wikipedia.org/wiki/Insertion_sort) **sort(lst)** that returns

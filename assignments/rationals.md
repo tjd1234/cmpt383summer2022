@@ -1,8 +1,8 @@
 # A Rational Type
 
 Implement a **rational** number type in a way that make sense in the language.
-A rational type represents a rational number, as described in these [notes on
-rational numbers](notes_on_rationals.md).
+A rational type represents a rational number, as described in these
+[mathematical notes on rational numbers](notes_on_rationals.md).
 
 Your rational type should support at least the following operations. Please
 put the number of each operation in a comment in your source near it's
@@ -64,23 +64,22 @@ implementation to help the marker understand your code.
     $`H_n = \frac{1}{1} + \frac{1}{2} + \frac{1}{3} + \ldots + \frac{1}{n}`$.
 
 
-
 ## General Notes
 
-The purpose of this assignment is to demonstrate your understanding of the
-basic features of the language. **Show us you understand the language by using
-its features in a sensible way**.
+The purpose of this activity is to demonstrate your understanding of the basic
+features of the language. **Show us you understand the language by using its
+features in a sensible way**.
 
 So you should implement and design your own **original** rational type, and
-write all the code yourself. *Don't* use any special packages or libraries
-that do a substantial part of the work. You can use basic helper functions
-from your language's standard library.
+write all the code yourself. *Don't* use any rational-specific packages or
+libraries that do a substantial part of the work. You can use basic helper
+functions from your language's standard library.
 
 Most of the languages we're using already have built-in support for rational
 numbers. But **don't** use them in your implementation. Calling pre-made code
-doesn't demonstrate much understanding of the language.
+doesn't demonstrate the understanding of the language we're looking for.
 
-Handling invalid fractions is important, and we want to see you use an
+Handling *invalid* fractions is important, and we want to see you use an
 error-handling strategy that is recommended for your language. *Don't* let the
 program crash when something *expected* goes wrong (e.g. dividing by 0 should
 never crash the program).
@@ -147,6 +146,8 @@ type Rationalizer interface {
 ```
 
 Use `errors.New` to create error values.
+
+More details may be posted here closer to the assignment deadline.
 
 
 ## Ruby-specific Notes
