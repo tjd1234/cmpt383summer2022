@@ -2,7 +2,7 @@
 
 Welcome to CMPT 383, Comparative Programming Languages!
 
-- [Weekly lecture notes and files](lectures/). This includes the weekly
+- [Weekly lecture notes and files](languages/). This includes the weekly
   schedule of topics.
 - [Assignments](assignments/).
 - [Grades, announcements, discussions
