@@ -64,7 +64,8 @@ would help readability).
 tokens. For example, given the Go source code `i := 3`, after tokenization it
 would be split into something like `[("i", identifier), (":=", shortvardecl),
 ("3", int)]`. Tokenization typically removes all whitespace and associates a
-token type with each token. This makes it much easier to process later.
+token type with each token. This makes it much easier to process later. Also
+know as **lexing**.
 
 **whitespace characters**: A character such as space, newline `\n`, tab `\t`,
 or return `\r`. On white paper, they are not printed and so the white paper is
