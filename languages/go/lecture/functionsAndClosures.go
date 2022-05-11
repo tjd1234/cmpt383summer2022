@@ -1,5 +1,14 @@
 // functionsAndClosures.go
 
+//
+// Write a function that returns another function.
+//
+// Write a function that returns two functions that share the same variable.
+//
+// Write a function that applies another function to every element of a slice
+// of strings.
+//
+
 package main
 
 import (
@@ -9,8 +18,8 @@ import (
 
 func main() {
     test_makeAdder()
-    test_makeIncrementer()
-    test_mapstr()
+    // test_makeIncrementer()
+    // test_mapstr()
 }
 
 //
