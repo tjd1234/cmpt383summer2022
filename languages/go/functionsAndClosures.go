@@ -24,6 +24,18 @@ func makeAdder(n int) func(int) int {
     }
 }
 
+//
+// In the code below, add5 is a function that takes one int, and returns 5
+// plus that int. It's essentially the same as if we'd defined it like this:
+//
+//    func add5(n int) int {
+//       return n + 5
+//    }
+//
+// The difference is that this func version must be completely defined at
+// compile-time. But the version below lets us specify the 5 (or any other
+// int) at run-time.
+//
 func test_makeAdder() {
     add5 := makeAdder(5)
     n := 1
@@ -41,6 +53,7 @@ func test_makeAdder() {
 //
 // makeIncrementer returns two closures, one for each of these operations.
 // Both closures share the same variable n.
+//
 func makeIncrementer() (func(), func() int) {
     // n is the value to be incremented
     n := 0
