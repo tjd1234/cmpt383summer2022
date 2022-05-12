@@ -87,8 +87,8 @@ func test_makeIncrementer() {
 
 
 //
-// mapstr makes a new slice of strings by applying a string function to every
-// element of a slice of strings.
+// mapstr makes a new slice of strings by applying a given string function to
+// every element of the slice.
 //
 // The first input, lst, is of type []string, a slice of strings, i.e. a
 // sequence of 0 or more strings. The second input, f, is any function that
@@ -96,10 +96,13 @@ func test_makeIncrementer() {
 // ..., sn], then mapstr(lst, f) returns a new slice equal to [f(s1), f(s2),
 // ..., f(sn)].
 //
-// The make function in the first line is a built-on Go function that, among
-// other things, creates a new slice. make([]string, len(lst)) creates a new
-// slice of strings with length len(lst). len(lst) is the number of elements
-// in lst.
+// Important: mapstr always returns a copy of the passed-in slice, which may
+// be inefficient. The passed-in slice is not modified.
+//
+// The make function in the first line is a built-in Go function that, among
+// other things, creates a new slice. The expression make([]string, len(lst))
+// returns a new slice of strings with length len(lst). len(lst) is the number
+// of elements in lst.
 //
 func mapstr(lst []string, f func(string) string) []string {
     result := make([]string, len(lst))
@@ -113,6 +116,14 @@ func makeTitle(s string) string {
     return "Title: " + s
 }
 
+//
+// In the code below, mapstr is called twice, one for each string function
+// that is applied. Unfortunately, that's inefficient: each call to mapstr
+// makes a new copy of the slice.
+//
+// What's a more efficient way to do the same thing, that calls mapstr only
+// once?
+//
 func test_mapstr() {
     movies := []string{"star wars", "the godfather", 
                        "everything everywhere all at once"}
