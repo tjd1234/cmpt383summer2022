@@ -133,9 +133,6 @@ func test_mapstr() {
     // capitalized
     modMovies := mapstr(movies, strings.Title)
     modMovies = mapstr(modMovies, makeTitle)
-    //
-    // Question: How can you rewrite these two calls to mapstr in a single
-    // line of code?
-    //
+
     fmt.Println(modMovies)
 }
