@@ -44,6 +44,16 @@ func incAll(s []int) {
     }
 }
 
+// Returns a new slice of length n, initialized with the values 0, 1, 2, ...,
+// n-1.
+func fillRange(n int) []int {
+    result := make([]int, n)
+    for i := 0; i < n; i++ {
+        result[i] = i
+    }
+    return result
+}
+
 func main() {
     // arr is an array (not a slice) of 5 ints
     arr := [5]int{1, 2, 3, 4, 5}
@@ -122,4 +132,6 @@ func main() {
     otherNames := []string{"Olivia", "Ray", "Dana"}
     names = append(names, otherNames...)
     fmt.Println(names)
+
+    fmt.Println(fillRange(10))
 } // main

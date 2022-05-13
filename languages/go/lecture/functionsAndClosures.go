@@ -8,9 +8,9 @@ import (
 )
 
 func main() {
-    test_makeAdder()
+    // test_makeAdder()
     // test_makeIncrementer()
-    // test_mapstr()
+    test_mapstr()
 }
 
 //
@@ -113,7 +113,11 @@ func mapstr(lst []string, f func(string) string) []string {
 }
 
 func makeTitle(s string) string {
-    return "Title: " + s
+    return "title: " + strings.Title(s)
+}
+
+func makeTitle2(s string) string {
+    return strings.Title("Title: " + s)
 }
 
 //
@@ -131,8 +135,8 @@ func test_mapstr() {
 
     // strings.Title returns a new string with the first letter of each word
     // capitalized
-    modMovies := mapstr(movies, strings.Title)
-    modMovies = mapstr(modMovies, makeTitle)
+    // modMovies := mapstr(movies, strings.Title)
+    modMovies := mapstr(movies, makeTitle)
 
     fmt.Println(modMovies)
 }

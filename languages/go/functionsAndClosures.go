@@ -113,6 +113,18 @@ func makeTitle(s string) string {
     return "Title: " + s
 }
 
+func composeStr(f, g func(string) string) func(string) string {
+    return func(s string) {
+        return f(g(s))
+    }
+}
+
+func composeFloat64(f, g func(float64) float64) func(float64) float64 {
+    return func(s float64) {
+        return f(g(s))
+    }
+}
+
 func test_mapstr() {
     movies := []string{"star wars", "the godfather", 
                        "everything everywhere all at once"}
