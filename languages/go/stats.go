@@ -1,8 +1,10 @@
 // stats.go
 
+//
 // Read a text file of real numbers, one per line, and calculate their min,
 // max, median, sum, average, and standard deviation (populations version, not
 // the sample version).
+//
 
 package main
 
@@ -16,14 +18,20 @@ import (
 )
 
 func main() {
-    // open the file
+    // Open the file.
     f, err := os.Open("numbers.txt")
     if err != nil {
         panic("Couldn't open file!")
     }
+    //
+    // f.Close() is deferred, meaning it will be called when the main function
+    // ends, even if it ends due to an error.
+    //
     defer f.Close()
 
-    // read the numbers int an array
+    //
+    // Read the numbers int a slice.
+    //
     var nums []float64
     scanner := bufio.NewScanner(f)
     for scanner.Scan() {

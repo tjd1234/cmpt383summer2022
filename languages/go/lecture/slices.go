@@ -65,13 +65,22 @@ func main() {
     fmt.Println()
 
     //
+    // range is useful way to get the index and elements of a slice. This
+    // for-loop prints the same thing as the one above.
+    //
+    for i, x := range sl {
+        fmt.Printf("sl[%v]: %v\n", i, x)
+    }
+    fmt.Println()
+
+    //
     // When you pass a slice to a function, the underlying array is *not*
     // copied. So passing a slice acts like pass-by-reference, and the
     // function can modify the passed-in slice.
     //
     incAll(sl)
-    for i := 0; i < len(sl); i++ {
-        fmt.Printf("sl[%v]: %v\n", i, sl[i])
+    for i, x := range sl {
+        fmt.Printf("sl[%v]: %v\n", i, x)
     }
     fmt.Println()
 
@@ -85,11 +94,16 @@ func main() {
     s := []int{5, 3, 7, 8, 9, 5}
     fmt.Println("Length of s:", len(s))
     fmt.Println("Capacity of s:", cap(s))
+
+    //
+    // range with a single variable gets the index of the slice.
+    // This initializes slice s to {0, 1, 2, 3, 4, 5}.
+    //
     for i := range s {
         s[i] = i
     }
-    for i := 0; i < len(s); i++ {
-        fmt.Printf("s[%v]: %v\n", i, s[i])
+    for i, x := range s {
+        fmt.Printf("s[%v]: %v\n", i, x)
     }
     fmt.Println()
 
