@@ -3,7 +3,7 @@
 //
 // Read a text file of real numbers, one per line, and calculate their min,
 // max, median, sum, average, and standard deviation (populations version, not
-// the sample version).
+// sample version).
 //
 
 package main
@@ -18,7 +18,9 @@ import (
 )
 
 func main() {
+    //
     // Open the file.
+    //
     f, err := os.Open("numbers.txt")
     if err != nil {
         panic("Couldn't open file!")

@@ -1,9 +1,12 @@
 // bits.go
 
 //
-// Print all bit strings of length n. It should work for any integer n >= 0,
-// although since there are an exponential number of bit strings it's okay if
-// your program takes a long time to calculate large values of n.
+// Print all bit strings consisting of n-bits.
+//
+// For example, the eight 3-bit bit strings are: "000", "001", "010", "011",
+// "100", , "101", "110", "111".
+//
+// The order of the bit strings doesn't matter.
 //
 
 package main
@@ -22,7 +25,7 @@ func main() {
 //
 // Returns a slice of all bit-strings of length n.
 //
-// The ... in the calls to append add all the elements of the slice on the
+// The ... in the calls to append add all the elements of the slice onto the
 // right.
 //
 func nbits(n int) []string {

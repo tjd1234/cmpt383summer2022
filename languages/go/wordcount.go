@@ -42,6 +42,10 @@ func main() {
     //
     // Create an array of all the words.
     //
+    // strings.Split returns a slice of strings of all the space-separated
+    // words in a string. For example, strings.Split("one two three") returns
+    // {"one", "two", "three"}.
+    //
     words := strings.Split(processedContent, " ")
 
     //
@@ -52,7 +56,11 @@ func main() {
     }
  
     //
-    // Create a map of the counts of all the words. A map is hash table.
+    // Create a map of the counts of all the words. A map is a hash table.
+    //
+    // The map is created intially empty. If w is not in the map, then freq[w]
+    // returns 0, i.e. the zero-value for the type int. Many other languages
+    // deal with values not in a map by raising an error.
     //
     freq := map[string]int{}
     for _, w := range words {
@@ -62,11 +70,11 @@ func main() {
     }
 
     //
-    // Create a key-value struct to for sorting the frequencies.
+    // Create a key-value struct for sorting the frequencies.
     //
     type kv struct {
-        key string
-        val int
+        key string // a word
+        val int    // number of times the word occurs
     }
 
     //
@@ -80,6 +88,9 @@ func main() {
     //
     // First sort alphabetically by word (the key).
     //
+    // sort.SliceStable is a standard Go sorting function, and it takes as
+    // input the slice to sort and a comparison function for comparing two
+    // elements in arr.
     sort.SliceStable(arr, func(i, j int) bool {
         return arr[i].key < arr[j].key
     })
@@ -88,7 +99,7 @@ func main() {
     // Sort from most frequent to least frequent.
     //
     sort.SliceStable(arr, func(i, j int) bool {
-        return arr[i].val > arr[j].val
+        return arr[i].val > arr[j].val  // note > instead of <
     })
 
     //
@@ -98,4 +109,4 @@ func main() {
     for i, pair := range arr[:N] {
         fmt.Printf("%v. %v (%v)\n", i + 1, pair.key, pair.val)
     }
-}
+} // main

@@ -60,6 +60,7 @@ Please read the following parts of [the Go tour](https://go.dev/tour/list)
 - [point.go](point.go)
 - [shapes.go](shapes.go)
 - [tokenizer.go](tokenizer.go)
+- [tokenizer2.go](tokenizer2.go) (declares a new type based on `int`)
 
 ### Lecture 7 Go: Concurrency
 
