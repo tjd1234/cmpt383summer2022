@@ -26,6 +26,42 @@ Interactive interpreter with a Ruby program loaded:
 $ irb -I . -r prog.rb
 ```
 
+## Ruby Lectures
+
+### Lecture 1,2 Ruby: Basics
+
+- [hello_world.rb](hello_world.rb)
+- [hello_name.rb](hello_name.rb)
+- [count_up.go](count_up.rb)
+- [count_down.rb](count_down.rb)
+- [numbered_list.rb](numbered_list.rb)
+- [primes.rb](primes.rb)
+- [stats.rb](stats.rb)
+
+### Lecture 3 Ruby: Arrays, Slices, and Hashes
+
+- [slices.md](slices.md)
+- [bits.rb](bits.rb)
+- [sort.rb](sort.rb)
+- [hashes.md](hashes.md)
+- [wordcount.rb](wordcount.rb)
+
+### Lecture 4 Ruby: Strings and Regular Expressions
+
+- [strings.md](strings.md)
+- [regex.md](regex.md)
+
+### Lecture 5,6 Ruby: Classes and Objects
+
+- [shapes1.rb](shapes1.rb)
+- [shapes2.rb](shapes2.rb)
+- [shapes3.rb](shapes3.rb)
+- [primes_oop.rb](primes_oop.rb)
+
+### Lecture 7 Ruby: Blocks and Yield
+
+- Coming soon!
+
 
 ## Some Shortcuts
 
@@ -94,39 +130,3 @@ You can find the arity (number of inputs) of a method like this:
 >> "cat".sum
 => 312   # sum of the ASCII values of "cat"
 ```
-
-## Ruby Lectures
-
-### Lecture 1,2 Ruby: Basics
-
-- [hello_world.rb](hello_world.rb)
-- [hello_name.rb](hello_name.rb)
-- [count_up.go](count_up.rb)
-- [count_down.rb](count_down.rb)
-- [numbered_list.rb](numbered_list.rb)
-- [primes.rb](primes.rb)
-- [stats.rb](stats.rb)
-
-### Lecture 3 Ruby: Arrays, Slices, and Hashes
-
-- [slices.md](slices.md)
-- [bits.rb](bits.rb)
-- [sort.rb](sort.rb)
-- [hashes.md](hashes.md)
-- [wordcount.rb](wordcount.rb)
-
-### Lecture 4 Ruby: Strings and Regular Expressions
-
-- [strings.md](strings.md)
-- [regex.md](regex.md)
-
-### Lecture 5,6 Ruby: Classes and Objects
-
-- [shapes1.rb](shapes1.rb)
-- [shapes2.rb](shapes2.rb)
-- [shapes3.rb](shapes3.rb)
-- [primes_oop.rb](primes_oop.rb)
-
-### Lecture 7 Ruby: Blocks and Yield
-
-- Coming soon!
