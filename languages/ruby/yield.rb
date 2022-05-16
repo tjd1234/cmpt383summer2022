@@ -149,6 +149,8 @@ end # Integer
 # c
 # => 0...3
 #
+# %w(a b c) is shorthand for ["a", "b", "c"]
+#
 # >> %w(a b c).myeach_with_index {|i,s| puts "#{i+1}. #{s}"}
 # 1. a
 # 2. b

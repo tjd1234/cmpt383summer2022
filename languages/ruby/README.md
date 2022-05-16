@@ -60,7 +60,7 @@ $ irb -I . -r prog.rb
 
 ### Lecture 7 Ruby: Blocks and Yield
 
-- Coming soon!
+- [yield.rb](yield.rb)
 
 
 ## Some Shortcuts
