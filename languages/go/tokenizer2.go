@@ -63,7 +63,7 @@ func (tt tokenType) String() string {
 
 type Token struct {
     token string    // the token as a string
-    kind tokenType  // the type of the token
+    kind  tokenType // the type of the token
     start int       // index in the string where the token starts
 }
 

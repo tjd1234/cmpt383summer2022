@@ -32,7 +32,7 @@ const (
 
 type Token struct {
     token string  // the token as a string
-    kind int      // the type of the token
+    kind  int     // the type of the token
     start int     // index in the string where the token starts
 }
 
