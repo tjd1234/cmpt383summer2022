@@ -26,7 +26,7 @@ func main() {
     // Open the file. ioutil.ReadFile is a utility function that reads all the
     // lines of a file in a slice of bytes.
     //
-    fname := "austenPandP.txt" // "short.txt"
+    fname := "short.txt" // "austenPandP.txt"
     bytes, err := ioutil.ReadFile(fname)
     if err != nil {
         panic("Couldn't open file!")
@@ -36,6 +36,8 @@ func main() {
     // Convert letters to lowercase, non-letters to spaces.
     //
     content := strings.ToLower(string(bytes))
+
+    // These two lines convert all non-lowercase letters to spaces.
     rep := regexp.MustCompile(`[^a-z]`)
     processedContent := rep.ReplaceAllString(content, " ")
 
@@ -49,18 +51,21 @@ func main() {
     words := strings.Split(processedContent, " ")
 
     //
-    // Trim any extra whitespace at the beginning or end of the strings.
+    // Remove any extra whitespace at the beginning or end of the strings.
     //
     for i := range words {
         words[i] = strings.TrimSpace(words[i])
     }
  
     //
-    // Create a map of the counts of all the words. A map is a hash table.
+    // Create a map of the counts of all the words. A map is a hash table. The
+    // keys are strings, and the corresponding values are the count of the
+    // number of times the string appears.
     //
-    // The map is created intially empty. If w is not in the map, then freq[w]
-    // returns 0, i.e. the zero-value for the type int. Many other languages
-    // deal with values not in a map by raising an error.
+    // The map is created initially empty. If a string w is not in the map,
+    // then freq[w] returns 0, i.e. the zero-value for the type int. This
+    // quite convenient in this situation. Many other languages deal with
+    // values not in a map by raising an error.
     //
     freq := map[string]int{}
     for _, w := range words {
@@ -105,7 +110,7 @@ func main() {
     //
     // Print the top N most frequently occurring words.
     //
-    N := 10
+    N := 5
     for i, pair := range arr[:N] {
         fmt.Printf("%v. %v (%v)\n", i + 1, pair.key, pair.val)
     }

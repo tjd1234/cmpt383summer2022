@@ -53,6 +53,7 @@ Please read the following parts of [the Go tour](https://go.dev/tour/list)
 - [bits.go](bits.go)
 - [sort.go](sort.go)
 - [stats.go](stats.go)
+- [deferDemo.go](deferDemo.go)
 - [wordcount.go](wordcount.go)
 
 ### Lecture 5,6 Go: Methods and Interfaces

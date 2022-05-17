@@ -67,7 +67,7 @@ func main() {
 
     // arr[start:end] evaluates to a slice that refers to
     // arr[start], arr[start+1], ..., arr[end-1]
-    var sl []int = arr[1:4]
+    var sl []int = arr
     for i := 0; i < len(sl); i++ {
         fmt.Printf("sl[%v]: %v\n", i, sl[i])
     }
@@ -123,11 +123,11 @@ func main() {
     //
     names := []string{"Ken", "Rob", "Andrew"}
     fmt.Println(names)
-    names = append(names, "Diane")
+    name = append(names, "Diane")
     fmt.Println(names)
 
     //
-    // The ... notation will append an entire slice.
+    // The ... notation appends an entire slice.
     //
     otherNames := []string{"Olivia", "Ray", "Dana"}
     names = append(names, otherNames...)
