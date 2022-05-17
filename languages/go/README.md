@@ -67,4 +67,3 @@ Please read the following parts of [the Go tour](https://go.dev/tour/list)
 
 - [spinner.go](spinner.go)
 - [gen.go](gen.go)
-

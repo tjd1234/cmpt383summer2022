@@ -1,12 +1,13 @@
 // tokenizer.go
 
 //
-// A tokenizer for list of integers like "{9, 343, 0}". The are four kinds of
-// tokens: open brace, close braces, commas, and integers.
+// Write a tokenizer for a list of integers like "{9, 343, 0}". The are four
+// kinds of tokens: open brace, close braces, commas, and integers.
 //
 // The tokenizer returns a slice of all the tokens, in the order they occur.
-// Does *not* check if the tokens are in a sensible order, e.g. the tokenizer
-// will convert "},, { 349" into a list of tokens.
+// It does *not* check if the tokens are in a sensible order, e.g. the
+// tokenizer will convert non-sensical strings like "},, { 349" into a list of
+// tokens without comnplaint.
 //
 
 package main
@@ -17,11 +18,10 @@ import (
 )
 
 //
-// This creates 4 read-only constant values. It's Go's way of implementing
-// enumerated types.
+// This creates 4 read-only constant values. It's like an enumerated type.
 //
 // iota assigns each constant an integer, starting at 0 and then incrementing
-// by 1. So open_brace is 0 and integer is 4.
+// by 1. So open_brace is 0, close_brace is 1, comma is 2, and integer is 3.
 //
 const (
     open_brace = iota
@@ -46,20 +46,24 @@ func (t Token) String() string {
 
 func kindToStr(k int) string {
     switch k {
-    case open_brace: return "open_brace"
-    case close_brace: return "close_brace"
-    case comma: return "comma"
-    case integer: return "integer"
-    default: return "unknown"
+    case open_brace  : return "open_brace"
+    case close_brace : return "close_brace"
+    case comma       : return "comma"
+    case integer     : return "integer"
+    default          : return "unknown"
     }
 }
 
-// returns s in quotes, e.g. quote("yes!") returns "\"yes!\""
+//
+// Returns s in quotes, e.g. quote("yes!") returns "\"yes!\""
+//
 func quote(s string) string {
     return "\"" + s + "\""
 }
 
+//
 // Starting at i, returns the index of the first non-digit character in s.
+//
 func firstNonDigit(s string, i int) int {
     for i < len(s) && unicode.IsDigit(rune(s[i])) {
         i++
@@ -81,15 +85,15 @@ func main() {
         case ' ', '\n', '\t', '\r': // ignore whitespace
             i++
         case '{':
-            tok := Token{s[i:i+1], open_brace}
+            tok := Token{"{", open_brace}
             tokens = append(tokens, tok)
             i++
         case '}':
-            tok := Token{s[i:i+1], close_brace}
+            tok := Token{"}", close_brace}
             tokens = append(tokens, tok)
             i++
         case ',':
-            tok := Token{s[i:i+1], comma}
+            tok := Token{",", comma}
             tokens = append(tokens, tok)
             i++
         case '0', '1', '2', '3', '4', '5', '6', '7', '8', '9':
