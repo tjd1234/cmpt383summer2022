@@ -64,6 +64,19 @@ func (tt tokenType) String() string {
 type Token struct {
     token string    // the token as a string
     kind tokenType  // the type of the token
+    start int       // index in the string where the token starts
+}
+
+func makeOpenBrace(start int) Token {
+    return Token{"{", open_brace, start}
+}
+
+func makeCloseBrace(start int) Token {
+    return Token{"}", close_brace, start}
+}
+
+func makeComma(start int) Token {
+    return Token{",", comma, start}
 }
 
 //
@@ -74,7 +87,7 @@ type Token struct {
 // representation of a value.
 //
 func (t Token) String() string {
-    return fmt.Sprintf("Token{%v, %v}", quote(t.token), t.kind)
+    return fmt.Sprintf("Token{%v, %v, %v}", quote(t.token), t.kind, t.start)
 }
 
 //
@@ -106,21 +119,21 @@ func main() {
         case ' ', '\n', '\t', '\r': // ignore whitespace
             i++
         case '{':
-            tok := Token{"{", open_brace}
+            tok := makeOpenBrace(i)
             tokens = append(tokens, tok)
             i++
         case '}':
-            tok := Token{"}", close_brace}
+            tok := makeCloseBrace(i)
             tokens = append(tokens, tok)
             i++
         case ',':
-            tok := Token{",", comma}
+            tok := makeComma(i)
             tokens = append(tokens, tok)
             i++
         case '0', '1', '2', '3', '4', '5', '6', '7', '8', '9':
             begin := i
             end := firstNonDigit(s, i+1)
-            tok := Token{s[begin:end], integer}
+            tok := Token{s[begin:end], integer, begin}
             tokens = append(tokens, tok)
             i = end
         default:
