@@ -6,8 +6,8 @@
 // panic call immediately ends the program in a controlled way).
 //
 // Function calls can be deferred in Go. A deferred function call is executed
-// when a function finishes. The deferred function is called no matter how the
-// function ends, e.g. normally, or due to an error. This is useful in
+// when a function finishes. Whether the function ends normally or due to an
+// error, the deferred function is guaranteed to be called. This is useful in
 // situations where an error might occur and you need to run some clean-up
 // code whether or not an error occurs.
 //
@@ -19,7 +19,7 @@
 // in.
 //
 // If there are multiple calls to defer, then the deferred function calls are
-// added in stack order, e.g.:
+// added in stack order, i.e. the *last* defer is called first:
 //
 //    defer funcCall1
 //    // ...
@@ -37,14 +37,14 @@ package main
 import "fmt"
 
 func main() {
-    test1()
-    fmt.Println()
-    test2()
-    fmt.Println()
-    test3()
-    fmt.Println()
-    test4()
+    // test1()
     // fmt.Println()
+    // test2()
+    // // fmt.Println()
+    // test3()
+    // fmt.Println()
+    test4()
+    fmt.Println()
     // test5()
 }
 
@@ -68,14 +68,15 @@ func test3() {
 
 // Strange, but possible!
 func test4() {
-    for i := 0; i < 10; i++ {
+    i := 0
+    for ; i < 10; i++ {
         fmt.Println(i)
         defer fmt.Println(i)
     }
 }
 
 //
-// Here we use defer to print a emssage after a function finishes. this coudl
+// Here we use defer to print a emssage after a function finishes. This could
 // be useful for debugging.
 //
 func test5() {

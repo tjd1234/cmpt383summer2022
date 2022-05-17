@@ -35,6 +35,7 @@ type Person struct {
     age int
 }
 
+// a method
 func (p Person) String() string {
     return fmt.Sprintf("{%v, %v}", p.name, p.age)
 }

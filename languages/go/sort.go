@@ -47,7 +47,7 @@ func insert1(x int, i int, lst []int) []int {
 }
 
 //
-// Yet another way of writing insert.
+// Another way of writing insert.
 //
 func insert2(x int, i int, lst []int) []int {
     n := len(lst)

@@ -14,7 +14,7 @@ package main
 import "fmt"
 
 func main() {
-    n := 5
+    n := 4
     fmt.Printf("%v-bit strings:\n", n)
     bits := nbits(n)
     for i, b := range bits {
@@ -41,8 +41,8 @@ func nbits(n int) []string {
         one := append([]string{}, n1bits...)
 
         for i := range n1bits {
-            zero[i] = "0" + zero[i]
-            one[i] = "1" + one[i]
+            zero[i] = zero[i] + "0"
+            one[i] = one[i] + "1"
         }
 
         return append(zero, one...)

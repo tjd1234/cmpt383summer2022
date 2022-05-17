@@ -4,25 +4,46 @@ package main
 
 import (
     "fmt"
-    // "sort"
 )
 
 //
-// Returns a copy of lst with x inserted at location i e.g. insert(9, 2,
-// {3,2,1,4}) returns {3, 2, 9, 1, 4}.
+// The following insert functions use the built Go copy function. copy(dest,
+// src) copies the contents of slice src into slice dest. It works correctly
+// if dest and src overlap.
+//
+
+//
+// Returns a copy of lst with x inserted at location i e.g. insert(9, 2, {3,
+// 2, 1, 4}) returns {3, 2, 9, 1, 4}.
 //
 func insert1(x int, i int, lst []int) []int {
     n := len(lst)
+    
+    // Force i to be in the range 0 to n.
     if i < 0 {
         i = 0
     } else if i > n {
         i = n
     }
+    
+    // result is a new slice of size n+1
     result := make([]int, n+1)
+
+    // Get the left and right slice of lst.
     left, right := lst[:i], lst[i:]
+
+    // Copy the slice into the left part of result. copy is a built-in Go
+    // function.
+    // copy(dest, target)
     copy(result, left)
+
+    // Copy the right slice into the right part of the result, one space ahead
+    // to make room for x.
     copy(result[i+1:], right)
+
+    // Put x in the resulting slice.
     result[i] = x
+
     return result
 }
 
@@ -31,18 +52,32 @@ func insert1(x int, i int, lst []int) []int {
 //
 func insert2(x int, i int, lst []int) []int {
     n := len(lst)
+
+    // Force i to be in the range 0 to n.
     if i < 0 {
         i = 0
     } else if i > n {
         i = n
     }
-    result := make([]int, n+1)
-    copy(result, lst[:i])
-    copy(result[i+1:], lst[i:])
+
+    // result is a copy of lst
+    result := append([]int{}, lst...)
+
+    // add 1 more int to lst, for the x to be inserted
+    result = append(result, 0)
+
+    // Shift each int in the right part of result one element to the right.
+    copy(result[i+1:], result[i:])
+
+    // Put x into the right place.
     result[i] = x
+
     return result
 }
 
+//
+// Helper function used by testInsert.
+//
 func testEq(a, b []int) bool {
     if len(a) != len(b) {
         return false
@@ -55,6 +90,9 @@ func testEq(a, b []int) bool {
     return true
 }
 
+//
+// Tests if an insert function works correctly.
+//
 func testInsert(insert func(int, int, []int) []int) {
     testNum := 0
     pass, fail := 0, 0
@@ -71,6 +109,9 @@ func testInsert(insert func(int, int, []int) []int) {
             fmt.Printf("test %v FAILED\n", testNum)
         }
     }
+    check(9, 0, []int{},          []int{9})
+    check(9, 0, []int{0},         []int{9,0})
+    check(9, 1, []int{0},         []int{0,9})
     check(9, 0, []int{0,1,2,3,4}, []int{9,0,1,2,3,4})
     check(9, 1, []int{0,1,2,3,4}, []int{0,9,1,2,3,4})
     check(9, 2, []int{0,1,2,3,4}, []int{0,1,9,2,3,4})
@@ -80,7 +121,7 @@ func testInsert(insert func(int, int, []int) []int) {
 
     fmt.Printf("Done. %v/%v passed, %v/%v failed\n",
         pass, testNum, fail, testNum)
-}
+} // testInsert
 
 //
 // Sorts slice a into ascending sorted order using insertion sort.
@@ -107,6 +148,9 @@ func isSorted(a []int) bool {
     return true
 }
 
+//
+// Test if a sorting function is correct.
+//
 func testSort(sort func([]int)) {
     data := [][]int{
         []int{}, []int{1}, []int{1,2}, []int{2,1}, []int{2,2}, 
@@ -127,5 +171,5 @@ func testSort(sort func([]int)) {
 
 func main() {
     testInsert(insert2)
-    testSort(insertionSort)
+    // testSort(insertionSort)
 }

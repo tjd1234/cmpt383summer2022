@@ -40,7 +40,7 @@ func main() {
         // get the next string in the file
         s := scanner.Text()
 
-        // convert the stringt to a float
+        // convert the string to a float
         x, err := strconv.ParseFloat(s, 64)
 
         // check for errors
@@ -53,19 +53,10 @@ func main() {
     }
 
     //
-    // Sort the numbers into ascending order using one of Go's built-in
-    // sorting functions.
-    //
-    // sort.Float64s(nums)
-    // fmt.Println(nums)
-
-    //
     // Print statistics
     //
     fmt.Println("      Min:", min(nums))
-    // fmt.Println("   Median:", nums[len(nums)/2])
     fmt.Println("   Median:", median(nums))
-    // fmt.Println("      Max:", nums[len(nums)-1])
     fmt.Println("      Max:", max(nums))
     fmt.Println("      Sum:", sum(nums))
     fmt.Println("     Mean:", mean(nums))
@@ -92,7 +83,7 @@ func mean(nums []float64) float64 {
 }
 
 //
-// Returns the small float in nums.
+// Returns the smallest float in nums.
 //
 func min(nums []float64) float64 {
     result := nums[0]
