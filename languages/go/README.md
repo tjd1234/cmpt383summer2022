@@ -58,6 +58,8 @@ Please read the following parts of [the Go tour](https://go.dev/tour/list)
 
 ### Lecture 5,6 Go: Methods and Interfaces
 
+- [interfaceDemo.md](interfaceDemo.md) (and associated code in
+  [interfaceDemo.go](interfaceDemo.go))
 - [sortInterfaces.go](sortInterfaces.go) (demo of Go's standard sort function)
 - [point.go](point.go)
 - [shapes.go](shapes.go)
