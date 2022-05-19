@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # CMPT 383, Summer 2022 ... github version!
 
 - [Weekly lectures](languages/schedule.md). This includes the weekly schedule
