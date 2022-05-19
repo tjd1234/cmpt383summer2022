@@ -28,22 +28,16 @@ $\frac{b}{a}$. If $a = 0$, then $\frac{a}{b}$ has no inverse.
 
 Rationals $\frac{a}{b}$ and $\frac{c}{d}$ are *added* like this:
 
-\[
-\frac{a}{b} + \frac{c}{d} = \frac{ad + bc}{bd}
-\]
+$$\frac{a}{b} + \frac{c}{d} = \frac{ad + bc}{bd}$$
 
 They are *multiplied* like this:
 
-\[
-\frac{a}{b} \cdot \frac{c}{d} = \frac{ac}{bd}
-\]
+$$\frac{a}{b} \cdot \frac{c}{d} = \frac{ac}{bd}$$
 
 And, assuming $b \neq 0$, $c \neq 0$, and $d \neq 0$, they are *divided* like
 this:
 
-\[
-\frac{\frac{a}{b}}{\frac{c}{d}} = \frac{ad}{bc}
-\]
+$$\frac{\frac{a}{b}}{\frac{c}{d}} = \frac{ad}{bc}$$
 
 
 ## Reducibility
