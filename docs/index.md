@@ -1,4 +1,4 @@
-## Welcome to CMPT 383, Summer 2022 ... github version!
+# CMPT 383, Summer 2022 ... github version!
 
 - [Weekly lectures](https://github.com/tjd1234/cmpt383summer2022/tree/main/languages). This includes the weekly schedule of topics.
 - Language notes: [Go](https://github.com/tjd1234/cmpt383summer2022/tree/main/languages/go), [Ruby](https://github.com/tjd1234/cmpt383summer2022/tree/main/languages/ruby), 
