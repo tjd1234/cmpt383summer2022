@@ -1,7 +1,3 @@
----
-use_math: true
----
-
 # Rational Numbers
 
 A **rational number** is a real number that can represented as a fraction
@@ -32,22 +28,22 @@ $\frac{b}{a}$. If $a = 0$, then $\frac{a}{b}$ has no inverse.
 
 Rationals $\frac{a}{b}$ and $\frac{c}{d}$ are *added* like this:
 
-```math
+\[
 \frac{a}{b} + \frac{c}{d} = \frac{ad + bc}{bd}
-```
+\]
 
 They are *multiplied* like this:
 
-```math
+\[
 \frac{a}{b} \cdot \frac{c}{d} = \frac{ac}{bd}
-```
+\]
 
 And, assuming $b \neq 0$, $c \neq 0$, and $d \neq 0$, they are *divided* like
 this:
 
-```math
+\[
 \frac{\frac{a}{b}}{\frac{c}{d}} = \frac{ad}{bc}
-```
+\]
 
 
 ## Reducibility
