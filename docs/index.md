@@ -1,6 +1,7 @@
 # CMPT 383, Summer 2022 ... github version!
 
-- [Weekly lectures](languages). This includes the weekly schedule of topics.
+- [Weekly lectures](languages/schedule.md). This includes the weekly schedule
+  of topics.
 - Language notes: [Go](languages/go), [Ruby](languages/ruby), 
   [Racket](languages/racket), [Haskell](languages/haskell),
   [Prolog](languages/prolog)
