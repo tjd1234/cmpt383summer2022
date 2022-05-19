@@ -2,7 +2,7 @@
 
 Welcome to CMPT 383, Comparative Programming Languages!
 
-- [Weekly lectures](languages/). This includes the weekly schedule of topics.
+- [Weekly lectures](https://github.com/tjd1234/cmpt383summer2022/tree/main/languages). This includes the weekly schedule of topics.
 - Language notes: [Go](/languages/go), [Ruby](languages/ruby),
   [Racket](/languages/racket), [Haskell](languages/haskell),
   [Prolog](/languages/prolog)
