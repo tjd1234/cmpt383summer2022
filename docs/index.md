@@ -1,10 +1,10 @@
 # CMPT 383, Summer 2022 ... github version!
 
-- [Weekly lectures](https://github.com/tjd1234/cmpt383summer2022/tree/main/languages). This includes the weekly schedule of topics.
-- Language notes: [Go](https://github.com/tjd1234/cmpt383summer2022/tree/main/languages/go), [Ruby](https://github.com/tjd1234/cmpt383summer2022/tree/main/languages/ruby), 
-  [Racket](https://github.com/tjd1234/cmpt383summer2022/tree/main/languages/racket), [Haskell](https://github.com/tjd1234/cmpt383summer2022/tree/main/languages/haskell),
-  [Prolog](https://github.com/tjd1234/cmpt383summer2022/tree/main/languages/prolog)
-- [Assignments](https://github.com/tjd1234/cmpt383summer2022/tree/main/assignments).
+- [Weekly lectures](languages). This includes the weekly schedule of topics.
+- Language notes: [Go](languages/go), [Ruby](languages/ruby), 
+  [Racket](languages/racket), [Haskell](languages/haskell),
+  [Prolog](languages/prolog)
+- [Assignments](assignments).
 - [Installing the languages](install.md) on Ubuntu Linux.
 - [Grades, announcements, discussions
   (Canvas)](https://canvas.sfu.ca/courses/70067).
