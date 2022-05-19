@@ -7,7 +7,7 @@ the other languages that it end up having a different assignment.
 **Please see Canvas for the due dates for each of the assignments**. Also,
 submit your work on Canvas.
 
-[Weekly lecture notes are here](../languages/).
+[Weekly lecture notes are here](../languages/schedule.md).
 
 
 ## Part 1: Create a Rational Type
@@ -70,6 +70,11 @@ For timing the functions, most languages should have library functions that
 let you get the current time: if you save the time at the start of a function
 and the end of the function, you can subtract them to get the total run time.
 You could also use the command-line shell `time` function.
+
+Your code does *not* need to automatically generate Excel files. You could, if
+you like, print the timings to the screen and then cut-and-paste them by hand
+into the spreadsheet. Another possibility is to write the output to
+comma-separated value files, which Excel can read.
 
 
 ### Marking Scheme

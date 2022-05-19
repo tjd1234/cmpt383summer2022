@@ -1,49 +1,49 @@
 The weekly schedule of topics is below. Although no changes are planned, it is
 possible that changes are made as the course progresses.
 
-[Assignments are here](../assignments/).
+[Assignments are here](../assignments/assignments.md).
 
 ## Week 1 Go
 
-- [Notes on Go](go/) 
+- [Notes on Go](go/go_notes.md) 
 
 ## Week 2 Go
 
-- [Notes on Go](go/) 
+- [Notes on Go](go/go_notes.md) 
 
 ## Week 3 Go, Ruby
 
-- [Notes on Go](go/) 
-- [Notes on Ruby](ruby/)
+- [Notes on Go](go/go_notes.md) 
+- [Notes on Ruby](ruby/ruby_notes.md)
 
 ## Week 4 Ruby
-- [Notes on Ruby](ruby/)
+- [Notes on Ruby](ruby/ruby_notes.md)
 
 ## Week 5 Ruby, Racket
-- [Notes on Ruby](ruby/)
-- [Notes on Racket](racket/)
+- [Notes on Ruby](ruby/ruby_notes.md)
+- [Notes on Racket](racket/racket_notes.md)
 
 ## Week 6 Racket
-- [Notes on Racket](racket/)
+- [Notes on Racket](racket/racket_notes.md)
 
 ## Week 7 Racket
-- [Notes on Racket](racket/)
+- [Notes on Racket](racket/racket_notes.md)
 
 ## Week 8 Haskell
-- [Notes on Haskell](haskell/)
+- [Notes on Haskell](haskell/haskell_notes.md)
 
 ## Week 9 Haskell
-- [Notes on Haskell](haskell/)
+- [Notes on Haskell](haskell/haskell_notes.md)
 
 ## Week 10 Haskell, Prolog
-- [Notes on Haskell](haskell/)
-- [Notes on Prolog](prolog/)
+- [Notes on Haskell](haskell/haskell_notes.md)
+- [Notes on Prolog](prolog/prolog_notes.md)
 
 ## Week 11 Prolog
-- [Notes on Prolog](prolog/)
+- [Notes on Prolog](prolog/prolog_notes.md)
 
 ## Week 12 Prolog
-- [Notes on Prolog](prolog/)
+- [Notes on Prolog](prolog/prolog_notes.md)
 
 ## Week 13 Wrap-up
 
