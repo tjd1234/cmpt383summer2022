@@ -63,8 +63,8 @@ Please read the following parts of [the Go tour](https://go.dev/tour/list)
 - [sortInterfaces.go](sortInterfaces.go) (demo of Go's standard sort function)
 - [point.go](point.go)
 - [shapes.go](shapes.go)
-- [tokenizer.go](tokenizer.go)
-- [tokenizer2.go](tokenizer2.go) (declares a new type based on `int`)
+- [tokenizer.go](tokenizer.go) and [tokenizer2.go](tokenizer2.go) (declares a
+  new type based on `int`)
 
 ### Lecture 7 Go: Concurrency
 
