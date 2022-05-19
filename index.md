@@ -4,8 +4,8 @@
 - Language notes: [Go](https://github.com/tjd1234/cmpt383summer2022/tree/main/languages/go), [Ruby](https://github.com/tjd1234/cmpt383summer2022/tree/main/languages/ruby), 
   [Racket](https://github.com/tjd1234/cmpt383summer2022/tree/main/languages/racket), [Haskell](https://github.com/tjd1234/cmpt383summer2022/tree/main/languages/haskell),
   [Prolog](https://github.com/tjd1234/cmpt383summer2022/tree/main/languages/prolog)
-- [Assignments](assignments/).
-- [Installing the languages](install.md) on Ubuntu Linux.
+- [Assignments](https://github.com/tjd1234/cmpt383summer2022/tree/main/assignments).
+- [Installing the languages](https://github.com/tjd1234/cmpt383summer2022/blob/main/install.md) on Ubuntu Linux.
 - [Grades, announcements, discussions
   (Canvas)](https://canvas.sfu.ca/courses/70067).
 
