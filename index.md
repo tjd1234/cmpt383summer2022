@@ -5,7 +5,7 @@
   [Racket](https://github.com/tjd1234/cmpt383summer2022/tree/main/languages/racket), [Haskell](https://github.com/tjd1234/cmpt383summer2022/tree/main/languages/haskell),
   [Prolog](https://github.com/tjd1234/cmpt383summer2022/tree/main/languages/prolog)
 - [Assignments](https://github.com/tjd1234/cmpt383summer2022/tree/main/assignments).
-- [Installing the languages](https://github.com/tjd1234/cmpt383summer2022/blob/main/install.md) on Ubuntu Linux.
+- [Installing the languages](install.md) on Ubuntu Linux.
 - [Grades, announcements, discussions
   (Canvas)](https://canvas.sfu.ca/courses/70067).
 
