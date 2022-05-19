@@ -1,1 +1,3 @@
+# Haskell Notes
+
 Coming soon!

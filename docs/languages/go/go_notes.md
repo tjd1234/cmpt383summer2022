@@ -1,4 +1,4 @@
-# Go
+# Go Notes
 
 ## Linux Installation
 

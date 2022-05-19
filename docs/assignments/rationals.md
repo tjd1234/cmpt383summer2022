@@ -87,6 +87,11 @@ never crash the program).
 
 ## Go-specific Notes
 
+**Do not use Go generics** for any part of this assignment. They are a very
+recent feature of the language that not all Go compilers support yet. So
+please do not use them (if you do you may be asked to re-write your code
+without generics).
+
 Represent rationals using a `struct` that implements the following
 `Rationalizer` interface. Note that this interface does *not* include making a
 rational or calculating the harmonic sum, and so you should implement those as

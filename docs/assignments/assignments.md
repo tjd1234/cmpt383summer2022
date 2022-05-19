@@ -76,8 +76,15 @@ you like, print the timings to the screen and then cut-and-paste them by hand
 into the spreadsheet. Another possibility is to write the output to
 comma-separated value files, which Excel can read.
 
+### Go-specific Notes
 
-### Marking Scheme
+**Do not use Go generics** for any part of this assignment. They are a very
+recent feature of the language that not all Go compilers support yet. So
+please do not use them (if you do you may be asked to re-write your code
+without generics).
+
+
+## Marking Scheme
 
 For your rational type:
 - **15 marks** 1 mark for each correctly and reasonably implemented question
