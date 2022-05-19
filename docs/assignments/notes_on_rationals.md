@@ -6,8 +6,8 @@ use_math: true
 
 A **rational number** is a real number that can represented as a fraction
 \( \frac{a}{b} \), where \( a \) and \( b \neq 0 \) are integers. For example,
-$`\frac{8}{11}`$, $`\frac{10}{-4}`$, $`\frac{0}{22}`$, and $`\frac{12}{12}`$
-are all rational numbers. But $`\frac{8.5}{11}`$ and $`\frac{45}{0}`$ are
+$\frac{8}{11}$, $\frac{10}{-4}$, $\frac{0}{22}$, and $\frac{12}{12}$
+are all rational numbers. But $\frac{8.5}{11}$ and $\frac{45}{0}$ are
 *not* rational numbers. For simplicity, we will often call them **rationals**.
 
 As with all fractions, if $`\frac{a}{b}`$ is a rational number then $`a`$ is
