@@ -8,9 +8,9 @@ Your rational type should support at least the following operations. Please
 put the number of each operation in a comment in your source near it's
 implementation to help the marker understand your code.
 
-1. **Make a rational**: Given integers $`a`$ and $`b`$, create a new rational
-   with $`a`$ as the numerator and $`b`$ as the denominator. Trying to create
-   a rational with denominator 0 is an error, but it should *not* crash your
+1. **Make a rational**: Given integers $a$ and $b$, create a new rational with
+   $a$ as the numerator and $b$ as the denominator. Trying to create a
+   rational with denominator 0 is an error, but it should *not* crash your
    program. Instead, handle this case in a systematic way that makes sense
    within your programming language; the language-specific notes at the bottom
    may give you hints.
@@ -60,8 +60,8 @@ implementation to help the marker understand your code.
     the greatest common divisor (GCD) algorithm to help do this. Be careful in
     the case where the numerator or denominator is negative.
 
-15. **Harmonic sum** Given an integer $`n > 0`$, return a rational equal to
-    $`H_n = \frac{1}{1} + \frac{1}{2} + \frac{1}{3} + \ldots + \frac{1}{n}`$.
+15. **Harmonic sum** Given an integer $n > 0$, return a rational equal to $H_n
+    = \frac{1}{1} + \frac{1}{2} + \frac{1}{3} + \ldots + \frac{1}{n}$.
 
 
 ## General Notes
