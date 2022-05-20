@@ -52,7 +52,16 @@ func (p *Point) add(other Point) {
     p.y += other.y
 }
 
+// func makeRational(n, d int) (Rational, error) {
+//     if d == 0 {
+//         // ... error ...
+//     }
+//     return Rational{n, d}
+// }
+
 func main() {
+    // r, err := makeRational(4, 0)
+
     p := Point{0, 1}
     q := Point{4, 3}
     fmt.Printf("p = %v, q = %v\n", p, q)

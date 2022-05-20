@@ -11,8 +11,8 @@ type Stringer interface {
 ```
 
 A type is said to *implement* an interface if it has methods for all the
-methods listed in it. So a type `T` implements `Stringer` if it implements a
-method that looks like this:
+methods listed in it. Type `T` implements `Stringer` if it implements a method
+that looks like this:
 
 ```go
 func (this T) String() string {
@@ -31,7 +31,7 @@ explicitly call `String()` on them.
 
 ## Implementing Your Own Stringer
 
-Suppose you implement your own type, such as `Person`:
+Suppose you implement your own type `Person`:
 
 ```go
 type Person struct {
@@ -45,12 +45,11 @@ func main() {
 }
 ```
 
-When `p` is printed with a standard Go function like `fmt.Println`, it gets
-printed in a default format: `"{Bob 65}"`.
+When you print `p` with a standard Go function like `fmt.Println`, it uses
+Go's default format: `"{Bob 65}"`.
 
-What if you want to print `Person` objects in some other format, say
-`Person(Bob, 65)`? You can do that by adding a `String()` method like this,
-e.g.:
+If you want to print `Person` values in some other format, say `Person(Bob,
+65)`, you can add your own `String()` method like this:
 
 ```go
 type Person struct {
@@ -70,14 +69,13 @@ func main() {
 
 Importantly, the `String()` method must *exactly* match the signature in
 `Stringer`. If it does, then the type `Person` is said to implement the
-`Stringer` interface. Now when `fmt.Println(p)` is called `"Person(Bob, 65)"`
-is printed.
+`Stringer` interface. 
 
 
 ## Counter: An Interface for Counting
 
 Lets create our own interface. `Counter` is an interface for values that can
-incremented, read, and reset:
+be incremented, read, and reset:
 
 ```go
 type Counter interface {
@@ -88,7 +86,7 @@ type Counter interface {
 ```
 
 To implement a `Counter`, we need to create a new type that has the three
-methods in `Counter`. Lets do that as follows:
+methods in `Counter`. Here's one way to do it:
 
 ```go
 type NamedCount struct {

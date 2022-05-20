@@ -1,12 +1,13 @@
 // tokenizer2.go
 
 //
-// A tokenizer for list of integers like "{9, 343, 0}". The are four kinds of
-// tokens: open brace, close braces, commas, and integers.
+// Write a tokenizer for a list of integers like "{9, 343, 0}". The are four
+// kinds of tokens: open brace, close braces, commas, and integers.
 //
 // The tokenizer returns a slice of all the tokens, in the order they occur.
-// Does *not* check if the tokens are in a sensible order, e.g. the tokenizer
-// will convert "},, { 349" into a list of tokens.
+// It does *not* check if the tokens are in a sensible order, e.g. the
+// tokenizer will convert non-sensical strings like "},, { 349" into a list of
+// tokens without comnplaint.
 //
 
 package main
@@ -32,8 +33,7 @@ func quote(s string) string {
 type tokenType int
 
 //
-// This creates 4 read-only constant values of type tokenType. It's Go's way
-// of implementing enumerated types.
+// This creates 4 read-only constant values of type tokenType.
 //
 // iota assigns each constant a different tokenType, starting at 0 and then
 // incrementing by 1.
@@ -53,17 +53,30 @@ const (
 //
 func (tt tokenType) String() string {
     switch tt {
-    case open_brace: return "open_brace"
-    case close_brace: return "close_brace"
-    case comma: return "comma"
-    case integer: return "integer"
-    default: return "unknown"
+    case open_brace  : return "open_brace"
+    case close_brace : return "close_brace"
+    case comma       : return "comma"
+    case integer     : return "integer"
+    default          : return "unknown"
     }
 }
 
 type Token struct {
     token string    // the token as a string
-    kind tokenType  // the type of the token
+    kind  tokenType // the type of the token
+    start int       // index in the string where the token starts
+}
+
+func makeOpenBrace(start int) Token {
+    return Token{"{", open_brace, start}
+}
+
+func makeCloseBrace(start int) Token {
+    return Token{"}", close_brace, start}
+}
+
+func makeComma(start int) Token {
+    return Token{",", comma, start}
 }
 
 //
@@ -74,7 +87,7 @@ type Token struct {
 // representation of a value.
 //
 func (t Token) String() string {
-    return fmt.Sprintf("Token{%v, %v}", quote(t.token), t.kind)
+    return fmt.Sprintf("Token{%v, %v, %v}", quote(t.token), t.kind, t.start)
 }
 
 //
@@ -106,21 +119,21 @@ func main() {
         case ' ', '\n', '\t', '\r': // ignore whitespace
             i++
         case '{':
-            tok := Token{s[i:i+1], open_brace}
+            tok := makeOpenBrace(i)
             tokens = append(tokens, tok)
             i++
         case '}':
-            tok := Token{s[i:i+1], close_brace}
+            tok := makeCloseBrace(i)
             tokens = append(tokens, tok)
             i++
         case ',':
-            tok := Token{s[i:i+1], comma}
+            tok := makeComma(i)
             tokens = append(tokens, tok)
             i++
         case '0', '1', '2', '3', '4', '5', '6', '7', '8', '9':
             begin := i
             end := firstNonDigit(s, i+1)
-            tok := Token{s[begin:end], integer}
+            tok := Token{s[begin:end], integer, begin}
             tokens = append(tokens, tok)
             i = end
         default:
