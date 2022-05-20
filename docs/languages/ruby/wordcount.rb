@@ -41,8 +41,8 @@ words = File.open(fname).read.downcase.gsub(/[^a-z]/, ' ').split
 #
 # Create a hash table of (word, count) pairs.
 #
-# Ruby hash tables begin with { and end with }.
-# They consist of key/value pairs, e.g.:
+# Ruby hash tables begin with { and end with }. They consist of key/value
+# pairs, e.g.:
 #
 #    > fruit = {"pear" => 1, "apple" => 2, "cherry" => 3}
 #    > fruit["orange"]
@@ -53,23 +53,41 @@ words = File.open(fname).read.downcase.gsub(/[^a-z]/, ' ').split
 # This codes creates an initially empty hash table, and then adds each words
 # from words to it.
 #
-wc = {}
-words.each do |w| 
-	if wc.has_key?(w)
-		wc[w] += 1
-	else
-		wc[w] = 1
-	end
+# The expression Hash.new(0) returns a new hash table that returns 0 instead
+# of nil if you access a key not in the hash.
+#
+wc = Hash.new(0)
+words.each do |w|
+    wc[w] += 1
+    # if wc.has_key?(w)
+    #   wc[w] += 1
+    # else
+    #   wc[w] = 1
+    # end
 end
 
 # puts wc
 
+#
 # Sort the pairs first alphabetically by word, and then from highest count to
 # lowest count.
+#
+# For a hash table, in .sort_by {|w,c| ... } the w is the word (key) and c is
+# the corresponding count (value). .sort_by returns a list of list of pairs,
+# e.g.:
+#
+#   >> h = {a:10, b:2, c:13, d:4}
+#   >> h
+#   => {:a=>10, :b=>2, :c=>13, :d=>4}
+#   >> h.sort_by {|w,c| c}
+#   => [[:b, 2], [:d, 4], [:a, 10], [:c, 13]]
+#
 sorted_pairs = wc.sort_by {|w,c| w} .sort_by {|w,c| -c }
 
+#
 # Display the list of sorted words and their counts.
+#
 puts "Top 10 Most Frequent Words in #{fname}"
 sorted_pairs[0..9].each_with_index do |p,i|
-	puts "#{i+1}. #{p[0]} (#{p[1]})"
+    puts "#{i+1}. #{p[0]} (#{p[1]})"
 end

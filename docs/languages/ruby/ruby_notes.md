@@ -17,7 +17,7 @@ $ ruby prog.rb
 Interactive interpreter:
 
 ```bash
-$ irb
+$ irb --simple-prompt
 ```
 
 Interactive interpreter with a Ruby program loaded:
@@ -37,13 +37,14 @@ $ irb -I . -r prog.rb
 - [numbered_list.rb](numbered_list.rb)
 - [primes.rb](primes.rb)
 - [stats.rb](stats.rb)
+- [filedemo.rb](filedemo.rb)
 
 ### Lecture 3 Ruby: Arrays, Slices, and Hashes
 
 - [slices.md](slices.md)
 - [bits.rb](bits.rb)
 - [sort.rb](sort.rb)
-- [hashes.md](hashes.md)
+- [hashes.md](hashes.md) and [symbols.md](symbols.md)
 - [wordcount.rb](wordcount.rb)
 
 ### Lecture 4 Ruby: Strings and Regular Expressions
@@ -65,7 +66,7 @@ $ irb -I . -r prog.rb
 
 ## Some Shortcuts
 
-`%w` specifies an array of strings literal:
+`%w` specifies a string array literal:
 
 ```ruby
 >> %w(once upon a time)
@@ -75,9 +76,9 @@ $ irb -I . -r prog.rb
 => ["1", "2", "3", "4"]
 ```
 
-Putting a command in backquotes will run that command in the terminal. For
-example, `` `ls` `` runs the `ls` command in the current directory, returning
-the result as a string:
+Putting a terminal command in backquotes runs that command and returns the
+results as a string. For example, `` `ls` `` runs the `ls` command in the
+current directory:
 
 ```ruby
 >> `ls`

@@ -6,13 +6,12 @@
 #
 
 #
-# `ls` runs the ls command in the shell and returns the results as a string.
-# For example:
+# `ls` runs the ls command in the shell and returns the results as a string:
 #
 #   >> `ls`
 #   => "austenPandP.txt\nbits.rb\ncount_down.rb\ncount_up.rb\nfiledemo.rb\n"
 #
-# split converts the string to a list individual file names.
+# split converts the string to a list of individual file names:
 #
 #   >> `ls`.split
 #   => ["austenPandP.txt", "bits.rb", "count_down.rb", "count_up.rb", 
@@ -21,14 +20,26 @@
 files = `ls`.split
 
 #
-# This creates a new empty hash table. The 0 means that if a key is not in the
-# table then 0 will be returned (otherwise nil would have been returned).
+# Hash.new(0) creates a new empty hash table. The 0 means that if you ask for
+# a key not in the table then 0 will be returned (otherwise nil would have
+# been returned).
 #
 h = Hash.new(0)
 
 #
 # A helper function that returns the extension of a file name as a symbol,
 # e.g. "README.md" returns :md. If s has no extension, then :none is returned.
+#
+# Ruby symbols are similar to strings, but with symbols we don't usually care
+# about accessing the individual characters. A symbol is as an identifier,
+# while a string is a sequence of characters.
+#
+# Ruby symbols always begin with a :, e.g. :one, :if, and :flag are all
+# symbols. These are all different Ruby values:
+#
+# - return   a keyword
+# - "return" a string
+# = :return
 #
 def get_ext(s)
     # - get the extension of the file name using File.extname
@@ -76,6 +87,8 @@ fcount.sort! {|a,b| b[1] <=> a[1]}
 #    3: txt
 #    1: pptx
 #
+
+puts 'Frequencies of extensions of files in this folder:'
 fcount.each do |ext,count|
-    puts "#{count.to_s.rjust(3)}: #{ext}"
+    puts "#{count.to_s.rjust(3)}: .#{ext}"
 end

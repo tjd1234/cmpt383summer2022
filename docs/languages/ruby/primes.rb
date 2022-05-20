@@ -1,7 +1,12 @@
 # primes.rb
 
-# Returns true if n is prime, false otherwise.
-# Uses trial division to find factors.
+#
+# Returns true if n is prime, false otherwise. Uses trial division to find
+# factors.
+#
+# Ruby functions that end with ? customarily return a bool, i.e. true or
+# false.
+#
 def is_prime?(n)
     if n < 2
         false
@@ -19,12 +24,23 @@ def is_prime?(n)
     end
 end
 
+#
 # Returns the number of primes less than the integer n.
+#
+# (1..n-1) is the range of integers from 1 up to, and including, n-1.
+#
+# (1..n-1).count {|i| is_prime?(i)} returns the number of ints from 1 to n-1
+# that satisfy is_prime?, i.e. the number of primes from 1 to n-1 inclusive.
+#
 def primes_less_than(n)
     return (1..n-1).count {|i| is_prime?(i)}
 end
 
+#
 # Which of the numbers from 0 to 30 are prime?
+#
+# Prints numbers and indicates which ones are prime.
+#
 count = 0
 30.times do |n| 
     if is_prime?(n)
