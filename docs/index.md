@@ -13,4 +13,4 @@
   (Canvas)](https://canvas.sfu.ca/courses/70067).
 
 You're welcome to clone/download this repository. It will be updated quite
-frequently, so be to sure to check for changes.
+frequently, so be sure to check for changes.
