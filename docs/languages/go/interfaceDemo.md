@@ -10,9 +10,9 @@ type Stringer interface {
 }
 ```
 
-A type is said to implement an interface if it has methods for all the methods
-listed in it. So a type implements `Stringer` if it implements a method that
-looks like this:
+A type is said to *implement* an interface if it has methods for all the
+methods listed in it. So a type `T` implements `Stringer` if it implements a
+method that looks like this:
 
 ```go
 func (this T) String() string {
@@ -21,11 +21,11 @@ func (this T) String() string {
 ```
 
 The parameter `(this T)` that appears before the name is called the **receiver
-argument** of the method. Importantly, the receiver of a method does *not*
-appear in an interface. This allows different types to implement their own
-version of `String()`.
+argument** of the method. Importantly, the receiver does *not* appear in an
+interface. This allows different types to implement their own version of
+`String()`.
 
-All Go's standard types act is they implement `Stringer`, but they you can't
+All Go's standard types act as if they implement `Stringer`, but you can't
 explicitly call `String()` on them.
 
 
@@ -48,8 +48,9 @@ func main() {
 When `p` is printed with a standard Go function like `fmt.Println`, it gets
 printed in a default format: `"{Bob 65}"`.
 
-What if you `Person` objects printed in some other format, say `Person(Bob,
-65)`? You can do that by adding a `String()` method like this, e.g.:
+What if you want to print `Person` objects in some other format, say
+`Person(Bob, 65)`? You can do that by adding a `String()` method like this,
+e.g.:
 
 ```go
 type Person struct {
@@ -67,27 +68,27 @@ func main() {
 }
 ```
 
-Importantly, the `String()` method must *exactly* match the signature that
-appears in `Stringer`. If it does, then the type `Person` is said to implement
-the `Stringer` interface. Now when `fmt.Println(p)` is called `"Person(Bob,
-65)"` is printed.
+Importantly, the `String()` method must *exactly* match the signature in
+`Stringer`. If it does, then the type `Person` is said to implement the
+`Stringer` interface. Now when `fmt.Println(p)` is called `"Person(Bob, 65)"`
+is printed.
 
 
 ## Counter: An Interface for Counting
 
-Lets create our own interface. `Counter` is an interface for representing a
-counter that can incremented, read, and rest:
+Lets create our own interface. `Counter` is an interface for values that can
+incremented, read, and reset:
 
 ```go
 type Counter interface {
-    incr(n int)     // increment the counter by n
-    getCount() int  // the current value of the counter
+    incr(n int)     // increase the counter by n
+    getCount() int  // return the current value of the counter
     reset()         // set the counter to 0
 }
 ```
 
-To implement `Counter`, we need to create a new type that has the three method
-in `Counter`. Lets do that as follows:
+To implement a `Counter`, we need to create a new type that has the three
+methods in `Counter`. Lets do that as follows:
 
 ```go
 type NamedCount struct {
@@ -154,9 +155,9 @@ func main() {
 ```
 
 `BasicCount` has the same internal implementation as an `int`, but it's *not*
-the same type as an `int`, i.e. `int` and `BasicCount` *cannot* be used
-interchangeably. Instead, you must explicitly convert between the types, as
-done in the code above.
+the same type as `int`, i.e. `int` and `BasicCount` *cannot* be used
+interchangeably. You must explicitly convert between the types, as done in the
+code above.
 
 Note that `incr` and `reset` both use a *pointer* receiver. That's so the
 value can be changed in-place. If you don't use a pointer, then a copy is made
@@ -166,4 +167,3 @@ of the receiver parameter.
 ## Code
 
 Much of the code used in this note is in [interfaceDemo.go](interfaceDemo.go).
-
