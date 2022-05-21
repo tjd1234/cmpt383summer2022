@@ -1,8 +1,21 @@
 # yield.rb
 
 #
+# To load this code into the Ruby interpreter:
+#
+#   $ irb -I . -r yield.rb
+#
+
+#
 # Yields 3 different values.
-# yield_stuff {|x| puts x }
+#
+#   >> yield_stuff {|x| puts x }
+#   start
+#   3
+#   cow
+#   2.09
+#   stop
+#   => nil
 #
 def yield_stuff
     puts "start"
@@ -40,7 +53,15 @@ def fib(n)
 end
 
 #
-# Iterates from 0 up to, and including, n-1
+# Iterates from 0 up to, and including, n-1:
+#
+#   >> mytimes(5) {|n| puts n**2}
+#   0
+#   1
+#   4
+#   9
+#   16
+#   => 0...5
 #
 def mytimes(n)
     for i in 0...n  # ... excludes n
@@ -49,7 +70,15 @@ def mytimes(n)
 end
 
 #
-# mytimes implemented as a method of Integer
+# mytimes implemented as a method of Integer:
+#
+#   >> 5.mytimes {|n| puts n**2}
+#   0
+#   1
+#   4
+#   9
+#   16
+#   => 0...5
 #
 class Integer
     def mytimes
@@ -57,12 +86,18 @@ class Integer
             yield i
         end
     end
-end # Integer
+end
 
 
 #
-# digits iterates through the digits of the number, e.g. 543.digits yields 5,
-# 4, and 3
+# digits iterates through the digits of the number, e.g.:
+#
+#   >> 4589.digits {|d| puts d}
+#   4
+#   5
+#   8
+#   9
+#   => "4589"
 #
 class Integer    
     def digits
@@ -71,11 +106,20 @@ class Integer
             yield c.to_i
         end
     end
-end # Integer
+end
 
+#
 # String iterator that returns just the alphabetic characters that appear in a
 # string. The regular expression /^[a-zA-Z]$/ matches just the alphabetic
 # characters.
+#
+# For example:
+#
+#   >> "96372f1..9b42511".just_chars {|c| puts c}
+#   f
+#   b
+#   => "96372f1..9b42511"
+#
 class String
     def just_chars
         self.each_char do |c|
@@ -90,6 +134,11 @@ end # String
 class Integer 
     #
     # Returns true if the integer n is prime, and false otherwise.
+    #
+    #   >> 32883.is_prime?
+    #   => false
+    #   >> 32887.is_prime?
+    #   => true
     #
     def is_prime?
         return false if self < 2    # self refers to the value of the object
@@ -115,6 +164,7 @@ class Integer
     # 5
     # 7
     # => 2...10
+    #
     def primes_less_than
         for i in (2...self)  # ... excludes self
             yield i if i.is_prime?
@@ -131,12 +181,13 @@ class Integer
     # 8
     # 9
     # => 1...10
+    #
     def composites_less_than
          for i in (1...self)  # 1 is first composite; ... excludes self
             yield i if not i.is_prime?
         end       
     end
-end # Integer
+end
 
 
 #
@@ -169,4 +220,4 @@ class Array
             yield i, self[i]
         end
     end
-end # Array
+end
