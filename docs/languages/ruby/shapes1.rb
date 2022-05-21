@@ -6,12 +6,15 @@
 #
 
 class Rectangle
+    #
     # This lines creates "getter" methods for the width and height variables.
-    # It as if you had written these two methods:
+    #
     attr_reader :width, :height
 
+    #
     # initialize is called when a new instance of the object is created. The
     # instance variables of the class start with @.
+    #
     def initialize(width, height)
         raise "Rectangle: width must be > 0" if width <= 0
         raise "Rectangle: height must be > 0" if height <= 0
@@ -31,18 +34,24 @@ class Rectangle
         Math.sqrt(@width**2 + @height**2)
     end
 
+    #
     # to_s is the standard Ruby method for returning a string representation
+    #
     def to_s
         "Rectangle(w=#{@width}, h=#{@height})"
     end
 end
 
 class Circle
-    # This lines creates "getter" methods for the width and height variables.
+    #
+    # This lines creates a "getter" method for the radius variable.
+    #
     attr_reader :radius
 
+    #
     # initialize is called when a new instance of the object is created. The
     # instance variables of the class start with @.
+    #
     def initialize(radius)
         @radius = radius
     end
@@ -55,12 +64,16 @@ class Circle
         2 * 3.14 * @radius
     end
 
+    #
     # diagonal line through circle's center is the circle's diameter
+    #
     def diagonal
         2 * @radius
     end
 
+    #
     # to_s is the standard Ruby method for returning a string representation
+    #
     def to_s
         "Circle(r=#{@radius})"
     end
@@ -90,5 +103,5 @@ shapes.each do |s|
     printShapeStats(s)
 end
 
-# Show what happens when you pass an object with area or perimeter methods.
+# What happens when you pass an object with area or perimeter methods?
 printShapeStats("triangle")

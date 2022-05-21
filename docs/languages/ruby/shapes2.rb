@@ -1,8 +1,8 @@
 # shapes2.rb
 
 #
-# Based on shapes1.rb. Uses a Shape based class that other classes inherit
-# from. printShapeStats is a method in the Shape base class.
+# Based on shapes1.rb. Classed inherit from the Shape base class.
+# printShapeStats is a method in the Shape base class.
 #
 
 class Shape
@@ -12,8 +12,10 @@ class Shape
 end
 
 class Rectangle < Shape
+    #
     # initialize is called when a new instance of the object is created. The
     # instance variables of the class start with @.
+    #
     def initialize(width, height)
         @width = width
         @height = height

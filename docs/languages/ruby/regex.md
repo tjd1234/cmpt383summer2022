@@ -4,15 +4,14 @@ A [regular expression](https://en.wikipedia.org/wiki/Regular_expression), or
 **regex** for short, is a sequence of characters that specifies a set of
 strings. They are often used for pattern-matching in text.
 
-For example, suppose you ask someone to type a phone number in a web form,
-they could type it in at least these ways: "(778) 782-3111", "778-782-3111",
+For example, if you ask the user to type a phone number in a web form, they
+could type it in many different ways: "(778) 782-3111", "778-782-3111",
 "778.782.3111", "7787823111". All are correct ways to write a phone number,
-and it's possible to write *one* regular expression that matches all those
-formats.
+and it's possible to write *one* regular expression that matches all of them.
 
-Most languages provide support for regular expressions in a library that can
-be imported. Ruby is a bit different: regular expressions are built into the
-language itself.
+Most languages that provide support for regular expressions do so in a library
+that is imported. Ruby is a bit different: regular expressions are built into
+the language itself.
 
 
 # String Matching: Matching a Digit
@@ -20,16 +19,19 @@ language itself.
 To understand Ruby regular expressions, lets look at some concrete examples.
 
 Suppose you want to determine if a string *contains* the digit 5 somewhere
-within it. For example, the string "Year: 1156" has a 5, but "Year: 1647" and
-"two or three" don't.
+within it. For example, "Year: 1156" has a 5, but "Year: 1647" and "two or
+three" don't.
 
 In Ruby you can check for this using regular expressions:
 
 ```ruby
+
 >> "Year: 1156" =~ /5/    # returns index of first occurrence of 5
 => 8
+
 >> "5 and 5 and 5" =~ /5/ #=~ matches the first 5 only
 => 0
+
 >> "Year: 1647" =~ /5/    # nil if no match
 => nil
 ```
@@ -39,8 +41,8 @@ operator, it matches the *first* occurrence of a "5" in a string "5", and
 nothing else. Ruby regular expressions start with `/` and end with `/`. The
 string that comes between those describes a set of strings.
 
-Now suppose we want to determine if the entire string is "5", not just a if a
-5 occurs somewhere in it. We can do it like this:
+Now suppose we want to determine if the entire string is "5", not just if a 5
+occurs somewhere in it. We can do it like this:
 
 ```ruby
 >> "5" =~ /^5$/       # ^ matches the start of the string, $ the end
@@ -51,19 +53,21 @@ nil
 
 `^` and `$` are special regular expression symbols. Instead of matching
 characters, they match *positions* in a string. `^` matches the start of a
-string, and `$` matches the right end of a string. So the regular expression
-`/^5$/` matches *just* the string "5", i.e. the string where the character "5"
-is immediately after the start, and immediately before the end.
+string, and `$` matches the end of a string. So the regular expression `/^5$/`
+matches *just* the string "5", i.e. the string where the character "5" is
+immediately after the start, and immediately before the end.
 
-Now suppose we want to determine if a string *contains* a 5 *or* 6. In a
-regular expression the symbol `|` means "or", and the regular expression
+Now suppose we want to determine if a string *contains* a 5 *or* a 6, or both.
+In a regular expression the symbol `|` means "or", and the regular expression
 `/5|6/` will match a 5 or a 6:
 
 ```ruby
 >> "V9U 6M2" =~ /5|6/    # matches the 6
 => 4
+
 >> "Is 5 = 6?" =~ /5|6/  # matches the 5
 => 3
+
 >> "V9U 7M2" =~ /5|6/    # nil is returned if there's no 5 or 6
 => nil
 ```
@@ -75,10 +79,13 @@ want to check if the *entire* string is "5" or the entire string is "6". `^`
 ```ruby
 >> "6" =~ /^(5|6)$/   # ^ matches the start of the string, $ matches the end
 => 0
+
 >> "5" =~ /^(5|6)$/
 => 0
+
 >> "7" =~ /^(5|6)$/
 => nil
+
 >> "Is 5 = 6?" =~ /^(5|6)$/  # only matches "5" or "6"
 nil
 ```
@@ -90,9 +97,9 @@ If we want to match *any* digit, you can use `|` multiple times. The regular
 expression `/0|1|2|3|4|5|6|7|8|9/` matches any single digit:
 
 ```ruby
->> "Score: 5" =~ /0|1|2|3|4|5|6|7|8|9/     # matches first digit
+>> "Score: 5" =~ /0|1|2|3|4|5|6|7|8|9/     # matches the 5
 => 7
->> "1 or 2 or 3" =~ /0|1|2|3|4|5|6|7|8|9/
+>> "1 or 2 or 3" =~ /0|1|2|3|4|5|6|7|8|9/  # matches the 1
 => 0
 >> "apple" =~ /0|1|2|3|4|5|6|7|8|9/        # nil if no match
 => nil
@@ -115,9 +122,9 @@ You can store regular expressions in variables:
 >> digit_regex = /0|1|2|3|4|5|6|7|8|9/
 >> digit_regex
 => /0|1|2|3|4|5|6|7|8|9/
->> "1920" =~ digit_regex
+>> "1920" =~ digit_regex                 # matches the 1
 => 0
->> "call me at 555-5555" =~ digit_regex
+>> "call me at 555-5555" =~ digit_regex  # matches the first 5
 => 11
 
 >> exact_digit_regex = /^(0|1|2|3|4|5|6|7|8|9)$/
@@ -129,8 +136,8 @@ You can store regular expressions in variables:
 => 0
 ```
 
-Matching a digit is so common that regular expressions provides a special
-shorthand for `/0|1|2|3|4|5|6|7|8|9/`. You can use write `/\d/`:
+Matching a digit is so common that there's a special shorthand for
+`/0|1|2|3|4|5|6|7|8|9/`. You can use write `/\d/`:
 
 ```ruby
 >> "Year: 1156" =~ /\d/  # matches first digit
@@ -157,8 +164,8 @@ of the ten strings `"0"`, `"1"`, `"2"`, ..., `"9"`.
 
 Suppose you want to find if a string contains a sequence of two digits in a
 row. For example, "It's 1965!" and "88 keys" both have sequences of two
-digits, while "1 or 2" and "3.1" do not. You can match that with the regular
-expression `/\d\d/`:
+digits, while "1 or 2" and "3.1" do not. The regular expression `/\d\d/` does
+just that:
 
 ```ruby
 >> "It's 1965!" =~ /\d\d/  # matches 19
@@ -181,16 +188,15 @@ expression `/\d\d/`:
 By combining multiple `\d`s together you can match any *fixed* number of
 digits in a row. For example, `/\d\d\d\d/` matches a sequence of 4 digits.
 
-But what if you want to match a sequence of *one or more* digits? Any number
-of 1 or more digits. The regular expression operator `+` matches the regular
-expression before 1 or more times:
+But what if you want to match a sequence of *one or more* digits? The regular
+expression operator `+` matches the regular expression before 1 or more times:
 
 ```ruby
 >> "There are 365 days in a year" =~ /\d+/ # matches "3"
 => 10
->> "(605)555-5555" =~ /\d+/
+>> "(605)555-5555" =~ /\d+/                # matches "605"
 => 1
->> "cat" =~ /\d+/
+>> "cat" =~ /\d+/                          # no match
 => nil
 
 >> "898" =~ /^\d+$/    # "898" is a string of 1 or more digits
@@ -207,8 +213,9 @@ only strings that consist entirely of 1, or more, digit characters.
 
 ## Optional Matches
 
-Suppose we want to match *integer strings* that look like integers, such as
-"347", "0", or "-458". We could describe such strings in English like this:
+Suppose we want to match *integer strings*, i.e. strings that look like
+integers, such as "347", "0", or "-458". We could describe such strings in
+English like this:
 
 	Integer strings consist of 1 or more digits, and, optionally, may start
 	with a "-" character.
@@ -217,20 +224,20 @@ In the language of Ruby regular expressions, the `?` operator makes the
 expression *before* it optional. So we can match integer strings like this:
 
 ```ruby
->> "It's 25" =~ /-?\d+/    # match starting at "2"
+>> "It's 25" =~ /-?\d+/    # matches "25"
 => 5
->> "It's -25" =~ /-?\d+/   # match start at "-"
+>> "It's -25" =~ /-?\d+/   # matches "-25"
 => 5
 
->> "-43" =~ /^(-?\d+)$/
+>> "-43" =~ /^(-?\d+)$/    # matches entire string
 => 0
->> "700912" =~ /^(-?\d+)$/
+>> "700912" =~ /^(-?\d+)$/ # matches entire string
 => 0
 => nil
->> "2-3" =~ /^(-?\d+)$/   # no match: the "-" must be at the start
+>> "2-3" =~ /^(-?\d+)$/    # no match: the "-" must be at the start
 => nil
->> "-" =~ /^(-?\d+)$/     # no match: there must be 1 or more digits after
-=> nil                    #           the "-"
+>> "-" =~ /^(-?\d+)$/      # no match: there must be 1 or more digits after
+=> nil                     #           the "-"
 ```
 
 ## Improved Integer String Matching
@@ -255,14 +262,14 @@ of an integer:
 ```
 
 Whether or not we count "02" or "-000002" as integer strings depends upon the
-application we're using them for.
+application we have in mind.
 
 For the sake of this example, lets suppose we *don't* want any extra leading
 0s, i.e. strings like "02" or "-000002" *don't* count as integer strings.
 
 How can we modify `int_str_regex` and `exact_int_str_regex` to match only
-integer strings without extra leading 0s? It can help to describe what we want
-in English:
+integer strings without extra leading 0s? It helps to describe what we want in
+English:
 
 	An integer string without extra leading 0s consists of 1 or more digits in
 	sequence, optionally starting with a "-". The first digit can't be 0.
@@ -271,27 +278,27 @@ in English:
 expression that works is `1|2|3|4|5|6|7|8|9`. That's a lot of typing, so
 regular expressions also provide this shorthand notation: `[1-9]`.
 
-This suggests an expression like this:
+This suggests an expression like this might work:
 
 ```ruby
 exact_wrong = /^(-?[1-9]\d+)$/   # close, but has some problems
 ```
 
-As the name suggests, this expression is not completely correct. It does match
-(and not match) some strings correctly:
+As the name suggests, this expression is not completely correct. It handles
+some strings correctly:
 
 ```ruby
->> "28" =~ exact_wrong   # match: "28" is an integer string
+>> "28" =~ exact_wrong    # match: "28" is an integer string
 => 0
->> "-28" =~ exact_wrong  # match: "-28" is an integer string
+>> "-28" =~ exact_wrong   # match: "-28" is an integer string
 => 0
->> "028" =~ exact_wrong  # no match: "028" has a leading 0
+>> "028" =~ exact_wrong   # no match: "028" has a leading 0
 => nil
 >> "-028" =~ exact_wrong  # no match: "-028" has a leading 0
 => nil
 ```
 
-But for some strings it *doesn't* work the way we'd like:
+But it *doesn't* work for strings like these:
 
 ```ruby
 >> "5" =~ exact_wrong    # no match: but "5" is an integer string
@@ -328,7 +335,7 @@ It matches more strings correctly, but still not all:
 => nil
 ```
 
-So `exact_still_wrong` *doesn't* match "0", which is wrong. How can we get
+So `exact_still_wrong` *doesn't* match "0", which is a mistake. How can we get
 that to work? The simplest way is to use `|` (the or operator) and treat "0"
 as a special case:
 
@@ -357,8 +364,8 @@ string-matching problems, but they can be hard to read and difficult to test.
 
 ## More
 
-Regular expressions can do much more, but we'll stop here. If you do a bit of
-searching on the web you'll find examples of the many things they can do.
+Regular expressions can do much more, but we'll stop here. You can find more
+examples and tutorials on the web.
 
 
 ## Summary

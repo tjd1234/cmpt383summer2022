@@ -7,8 +7,8 @@
 #
 
 #
-# is_prime? and primes_less_than are defined as methods in Integer, so that
-# any integer can call them as a method.
+# is_prime? and primes_less_than are defined as methods in Integer, and so any
+# integer can call them as a method.
 #
 class Integer
     #
