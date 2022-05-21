@@ -14,7 +14,7 @@ import (
 // Returns an int channel
 //
 func counter(n int) chan int {
-    ch := make(chan int)
+    ch := make(chan int)  // ch is an unbuffered channel
 
     //
     // Launch a goroutine.
@@ -41,15 +41,15 @@ func TestCounter() {
 //
 // Generate the Fibonacci numbers one at a time.
 //
-// There is not stopping condition in the go routine. The calling code will
+// There is no stopping condition in the go routine. The calling code will
 // contain the the stopping condition.
 //
 func fibgen() chan int {
-    ch := make(chan int)
+    ch := make(chan int) // unbuffered channel
     go func() {
         a, b := 1, 1
-        for { // infinite loop
-            ch <- a // blocks here until a is removed from channel
+        for {            // infinite loop
+            ch <- a      // blocks here until a is received
             a, b = b, a+b
         }
     }()

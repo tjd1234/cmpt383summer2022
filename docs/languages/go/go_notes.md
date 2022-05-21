@@ -67,5 +67,4 @@ Please read the following parts of [the Go tour](https://go.dev/tour/list)
 
 ### Lecture 7 Go: Concurrency
 
-- [spinner.go](spinner.go)
-- [gen.go](gen.go)
+- [concurrency.md](concurrency.md): [spinner.go](spinner.go), [gen.go](gen.go)
