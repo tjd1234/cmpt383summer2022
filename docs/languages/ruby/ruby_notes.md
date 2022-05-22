@@ -32,7 +32,7 @@ $ irb -I . -r prog.rb
 
 - [hello_world.rb](hello_world.rb)
 - [hello_name.rb](hello_name.rb)
-- [count_up.go](count_up.rb)
+- [count_up.rb](count_up.rb)
 - [count_down.rb](count_down.rb)
 - [numbered_list.rb](numbered_list.rb)
 - [primes.rb](primes.rb)

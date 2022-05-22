@@ -55,6 +55,7 @@ func main() {
     //
     // Print statistics
     //
+    fmt.Println(nums)
     fmt.Println("      Min:", min(nums))
     fmt.Println("   Median:", median(nums))
     fmt.Println("      Max:", max(nums))
@@ -138,5 +139,5 @@ func std_dev(nums []float64) float64 {
         diff := x - avg
         result += diff * diff
     }
-    return math.Sqrt(result)
+    return math.Sqrt(result / float64(len(nums)))
 }
