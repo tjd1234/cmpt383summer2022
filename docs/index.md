@@ -2,13 +2,13 @@
 
 # Useful Links
 
+- [Assignments](assignments/assignments.md).
+- [Installing the languages](install.md) on Ubuntu Linux.
 - Language notes: [Go](languages/go/go_notes.md),
   [Ruby](languages/ruby/ruby_notes.md),
   [Racket](languages/racket/racket_notes.md),
   [Haskell](languages/haskell/haskell_notes.md),
   [Prolog](languages/prolog/prolog_notes.md)
-- [Assignments](assignments/assignments.md).
-- [Installing the languages](install.md) on Ubuntu Linux.
 - [Grades, announcements, discussions
   (Canvas)](https://canvas.sfu.ca/courses/70067).
 
@@ -23,45 +23,45 @@ possible that changes could be made as the course progresses.
 
 ## Week 1 Go
 
-- [Notes on Go](go/go_notes.md) 
+- [Go notes](go/go_notes.md) 
 
 ## Week 2 Go
 
-- [Notes on Go](go/go_notes.md) 
+- [Go notes](go/go_notes.md) 
 
 ## Week 3 Go, Ruby
 
-- [Notes on Go](go/go_notes.md) 
-- [Notes on Ruby](ruby/ruby_notes.md)
+- [Go notes](go/go_notes.md) 
+- [Ruby notes](ruby/ruby_notes.md)
 
 ## Week 4 Ruby
-- [Notes on Ruby](ruby/ruby_notes.md)
+- [Ruby notes](ruby/ruby_notes.md)
 
 ## Week 5 Ruby, Racket
-- [Notes on Ruby](ruby/ruby_notes.md)
-- [Notes on Racket](racket/racket_notes.md)
+- [Ruby notes](ruby/ruby_notes.md)
+- [Racket notes](racket/racket_notes.md)
 
 ## Week 6 Racket
-- [Notes on Racket](racket/racket_notes.md)
+- [Racket notes](racket/racket_notes.md)
 
 ## Week 7 Racket
-- [Notes on Racket](racket/racket_notes.md)
+- [Racket notes](racket/racket_notes.md)
 
 ## Week 8 Haskell
-- [Notes on Haskell](haskell/haskell_notes.md)
+- [Haskell notes](haskell/haskell_notes.md)
 
 ## Week 9 Haskell
-- [Notes on Haskell](haskell/haskell_notes.md)
+- [Haskell notes](haskell/haskell_notes.md)
 
 ## Week 10 Haskell, Prolog
-- [Notes on Haskell](haskell/haskell_notes.md)
-- [Notes on Prolog](prolog/prolog_notes.md)
+- [Haskell notes](haskell/haskell_notes.md)
+- [Prolog notes](prolog/prolog_notes.md)
 
 ## Week 11 Prolog
-- [Notes on Prolog](prolog/prolog_notes.md)
+- [Prolog notes](prolog/prolog_notes.md)
 
 ## Week 12 Prolog
-- [Notes on Prolog](prolog/prolog_notes.md)
+- [Prolog notes](prolog/prolog_notes.md)
 
 ## Week 13 Wrap-up
 
