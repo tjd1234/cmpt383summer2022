@@ -1,6 +1,6 @@
 # CMPT 383, Summer 2022 ... github version!
 
-# Usefule Links
+# Useful Links
 
 - Language notes: [Go](languages/go/go_notes.md),
   [Ruby](languages/ruby/ruby_notes.md),
