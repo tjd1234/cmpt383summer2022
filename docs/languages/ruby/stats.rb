@@ -18,10 +18,10 @@
 # - / n divides that sum by n, the size of the array
 #
 def std_dev(nums)
-	n = nums.length
-	mean = nums.sum / n
-	diffs = nums.map {|x| (x - mean)**2}
-	return Math.sqrt(diffs.sum / n)
+    n = nums.length
+    mean = nums.sum / n
+    diffs = nums.map {|x| (x - mean)**2}
+    return Math.sqrt(diffs.sum / n)
 end
 
 #
