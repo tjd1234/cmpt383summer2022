@@ -12,7 +12,7 @@
 puts '-' * 25
 
 #
-# Instead of { and }, you can use do and begin on multiple lines.
+# Instead of { and }, do you can use do and begin on multiple lines.
 #
 10.times do |i|
 	puts "This is statement #{i+1}."
