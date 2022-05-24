@@ -23,45 +23,45 @@ possible that changes could be made as the course progresses.
 
 ## Week 1 Go
 
-- [Go notes](go/go_notes.md) 
+- [Go notes](languages/go/go_notes.md) 
 
 ## Week 2 Go
 
-- [Go notes](go/go_notes.md) 
+- [Go notes](languages/go/go_notes.md) 
 
 ## Week 3 Go, Ruby
 
 - [Go notes](languages/go/go_notes.md) 
-- [Ruby notes](ruby/ruby_notes.md)
+- [Ruby notes](languages/ruby/ruby_notes.md)
 
 ## Week 4 Ruby
-- [Ruby notes](ruby/ruby_notes.md)
+- [Ruby notes](languages/ruby/ruby_notes.md)
 
 ## Week 5 Ruby, Racket
-- [Ruby notes](ruby/ruby_notes.md)
-- [Racket notes](racket/racket_notes.md)
+- [Ruby notes](languages/ruby/ruby_notes.md)
+- [Racket notes](languages/racket/racket_notes.md)
 
 ## Week 6 Racket
-- [Racket notes](racket/racket_notes.md)
+- [Racket notes](languages/racket/racket_notes.md)
 
 ## Week 7 Racket
-- [Racket notes](racket/racket_notes.md)
+- [Racket notes](languages/racket/racket_notes.md)
 
 ## Week 8 Haskell
-- [Haskell notes](haskell/haskell_notes.md)
+- [Haskell notes](languages/haskell/haskell_notes.md)
 
 ## Week 9 Haskell
-- [Haskell notes](haskell/haskell_notes.md)
+- [Haskell notes](languages/haskell/haskell_notes.md)
 
 ## Week 10 Haskell, Prolog
-- [Haskell notes](haskell/haskell_notes.md)
-- [Prolog notes](prolog/prolog_notes.md)
+- [Haskell notes](languages/haskell/haskell_notes.md)
+- [Prolog notes](languages/prolog/prolog_notes.md)
 
 ## Week 11 Prolog
-- [Prolog notes](prolog/prolog_notes.md)
+- [Prolog notes](languages/prolog/prolog_notes.md)
 
 ## Week 12 Prolog
-- [Prolog notes](prolog/prolog_notes.md)
+- [Prolog notes](languages/prolog/prolog_notes.md)
 
 ## Week 13 Wrap-up
 
