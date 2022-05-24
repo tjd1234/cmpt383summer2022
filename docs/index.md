@@ -31,7 +31,7 @@ possible that changes could be made as the course progresses.
 
 ## Week 3 Go, Ruby
 
-- [Go notes](go/go_notes.md) 
+- [Go notes](languages/go/go_notes.md) 
 - [Ruby notes](ruby/ruby_notes.md)
 
 ## Week 4 Ruby
