@@ -67,8 +67,8 @@ type Token struct {
     start int       // index in the string where the token starts
 }
 
-func makeOpenBrace(start int) Token {
-    return Token{"{", open_brace, start}
+func makeOpenBrace(start int) *Token {
+    return &Token{"{", open_brace, start}
 }
 
 func makeCloseBrace(start int) Token {

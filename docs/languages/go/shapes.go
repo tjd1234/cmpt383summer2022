@@ -86,7 +86,7 @@ func (c Circle) diameter() float64 {
 // getName uses a type switch to check the type of the underlying type of s.
 //
 func getName(s Shaper) string {
-    switch s.(type) {
+    switch s.(type) { // type switch
     case Rectangle: 
         return "Rectangle"
     case Circle:
