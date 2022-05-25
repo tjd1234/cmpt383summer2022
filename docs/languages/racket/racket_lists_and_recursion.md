@@ -227,7 +227,7 @@ for short.
 A dotted pair is implemented in memory as a **cons cell**, a value with two
 pointers:
 
-![[consCell.png|200]]
+![Cons Cell][consCell.png|width=200px]
 
 Visual diagrams like this are called **cons cell diagrams**.
 
@@ -261,7 +261,7 @@ Lists are nested pairs. Written as pairs, `'(3 4 5)` has this structure:
 
 In memory it looks like this:
 
-![[list123.png]]
+![Example list](list123.png)
 
 It has the structure `'(3 . something)`, and so it's a pair.
 
