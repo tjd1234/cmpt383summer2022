@@ -736,8 +736,8 @@ would fail with an error. Since `and` is short-circuited, when `(string? x)`
 is `#f` the entire expression returns `#f` and the last two expressions are
 *never evaluated*.
 
-The `or` form is similar to `and`, and it evaluates logical "or": `(or <test1>
-<test2> ...)` returns `#t` if 1, or more, of the tests evaluate to true, and
+The `or` form is similar to `and`, and it evaluates logical "or": 
+`(or <test1> <test2> ...)` returns `#t` if 1, or more, of the tests evaluate to true, and
 `#f` otherwise. For example:
 
 ```scheme
