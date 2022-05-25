@@ -227,12 +227,12 @@ for short.
 A dotted pair is implemented in memory as a **cons cell**, a value with two
 pointers:
 
-![Cons Cell][consCell.png|width=200px]
+![Cons Cell](consCell.png|width=200px)
 
 Visual diagrams like this are called **cons cell diagrams**.
 
-> **Aside** If you want to implement your own version of LISP, starting with
-> cons cells is a good approach.
+> **Aside** If you want to implement your own version of LISP, start by
+> creating a cons cell data structure.
 
 The `car` and `cdr` functions access the elements in a pair. `(car p)` returns
 the *first* element, and `(cdr p)` returns the *second* element, e.g.:
