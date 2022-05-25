@@ -7,7 +7,7 @@ the other languages that it end up having a different assignment.
 **Please see Canvas for the due dates for each of the assignments**. Also,
 submit your work on Canvas.
 
-[Weekly lecture notes are here](../languages/schedule.md).
+[Weekly lecture notes are here](../index.md).
 
 
 ## Part 1: Create a Rational Type

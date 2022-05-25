@@ -14,8 +14,8 @@ Any integer $n$ can be represented as the rational number $\frac{n}{1}$.
 
 ## Equality
 
-If $\frac{a}{b}$ and $\frac{c}{d}$ are rationals, then $\frac{a}{b} =
-\frac{c}{d}$ if and only if $ad = bc$.
+If $\frac{a}{b}$ and $\frac{c}{d}$ are rationals, then 
+$\frac{a}{b} = \frac{c}{d}$ if and only if $ad = bc$.
 
 
 ## Inverse
@@ -53,5 +53,5 @@ reducible. $\frac{8}{10}$ is reducible because the greatest common divisor of
 If $\frac{a}{b}$ is reducible, then it can be converted into to an equal
 irreducible rational by dividing $a$ and $b$ by their greatest common divisor.
 For example, $\frac{25}{5}$ can be reduced to $\frac{5}{1}$. The greatest
-common divisor of 25 and 5 is 5, and so $\frac{\frac{25}{5}}{\frac{5}{5}} =
-\frac{5}{1}$.
+common divisor of 25 and 5 is 5, and so 
+$\frac{\frac{25}{5}}{\frac{5}{5}} = \frac{5}{1}$.
