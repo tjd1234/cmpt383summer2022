@@ -231,7 +231,7 @@ pointers:
 
 Visual diagrams like this are called **cons cell diagrams**.
 
-> **Aside** If you want to implement your own version of LISP, start by
+> **Aside** If you want to implement your own version of [Lisp], start by
 > creating a cons cell data structure.
 
 The `car` and `cdr` functions access the elements in a pair. `(car p)` returns
@@ -920,5 +920,5 @@ versions. Here's the consed-out version of `deep-count-num`:
 
 [Scheme]: https://en.wikipedia.org/wiki/Scheme_(programming_language)
 [Racket]: https://racket-lang.org/
-[LISP]: https://en.wikipedia.org/wiki/Lisp_(programming_language)
+[Lisp]: https://en.wikipedia.org/wiki/Lisp_(programming_language)
 [Java]: https://en.wikipedia.org/wiki/Java

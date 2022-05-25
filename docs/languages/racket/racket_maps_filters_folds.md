@@ -505,8 +505,7 @@ This last expression suggests that `foldl` could be implemented like this:
 ```
 
 However, this is *not* how [Racket] implements `foldl`. According to [the
-documentation for foldl and foldr]
-(https://docs.racket-lang.org/reference/pairs.html#%28def._%28%28lib._racket%2Fprivate%2Flist..rkt%29._foldl%29%29),
+documentation for foldl and foldr](https://docs.racket-lang.org/reference/pairs.html#%28def._%28%28lib._racket%2Fprivate%2Flist..rkt%29._foldl%29%29),
 `foldl` uses a *constant* amount of space to process the list, while `foldr`
 uses an amount of space proportional to the size of the list. But this
 implementation of `my-foldl` calls `fold-right`, meaning it uses space
