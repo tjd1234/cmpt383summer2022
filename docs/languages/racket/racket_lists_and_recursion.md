@@ -227,7 +227,7 @@ for short.
 A dotted pair is implemented in memory as a **cons cell**, a value with two
 pointers:
 
-[[consCell.png|width=200px]]
+<img src="consCellpng" width="200">
 
 Visual diagrams like this are called **cons cell diagrams**.
 
