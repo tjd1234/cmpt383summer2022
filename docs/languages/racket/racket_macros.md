@@ -51,13 +51,14 @@ functions.
 But for those programmers who do want to implement such things, [Racket]
 provides **macros**. [Racket]'s macros are much more useful than the
 string-oriented macros you might have seen in C/C++. If you want to implement
-your own language features --- or even your own entire language --- macros
-will help you do this.
+your own language features --- or even your own language --- macros will help
+you do this.
 
 Macros are a relatively complex feature of [Racket], and here we will only
 discuss a few basic examples. If you are curious to learn more, check out some
 on-line resources such as [Let Over Lambda](https://letoverlambda.com/) and
 [Beautiful Racket](https://beautifulracket.com/).
+
 
 ## A First Macro: assert
 
@@ -165,11 +166,12 @@ evaluating (filter odd? '(1 2 3 4 5)) ...
 The form `(begin expr_1 expr_2 ... expr_n)` evaluates each of `expr_1` to
 `expr_n` in the order they occur, and then returns the value of `expr_n`.
 
+
 ## Basic Macro Expansion
 
-To better understand macros, it's useful to trace how macros get called. For
-example, when we call `(assert (= 1 2))`, we can imagine that it gets
-*expanded* into this expression:
+To better understand macros, lets trace how they're called. For example, when
+we call `(assert (= 1 2))`, we imagine that it gets *expanded* into this
+expression:
 
 ```scheme
 (when (not (= 1 2))

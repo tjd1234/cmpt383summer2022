@@ -768,26 +768,17 @@ This is the identity function: it returns unchanged whatever you pass it.
 
 ### Completeness of S and K
 
-Surprisingly, functions `S` and `K` can be combined to define *any* other pure
-function. Of course, the function might not be efficient or readable, but it
-can be done.
+Surprisingly, `S` and `K` can be combined to define *any* other pure function.
+Of course, the function might not be efficient or readable, but it can be
+done.
 
 We won't go through the proof here, but check out [the Wikipedia page on
 combinatory
 logic](https://en.wikipedia.org/wiki/Combinatory_logic#Completeness_of_the_S-K_basis)
 if you're curious.
 
-> It turns out there is a single function, called `X`, that can implement both
-> `S` and `K`:
-> 
->  ```scheme
->  (define (X x) ((x S) K))
->  ```
->  
-> Thus, *all* pure functions can be implemented in terms of the single
-> function `X`! Again, check out [the Wikipedia page on combinatory
-> logic](https://en.wikipedia.org/wiki/Combinatory_logic#One-point_basis) if
-> you are curious about the details.
+> See this [enchanted forest](https://wiki.xxiivv.com/site/logic.html) for a
+> more colorful approach to the same topic.
 
 [Scheme]: https://en.wikipedia.org/wiki/Scheme_(programming_language)
 [Racket]: https://racket-lang.org/
