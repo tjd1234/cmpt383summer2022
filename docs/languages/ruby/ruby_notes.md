@@ -41,16 +41,16 @@ $ irb -I . -r prog.rb
 
 ### Lecture 3 Ruby: Arrays, Slices, and Hashes
 
-- [slices.md](slices.md)
+- [Slices and ranges](slices_and_ranges.md)
 - [bits.rb](bits.rb)
 - [sort.rb](sort.rb)
-- [hashes.md](hashes.md) and [symbols.md](symbols.md)
+- [Hashes](hashes.md) and [symbols](symbols.md)
 - [wordcount.rb](wordcount.rb)
 
 ### Lecture 4 Ruby: Strings and Regular Expressions
 
-- [strings.md](strings.md)
-- [regex.md](regex.md)
+- [Strings](strings.md)
+- [Regular expressions](regex.md)
 
 ### Lecture 5,6 Ruby: Classes and Objects
 
