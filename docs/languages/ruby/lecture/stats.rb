@@ -9,13 +9,11 @@
 #
 # Returns the standard deviation of an array of numbers.
 #
-# The expression nums.each {|x| (x - mean)**2} .sum / n works as follows:
+# The expression nums.map {|x| (x - mean)**2} .sum works as follows:
 #
-# - (x - mean)**2 squares x - mean
-# - nums.map {|x| (x - mean)**2} returns a new array created by applying
-#   (x - mean)**2 to each element x of nums
-# - .sum returns the sum of the numbers in the array created by nums.each
-# - / n divides that sum by n, the size of the array
+# - nums.map {|x| (x - mean)**2} returns a new array created by applying (x -
+#   mean)**2 to each element x of nums
+# - .sum sums the numbers in the array created by nums.map
 #
 def std_dev(nums)
     n = nums.length
@@ -32,13 +30,13 @@ end
 nums = File.open("numbers.txt").readlines.map {|s| s.to_f}
 
 #
-# sort! modifies in-place the object being sorted
+# sort! does the sorting in-place, i.e. it modifies the array being sorted
 #
-# nums.sort would returne a sorted copy
+# In contrast, nums.sort doesn't change num and returns a new sorted copy.
 #
 nums.sort!
 
-puts nums.to_s
+puts nums.to_s  # num.to_s returns a string
 puts "        Min: #{nums[0]}"
 puts "     Median: #{nums[nums.length / 2]}"
 puts "        Max: #{nums[-1]}"

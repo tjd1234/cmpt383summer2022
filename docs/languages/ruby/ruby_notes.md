@@ -37,14 +37,14 @@ $ irb -I . -r prog.rb
 - [numbered_list.rb](numbered_list.rb)
 - [primes.rb](primes.rb)
 - [stats.rb](stats.rb)
-- [filedemo.rb](filedemo.rb)
+- [wc.rb](wc.rb)
+- [bits.rb](bits.rb)
 
 ### Lecture 3 Ruby: Arrays, Slices, and Hashes
 
 - [Slices and ranges](slices_and_ranges.md)
-- [bits.rb](bits.rb)
 - [sort.rb](sort.rb)
-- [Hashes](hashes.md) and [symbols](symbols.md)
+- [Hashes](hashes.md) and [symbols](symbols.md); [filedemo.rb](filedemo.rb)
 - [wordcount.rb](wordcount.rb)
 
 ### Lecture 4 Ruby: Strings and Regular Expressions
