@@ -108,7 +108,7 @@ Ruby strings come with many pre-made methods:
 >> s.split('')
 => ["e", "l", "e", "p", "h", "a", "n", "t", " ", " "]
 
->> s.upcase   # convert to uppercase
+>> s.upcase     # convert to uppercase
 => "ELEPHANT  "
 
 >> s.count('e') # count how many times a substring occurs
@@ -116,16 +116,15 @@ Ruby strings come with many pre-made methods:
 
 >> s.reverse
 => "  tnahpele"
->> s.each_char {|c| puts "'#{c}'" }  # each_char lets you apply'e'                                  # a code block to each
-'l'                                  # character in a string.
+>> s.each_char {|c| puts "'#{c}'" }  # each_char lets you apply
+'e'                                  # a code block to each
+'l'                                  # character in a string
 'e'
 'p'
 'h'
 'a'
 'n'
 't'
-' '
-
 ' '
 => "elephant  "
 >> s.split('').each_with_index {|c,i| puts "s[#{i}] = '#{c}' "}

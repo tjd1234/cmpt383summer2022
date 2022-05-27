@@ -16,7 +16,7 @@
 # - .sum sums the numbers in the array created by nums.map
 #
 def std_dev(nums)
-    n = nums.length
+    n = nums.size
     mean = nums.sum / n
     diffs = nums.map {|x| (x - mean)**2}
     return Math.sqrt(diffs.sum / n)

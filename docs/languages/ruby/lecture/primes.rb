@@ -7,38 +7,38 @@
 # Ruby functions that return a boolean value customarily end with ?.
 #
 
-def is_prime?(n)
-    if n < 2
-        false
-    elsif n == 2
-        return true
-    elsif n.even?
-        return false
-    else
-        candidate = 3
-        while candidate * candidate <= n
-            return false if n % candidate == 0
-            candidate += 2
-        end
-        return true
-    end
-end
+# def is_prime?(n)
+#     if n < 2
+#         false
+#     elsif n == 2
+#         true
+#     elsif n.even?
+#         false
+#     else
+#         candidate = 3
+#         while candidate * candidate <= n
+#             return false if n % candidate == 0
+#             candidate += 2
+#         end
+#         return true
+#     end
+# end
 
 #
 # An alternative implementation using if as a modifier.
 #
-# def is_prime?(n)
-#     return false if n < 2
-#     return true if n == 2
-#     return false if n.even?
-#
-#     candidate = 3
-#     while candidate * candidate <= n
-#         return false if n % candidate == 0
-#         candidate += 2
-#     end
-#     return true
-# end
+def is_prime?(n)
+    return false if n < 2
+    return true if n == 2
+    return false if n.even?
+
+    candidate = 3
+    while candidate * candidate <= n
+        return false if n % candidate == 0
+        candidate += 2
+    end
+    return true
+end
 
 
 #
@@ -50,7 +50,7 @@ end
 # that satisfy is_prime?, i.e. the number of primes from 1 to n-1 inclusive.
 #
 def primes_less_than(n)
-    return (1..n-1).count {|i| is_prime?(i)}
+    (1..n-1).count {|i| is_prime?(i)}
 end
 
 #
