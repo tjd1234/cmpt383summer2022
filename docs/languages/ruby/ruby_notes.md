@@ -42,6 +42,7 @@ $ irb -I . -r prog.rb
 
 ### Lecture 3 Ruby: Arrays, Slices, and Hashes
 
+- [Ruby array: each and map](each_and_map.md)
 - [Slices and ranges](slices_and_ranges.md)
 - [sort.rb](sort.rb)
 - [Hashes](hashes.md) and [symbols](symbols.md); [filedemo.rb](filedemo.rb)
