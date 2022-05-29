@@ -25,25 +25,19 @@ in a string:
 But Ruby symbols are *immutable*, i.e. once you create a symbol it can never
 change. This makes symbols useful as hash table keys. In a hash table, the
 value associated with a key depends upon the keys hash value, and so if you
-modify a string key in a hash table, you could end up getting the wrong hash
-value.
+use a mutable key (such as a string), you run the risk of accidentally
+modifying the key and thus changing its hash value. You could end up losing
+track of data in your hash.
 
-In contrast, if you use symbols as keys in a hash table, you can never change
-the symbol and thus you can never accidentally change their hash value.
-
-```ruby
->> "flag".hash
-=> 3366767042359227716
->> :flag.hash
-=> 3974238696057461111
-```
+In contrast, if you use symbols as keys, you can never change the symbol and
+thus you can never accidentally ruin the hash table.
 
 Finally, one other virtue of symbols over strings is that they can be more
 memory efficient. This examples shows that every time we write the string
 `"flag"` a new string object is created:
 
 ```ruby
->> "flag".object_id
+>> "flag".object_id   # each string is a brand new string
 => 220
 >> "flag".object_id
 => 240
@@ -55,7 +49,7 @@ But every time we write the symbol `:flag` we are referring to the same
 object:
 
 ```ruby
->> :flag.object_id
+>> :flag.object_id   # the same symbol each time
 => 544668
 >> :flag.object_id
 => 544668

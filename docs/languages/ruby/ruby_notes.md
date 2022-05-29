@@ -30,24 +30,23 @@ $ irb -I . -r prog.rb
 
 ### Lecture 1,2 Ruby: Basics
 
-- [hello_world.rb](hello_world.rb)
-- [hello_name.rb](hello_name.rb)
-- [count_up.rb](count_up.rb)
-- [count_down.rb](count_down.rb)
+- [hello_world.rb](hello_world.rb), [hello_name.rb](hello_name.rb)
+- [count_up.rb](count_up.rb), [count_down.rb](count_down.rb)
 - [numbered_list.rb](numbered_list.rb)
-- [primes.rb](primes.rb)
-- [stats.rb](stats.rb)
-- [wc.rb](wc.rb)
-- [bits.rb](bits.rb)
+- [primes.rb](primes.rb): calculating prime numbers
+- [stats.rb](stats.rb): reads a file of numbers and prints statistics
+- [wc.rb](wc.rb): a Ruby version of the standard `wc` Linux command
+- [bits.rb](bits.rb): uses recursion to print all bit strings
 
 ### Lecture 3 Ruby: Arrays, Slices, and Hashes
 
-- [linesize.rb](linesize.rb)
+- [linesize.rb](linesize.rb): prints lines in text files that are greater than
+  80 characters
 - [Ruby array: each and map](each_and_map.md)
 - [Slices and ranges](slices_and_ranges.md)
-- [sort.rb](sort.rb)
+- [sort.rb](sort.rb): a demonstration of sorting in Ruby
 - [Hashes](hashes.md) and [symbols](symbols.md); [filedemo.rb](filedemo.rb)
-- [wordcount.rb](wordcount.rb)
+- [wordcount.rb](wordcount.rb): using hashes to count words in a file
 
 ### Lecture 4 Ruby: Strings and Regular Expressions
 
@@ -56,14 +55,16 @@ $ irb -I . -r prog.rb
 
 ### Lecture 5,6 Ruby: Classes and Objects
 
+- [Object-oriented programming in Ruby](objects.md) 
 - [shapes1.rb](shapes1.rb)
 - [shapes2.rb](shapes2.rb)
 - [shapes3.rb](shapes3.rb)
-- [primes_oop.rb](primes_oop.rb)
+- [primes_oop.rb](primes_oop.rb): shows how to add a method to an existing
+  class
 
 ### Lecture 7 Ruby: Blocks and Yield
 
-- [yield.rb](yield.rb)
+- [yield.rb](yield.rb): how to create your own functions that work with blocks
 
 
 ## Some Shortcuts
@@ -101,7 +102,7 @@ makes it easier to read:
 => [:!, :!=, :!~, :%, :*, :+, :+@, :-@, :<, :<<, :<=, :<=>, :==, :===, :=~, :>, :>=, :[], :[]=, :__id__, :__send__, :ascii_only?, :b, :between?, :bytes, :bytesize, :byteslice, :capitalize, :capitalize!, :casecmp, :casecmp?, :center, :chars, :chomp, :chomp!, :chop, :chop!, :chr, :clamp, :class, :clear, :clone, :codepoints, :concat, :count, :crypt, :define_singleton_method, :delete, :delete!, :delete_prefix, :delete_prefix!, :delete_suffix, :delete_suffix!, :display, :downcase, :downcase!, :dump, :dup, :each_byte, :each_char, :each_codepoint, :each_grapheme_cluster, :each_line, :empty?, :encode, :encode!, :encoding, :end_with?, :enum_for, :eql?, :equal?, :extend, :force_encoding, :freeze, :frozen?, :getbyte, :grapheme_clusters, :gsub, :gsub!, :hash, :hex, :include?, :index, :insert, :inspect, :instance_eval, :instance_exec, :instance_of?, :instance_variable_defined?, :instance_variable_get, :instance_variable_set, :instance_variables, :intern, :is_a?, :itself, :kind_of?, :length, :lines, :ljust, :lstrip, :lstrip!, :match, :match?, :method, :methods, :next, :next!, :nil?, :object_id, :oct, :ord, :partition, :prepend, :private_methods, :protected_methods, :public_method, :public_methods, :public_send, :remove_instance_variable, :replace, :respond_to?, :reverse, :reverse!, :rindex, :rjust, :rpartition, :rstrip, :rstrip!, :scan, :scrub, :scrub!, :send, :setbyte, :singleton_class, :singleton_method, :singleton_methods, :size, :slice, :slice!, :split, :squeeze, :squeeze!, :start_with?, :strip, :strip!, :sub, :sub!, :succ, :succ!, :sum, :swapcase, :swapcase!, :taint, :tainted?, :tap, :then, :to_c, :to_enum, :to_f, :to_i, :to_r, :to_s, :to_str, :to_sym, :tr, :tr!, :tr_s, :tr_s!, :trust, :undump, :unicode_normalize, :unicode_normalize!, :unicode_normalized?, :unpack, :unpack1, :untaint, :untrust, :untrusted?, :upcase, :upcase!, :upto, :valid_encoding?, :yield_self]
 ```
 
-Just the string methods:
+Just the string-specific methods:
 
 ```ruby
 >> (String.instance_methods - Object.instance_methods).sort
