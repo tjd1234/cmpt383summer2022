@@ -3,8 +3,8 @@
 A Ruby **hash** stores (key, value) pairs in a way that allows for very
 efficient retrieval/insertion give a key.
 
-Hashes uses `{}`-brackets. If the keys are symbols, as they are in this example,
-then you can use the notation key:value for a pair:
+Hash literals uses `{}`-brackets. If the keys are symbols, as they are in this
+example, then you can use the notation *key:value* for a pair:
 
 ```ruby
 >> order = {cheese: 4.99, cookies: 2.45, juice: 0.99}

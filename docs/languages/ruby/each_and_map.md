@@ -25,7 +25,9 @@ every element. For example, `[a, b, c].map {|x| f(x)}` returns a new array
 ```
 
 `each` is similar to `map`, except it does not make a new array, and instead
-just runs code on each element. It is typically written in do-style, and it is the side-effects of the function that we care about:
+runs code block on each item of the original array. In other words, it's the
+*side-effects* of the function that we care about. It is typically written in
+do-style:
 
 ```ruby
 arr.each do |x|
@@ -33,8 +35,8 @@ arr.each do |x|
 end
 ```
 
-For instance, printing a string on the screen is a side-effect ofg `puts`,
-and so this prints every element of an array:
+For instance, printing a string on the screen is a side-effect of `puts`, and
+so this prints every element of an array:
 
 ```ruby
 [1,2,3].each do |n|
@@ -49,7 +51,7 @@ end
 The last line is the value return by the expression, the original array. We
 usually don't care about the return value of a  `.each` block.
 
-A .each block is essentially equivalent to "for each" loops that appear in
+A `.each` block is essentially equivalent to "for each" loops that appear in
 other languages.
 
 Since there is only a `puts` statement in the block, it is also pretty

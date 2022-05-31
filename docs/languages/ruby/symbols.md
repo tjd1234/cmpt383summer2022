@@ -45,7 +45,7 @@ memory efficient. This examples shows that every time we write the string
 => 260
 ```
 
-But every time we write the symbol `:flag` we are referring to the same
+But every time we write the symbol `:flag` we are referring to the *same*
 object:
 
 ```ruby
