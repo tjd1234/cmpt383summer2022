@@ -45,8 +45,11 @@ $ irb -I . -r prog.rb
   80 characters
 - [Slices and ranges](slices_and_ranges.md)
 - [sort.rb](sort.rb): a demonstration of sorting in Ruby
-- [Hashes](hashes.md) and [symbols](symbols.md); [filedemo.rb](filedemo.rb)
-- [wordcount.rb](wordcount.rb): using hashes to count words in a file
+- [Hashes](hashes.md) and [symbols](symbols.md)
+- [filedemo.rb](filedemo.rb): prints a count of file name extensions, from
+  most to least
+- [wordcount.rb](wordcount.rb): uses hashes to count top 10 most frequent
+  words in a file
 
 ### Lecture 4 Ruby: Strings and Regular Expressions
 

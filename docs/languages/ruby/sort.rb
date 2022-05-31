@@ -44,8 +44,8 @@ print files.sort.reverse, " reverse sorted\n"
 # >> 5 <=> 4
 # => 1
 #
-# All the standard types that can be ordered work with <=>, and you can
-# implement your own for your own classes.
+# All the standard types work with <=>, and you can implement your own for
+# your own classes.
 #
 print files.sort { |a,b| b <=> a }, " reverse sorted\n"
 

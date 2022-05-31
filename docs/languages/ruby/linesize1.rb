@@ -1,7 +1,10 @@
-# linesize.rb
+# linesize1.rb
 
 #
 # Print all the lines of the given text file whose length if over N.
+#
+# Not the most efficient way, but uses some interesting Ruby features like
+# ranges, zip, and select.
 #
 
 N = 80
