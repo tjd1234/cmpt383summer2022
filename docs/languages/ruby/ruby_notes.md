@@ -55,6 +55,7 @@ $ irb -I . -r prog.rb
 
 - [Strings](strings.md)
 - [Regular expressions](regex.md)
+- [phoneNumCheck.rb](phoneNumCheck.rb)
 
 ### Lecture 5, 6 Ruby: Classes and Objects
 

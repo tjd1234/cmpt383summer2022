@@ -1,14 +1,13 @@
 # Strings
 
-A Ruby **string** has an arbitrary sequence of bytes, usually representing
-text. Ruby strings are *mutable*, i.e. you can modify their characters
-in-place.
+A Ruby **string** is a sequence of bytes, usually representing text. Ruby
+strings are *mutable*, i.e. you can modify their characters in-place.
 
 Strings are different than symbols. Symbols are used as identifiers, and we
 don't usually access the individual characters of a symbol.
 
-Ruby has a number of ways to represent string literals. ""-quotes and
-''-quotes, which are found in other languages, are the most common.
+Ruby has a number of ways to represent string literals. `""`-quotes and
+`''`-quotes, similar to other languages, are the most common.
 
 ```ruby
 >> "hello, world!"
@@ -32,7 +31,7 @@ Egbert   # typed in by the user
 => "Hello Egbert, how are you?"
 ```
 
-You can also use ''-quoted strings, but `#{...}` notation is not supported:
+You can also use `''`-quoted strings, but `#{...}` notation is not supported:
 
 ```ruby
 >> 'I have #{3 + 1} cookies.'
@@ -52,9 +51,9 @@ Ruby strings can have *line breaks* in them:
 The special `">` prompt comes from *irb* (the Ruby interpreter), and indicates
 a multi-line string is being entered.
 
-Ruby also supports **heredocs** for larger strings, and alternate literal
+Ruby also supports **heredocs** for larger strings, and the alternate literal
 notations `%Q(...)` and `%q(...)`. We won't go into detail about those
-features here, but you can find out about the on the web.
+features here, but you can find out more about them on the web.
 
 
 ## Accessing String Characters

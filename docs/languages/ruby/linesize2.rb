@@ -3,7 +3,8 @@
 #
 # Print all the lines of the given text file whose length if over N.
 #
-# Much simpler and more efficient than 
+# Much simpler and more efficient than linesize1.rb. The output format is
+# different.
 #
 
 N = 80

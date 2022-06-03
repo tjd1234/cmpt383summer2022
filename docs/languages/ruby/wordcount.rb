@@ -57,13 +57,9 @@ words = File.open(fname).read.downcase.gsub(/[^a-z]/, ' ').split
 # of nil if you access a key not in the hash.
 #
 wc = Hash.new(0)
+
 words.each do |w|
     wc[w] += 1
-    # if wc.has_key?(w)
-    #   wc[w] += 1
-    # else
-    #   wc[w] = 1
-    # end
 end
 
 # puts wc
