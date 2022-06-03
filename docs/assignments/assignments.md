@@ -19,14 +19,14 @@ language you are using are given on that page.
 ## Part 2: Linear Insertion Sort
 
 Implement a version of [linear insertion
-sort](https://en.wikipedia.org/wiki/Insertion_sort) **sort(lst)** that returns
-a brand new list that is the same as **lst** but its elements are in ascending
-sorted order. For example:
+sort](https://en.wikipedia.org/wiki/Insertion_sort) **mySort(lst)** that
+returns a brand new list that is the same as **lst** but its elements are in
+ascending sorted order. For example:
 
-- **sort({})** returns **{}**
-- **sort({5})** returns **{5}**
-- **sort({5, 2})** returns **{2, 5}**
-- **sort({6, 2, 4, 3, 8, 1, 2})** returns **{1, 2, 2, 3, 4, 6, 8}**
+- **mySort({})** returns **{}**
+- **mySort({5})** returns **{5}**
+- **mySort({5, 2})** returns **{2, 5}**
+- **mySort({6, 2, 4, 3, 8, 1, 2})** returns **{1, 2, 2, 3, 4, 6, 8}**
 
 To help implement this, you could implement a function **insert(x, i, lst)**
 returns a new list with item **x** at location **i** in **lst**.
@@ -39,6 +39,9 @@ Your linear insertion sort function should work with at these three types:
 easy to do in the language you're using, implement it as a single function
 that works efficiently for all three types. Otherwise, you can implement a
 different version for each type.
+
+**Please use the name `mySort`.** This will help the TAs find and mark your
+function.
 
 
 ## Sorting Performance Experiment
@@ -75,13 +78,6 @@ Your code does *not* need to automatically generate Excel files. You could, if
 you like, print the timings to the screen and then cut-and-paste them by hand
 into the spreadsheet. Another possibility is to write the output to
 comma-separated value files, which Excel can read.
-
-### Go-specific Notes
-
-**Do not use Go generics** for any part of this assignment. They are a very
-recent feature of the language that not all Go compilers support yet. So
-please do not use them (if you do you may be asked to re-write your code
-without generics).
 
 
 ## Marking Scheme

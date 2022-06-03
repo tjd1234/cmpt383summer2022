@@ -60,8 +60,9 @@ implementation to help the marker understand your code.
     the greatest common divisor (GCD) algorithm to help do this. Be careful in
     the case where the numerator or denominator is negative.
 
-15. **Harmonic sum** Given an integer $n > 0$, return a rational equal to 
-    $H_n = \frac{1}{1} + \frac{1}{2} + \frac{1}{3} + \ldots + \frac{1}{n}$.
+15. **Harmonic sum** Given an integer $n > 0$, return a rational equal to $H_n
+    = \frac{1}{1} + \frac{1}{2} + \frac{1}{3} + \ldots + \frac{1}{n}$. Please
+    name the function `harmonicSum(n)` so it easy to find and run.
 
 
 ## General Notes
@@ -157,16 +158,32 @@ More details may be posted here closer to the assignment deadline.
 
 ## Ruby-specific Notes
 
-Represent the rationals using a class.
+- Represent the rationals using a class.
 
-Ruby already has a standard class called `Rational` that implements rational
-numbers. *Don't* use it in your implementation. Create your own original
-implementation of rationals called `MyRational` that *doesn't* use Ruby's
-`Rational` anywhere.
+- Ruby already has a standard class called `Rational` that implements rational
+  numbers. **Don't** use it. Create your own original implementation of
+  rationals called `MyRational` that *doesn't* use Ruby's `Rational` anywhere.
 
-In addition to the equality and less than operators, also implement the
-*spaceship operator* `<=>`, so that `MyRational` objects can be sorted with
-Ruby's standard sorting function.
+- Use Ruby **exceptions** to handle errors. For example, use `raise` to cause
+  an exception due to an error, e.g. `raise RuntimeError, 'something bad has
+  happened'`.
+
+- For part 5, please name the method `to_s`.
+
+- For part 6, please name the method `to_f`. In addition, in the standard Ruby
+  `Integer` class add a method called `to_mr` that returns a new `MyRational`
+  equivalent to the integer. For example, the expression `5.to_mr` returns a
+  new `MyRational` with numerator 5 and denominator 1.
+
+- For part 7, please name the method `==`.
+
+- For part 8, please implement the *spaceship operator* `<=>` as a method, and
+  include the [Comparable
+  module](https://docs.ruby-lang.org/en/2.5.0/Comparable.html) to get all the
+  relational operators.
+
+- For parts 10, 11, and 12, implement the standard arithmetic operators `+`,
+  `*`, and `/`.
 
 More details may be posted here closer to the assignment deadline.
 
@@ -176,7 +193,7 @@ More details may be posted here closer to the assignment deadline.
 Represent rationals using a regular list and functions. Don't use any special
 Racket data structures for this.
 
-Racket has built-in support for rational numbers. *Don't* use it anywhere in
+Racket has built-in support for rational numbers. **Don't** use it anywhere in
 your implementation. Create your own original implementation of rationals that
 *doesn't* use the built-in rationals anywhere.
 
@@ -185,9 +202,9 @@ More details may be posted here closer to the assignment deadline.
 
 ## Haskell-specific Notes
 
-Haskell has a standard `Rational` type. *Don't* use it in your implementation.
-Create your own original implementation of rationals in a typeclass called
-`MyRational` that doesn't use Haskell's `Rational` anywhere.
+Haskell has a standard `Rational` type. **Don't** use it in your
+implementation. Create your own original implementation of rationals in a
+typeclass called `MyRational` that doesn't use Haskell's `Rational` anywhere.
 
 More details may be posted here closer to the assignment deadline.
 
