@@ -20,8 +20,8 @@ implementation to help the marker understand your code.
 3. **Get the denominator** Returns the denominator of a given rational.
 
 4. **Get the numerator and denominator as a pair** Returns both the numerator
-   and denominator. Call this operation *split*, i.e. splitting 5/3 gives (5,
-   3).
+   and denominator. Call this operation *pair*, i.e. calling *pair* on 5/3
+   gives (5, 3).
 
 5. **Convert to a string** Returns the usual string representation of the
    rational. For instance, 5/3 would be the string "5/3".
@@ -170,7 +170,8 @@ More details may be posted here closer to the assignment deadline.
 - For part 2 and 3, name the methods `num` and `denom`, and implement them
   using `attr_reader`.
 
-- For part 4, please name the method `to_s`.
+- For part 4, please name the method `pair`, and it should return a list
+  `[n,d]`, where `n` is the numerator and `d` is the denominator.
 
 - For part 5, please name the method `to_s`.
 
