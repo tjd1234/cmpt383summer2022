@@ -170,7 +170,7 @@ More details may be posted here closer to the assignment deadline.
 - For part 2 and 3, name the methods `num` and `denom`, and implement them
   using `attr_reader`.
 
-- For part 4, please name the method `pair`, and it should return a list
+- For part 4, please name the method `pair`, and it should return an array
   `[n,d]`, where `n` is the numerator and `d` is the denominator.
 
 - For part 5, please name the method `to_s`.
