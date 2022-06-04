@@ -156,7 +156,7 @@ Use `errors.New` to create error values.
 More details may be posted here closer to the assignment deadline.
 
 
-## Ruby-specific Notes
+## Ruby-specific Notes {#Ruby-specific Notes}
 
 - Represent the rationals using a class.
 
