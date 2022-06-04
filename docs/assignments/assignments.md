@@ -19,14 +19,14 @@ language you are using are given on that page.
 ## Part 2: Linear Insertion Sort
 
 Implement a version of [linear insertion
-sort](https://en.wikipedia.org/wiki/Insertion_sort) **mySort(lst)** that
-returns a brand new list that is the same as **lst** but its elements are in
-ascending sorted order. For example:
+sort](https://en.wikipedia.org/wiki/Insertion_sort) **insertionSort(lst)**
+that returns a brand new list that is the same as **lst** but its elements are
+in ascending sorted order. For example:
 
-- **mySort({})** returns **{}**
-- **mySort({5})** returns **{5}**
-- **mySort({5, 2})** returns **{2, 5}**
-- **mySort({6, 2, 4, 3, 8, 1, 2})** returns **{1, 2, 2, 3, 4, 6, 8}**
+- **insertionSort({})** returns **{}**
+- **insertionSort({5})** returns **{5}**
+- **insertionSort({5, 2})** returns **{2, 5}**
+- **insertionSort({6, 2, 4, 3, 8, 1, 2})** returns **{1, 2, 2, 3, 4, 6, 8}**
 
 To help implement this, you could implement a function **insert(x, i, lst)**
 returns a new list with item **x** at location **i** in **lst**.
@@ -40,8 +40,8 @@ easy to do in the language you're using, implement it as a single function
 that works efficiently for all three types. Otherwise, you can implement a
 different version for each type.
 
-**Please use the name `mySort`.** This will help the TAs find and mark your
-function.
+**Please use the name `insertionSort`.** This will help the TAs find and mark
+your function.
 
 
 ## Sorting Performance Experiment

@@ -167,7 +167,8 @@ More details may be posted here closer to the assignment deadline.
 - Use Ruby **exceptions** to handle errors. For example, use `raise` to cause
   an exception due to an error, e.g. `raise 'MyRational: denominator cannot be 0'`.
 
-- For part 2 and 3, name the methods `get_num` and `get_denom`.
+- For part 2 and 3, name the methods `num` and `denom`, and implement them
+  using `attr_reader`.
 
 - For part 4, please name the method `to_s`.
 
@@ -185,7 +186,7 @@ More details may be posted here closer to the assignment deadline.
   module](https://docs.ruby-lang.org/en/2.5.0/Comparable.html) to get all the
   relational operators.
 
-- For part 9, please name the method `is_int?`.
+- For part 9, please name the method `int?`.
 
 - For parts 10, 11, and 12, implement the standard arithmetic operators `+`,
   `*`, and `/`.
