@@ -156,7 +156,7 @@ Use `errors.New` to create error values.
 More details may be posted here closer to the assignment deadline.
 
 
-## Ruby-specific Notes {#Ruby-specific Notes}
+## Ruby-specific Notes {#ruby-specific-notes}
 
 - Represent the rationals using a class.
 
@@ -165,8 +165,7 @@ More details may be posted here closer to the assignment deadline.
   rationals called `MyRational` that *doesn't* use Ruby's `Rational` anywhere.
 
 - Use Ruby **exceptions** to handle errors. For example, use `raise` to cause
-  an exception due to an error, e.g. `raise RuntimeError, 'something bad has
-  happened'`.
+  an exception due to an error, e.g. `raise 'MyRational: denominator cannot be 0'`.
 
 - For part 2 and 3, name the methods `get_num` and `get_denom`.
 
