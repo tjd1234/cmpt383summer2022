@@ -168,6 +168,10 @@ More details may be posted here closer to the assignment deadline.
   an exception due to an error, e.g. `raise RuntimeError, 'something bad has
   happened'`.
 
+- For part 2 and 3, name the methods `get_num` and `get_denom`.
+
+- For part 4, please name the method `to_s`.
+
 - For part 5, please name the method `to_s`.
 
 - For part 6, please name the method `to_f`. In addition, in the standard Ruby
@@ -175,15 +179,21 @@ More details may be posted here closer to the assignment deadline.
   equivalent to the integer. For example, the expression `5.to_mr` returns a
   new `MyRational` with numerator 5 and denominator 1.
 
-- For part 7, please name the method `==`.
+- For part 7, please name the method `get_pair`.
 
 - For part 8, please implement the *spaceship operator* `<=>` as a method, and
   include the [Comparable
   module](https://docs.ruby-lang.org/en/2.5.0/Comparable.html) to get all the
   relational operators.
 
+- For part 9, please name the method `is_int?`.
+
 - For parts 10, 11, and 12, implement the standard arithmetic operators `+`,
   `*`, and `/`.
+
+- For part 13, please name the method `invert`.
+
+- For part 14, please name the method `to_lowest_terms`.
 
 More details may be posted here closer to the assignment deadline.
 
