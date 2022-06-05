@@ -180,7 +180,8 @@ More details may be posted here closer to the assignment deadline.
   equivalent to the integer. For example, the expression `5.to_mr` returns a
   new `MyRational` with numerator 5 and denominator 1.
 
-- For part 7, please name the method `get_pair`.
+- For part 7, please implement as the standard equality operator `==` as a
+  method.
 
 - For part 8, please implement the *spaceship operator* `<=>` as a method, and
   include the [Comparable
@@ -204,9 +205,9 @@ More details may be posted here closer to the assignment deadline.
 Represent rationals using a regular list and functions. Don't use any special
 Racket data structures for this.
 
-Racket has built-in support for rational numbers. **Don't** use it anywhere in
-your implementation. Create your own original implementation of rationals that
-*doesn't* use the built-in rationals anywhere.
+Racket has built-in support for rational numbers. **Don't** use them! Create
+your own original implementation of rationals that *doesn't* use the built-in
+rationals anywhere.
 
 More details may be posted here closer to the assignment deadline.
 
