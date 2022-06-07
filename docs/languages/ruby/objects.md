@@ -17,6 +17,9 @@ class. The `.class` method returns the class of an object:
 >> "4".class
 => String
 
+>> :flag.class
+Symbol
+
 >> [4,4].class
 => Array
 
@@ -84,12 +87,20 @@ class Point1
         @y = y
     end
 
-    def get_x  # getter
+    def get_x     # getter
         @x
     end
 
-    def get_y  # getter
+    def set_x(x)  # setter
+        @x = x
+    end
+
+    def get_y     # getter
         @y
+    end
+
+    def get_y(y)  # setter
+        @y = y
     end
 
     def to_s  # convert to a string
@@ -130,7 +141,7 @@ puts p
 ## Simplifying Getters and Setters
 
 A common complaint about object-oriented programming is that getters and
-setters are both tedious to write, and hard to use. For example, most
+setters are both tedious to write, and awkward to use. For example, most
 programmers would prefer to write `p.x = 0` instead of `p.set_x(0)`.
 
 Ruby provides a solution to that problem with `attr_accessor`:
@@ -202,7 +213,9 @@ Note the following:
 Ruby only allows single-inheritance, i.e. a class an inherit from only one
 other class at a time. While it is possible to allow a class to inherit from
 more than one class (**multiple inheritance**), Ruby does *not* permit that
-since it introduces too many complexities.
+since it introduces too many complexities. For example, if Ruby was allowed to
+inherit from a class `A` and another class `B`, and both classes had their own
+public `to_s` method, which implementation of `to_s` should the class inherit?
 
 Instead, Ruby allows a class to *include* one or more **modules**. A module is
 a collection of variables and values, and when a class includes a module it
@@ -267,17 +280,46 @@ puts "Writing #{p} to #{p.filename} ..."
 p.to_f
 ```
 
+As an aside, mix-ins can have name collisions that can be the source of
+confusion. For example, an answer in this [Stack Overflow question illustrates
+the
+problem](https://stackoverflow.com/questions/1282864/ruby-inheritance-vs-mixins):
+
+```ruby
+module A
+  FRUIT = "apple"
+  def sayname
+    puts FRUIT
+  end
+end
+
+module B
+  FRUIT = "orange"
+  def sayname
+    puts FRUIT
+  end
+end
+
+class C
+  include A
+  include B
+end
+
+c = C.new
+c.sayname    # What does this print?
+```
+
 ## The Comparable and Enumerable Modules
 
 Ruby has a number of standard modules that you can, if you choose, include in
 your own classes.
 
-One of the most useful modules is
+One of the most useful is
 [Comparable](https://docs.ruby-lang.org/en/2.5.0/Comparable.html). It provides
 implementation of standard relational operators such as `<`, `<=`, `==`, and
 so on. To use
 [Comparable](https://docs.ruby-lang.org/en/2.5.0/Comparable.html) your class
-must both include, and implement the `<=>` operator.
+must both include it, and implement the `<=>` operator.
 
 Similarly, the [Enumerable](https://ruby-doc.org/core-2.6.3/Enumerable.html)
 module provides a large number of methods that work on array-like classes. To
@@ -376,11 +418,10 @@ number of features, and yet have very little code and appear quite simple. For
 many programmers, this is very appealing, and makes them more productive.
 
 A downside of this approach is that Ruby has a lot of features that are not
-explicit, and you must learn a lot about how to best use these features.
-Reading sophisticated Ruby code can be a challenge due to all the defaults and
+explicit, and you must learn a about how to best use these features. Reading
+sophisticated Ruby code can be a challenge due to all the defaults and
 built-in behaviour. In addition, all these hidden features also tend to make a
 Ruby an inefficient language, in both time and memory.
 
 There is no one answer about whether Ruby is a good or bad language. It
 depends on your application, and how much you enjoy using Ruby features.
-

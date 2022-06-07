@@ -1,19 +1,21 @@
-# shapes3.go
+# shapes2.rb
 
 #
-# Based on shapes1.rb. printShapeStats is a method in the Shape module (not
-# class!), and Rectangle and Circle include Shape as a mixin.
+# Based on shapes1.rb. Classes inherit from the Shape base class.
+# printShapeStats is a method in the Shape base class.
 #
 
-module Shape
-    def printShapeStats()
+class Shape
+    def printShapeStats
         puts "#{self.class.name}: area=#{area}, perimeter=#{perimeter}"
     end
 end
 
-class Rectangle
-include Shape  # allows Shape methods to be called in Rectangle 
-
+class Rectangle < Shape
+    #
+    # initialize is called when a new instance of the object is created.
+    # Instance variables of the class start with @.
+    #
     def initialize(width, height)
         @width = width
         @height = height
@@ -26,15 +28,9 @@ include Shape  # allows Shape methods to be called in Rectangle
     def perimeter
         2 * (@width + @height)
     end
-
-    def method_missing(m, *args, &block)
-        puts "Shape: no method named #{m}."
-    end
 end
 
-class Circle
-include Shape
-
+class Circle < Shape
     def initialize(radius)
         @radius = radius
     end
@@ -58,5 +54,3 @@ shapes = [box, dot]
 shapes.each do |s|
     s.printShapeStats
 end
-
-box.print

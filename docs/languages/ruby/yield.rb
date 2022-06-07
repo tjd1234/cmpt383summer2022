@@ -115,13 +115,13 @@ end
 #
 # For example:
 #
-#   >> "96372f1..9b42511".just_chars {|c| puts c}
+#   >> "96372f1..9b42511".just_letters {|c| puts c}
 #   f
 #   b
 #   => "96372f1..9b42511"
 #
 class String
-    def just_chars
+    def just_letters
         self.each_char do |c|
             if c =~ /^[a-zA-Z]$/
                 yield c
