@@ -11,18 +11,18 @@
 # lists are appended together to get the final result.
 #
 def nbits(n)
-	# non-recursive base cases
-	return [] if n < 0
-	return ['0','1'] if n == 1
+    # non-recursive base cases
+    return [] if n < 0
+    return ['0','1'] if n == 1
 
-	# recursive case
-	n1bits = nbits(n-1)
+    # recursive case
+    n1bits = nbits(n-1)
 
-	# map returns a new array
-	zero = n1bits.map {|s| '0' + s}
-	one = n1bits.map {|s| '1' + s}
-	
-	return zero + one
+    # map returns a new array
+    zero = n1bits.map {|s| '0' + s}
+    one = n1bits.map {|s| '1' + s}
+    
+    return zero + one
 end
 
 #
@@ -30,5 +30,5 @@ end
 #
 results = nbits(5)
 results.each_with_index do |b,i|
-	puts "#{b} #{i}"
+    puts "#{b} #{i}"
 end
