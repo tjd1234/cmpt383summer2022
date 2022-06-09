@@ -202,8 +202,8 @@ More details may be posted here closer to the assignment deadline.
 
 ## Racket-specific Notes
 
-Represent rationals using a regular list and functions. Don't use any special
-Racket data structures for this.
+Represent rationals using a **regular list and functions**. **Don't** use any
+special Racket data structures for this.
 
 Racket has built-in support for rational numbers. **Don't** use them! Create
 your own original implementation of rationals that *doesn't* use the built-in
