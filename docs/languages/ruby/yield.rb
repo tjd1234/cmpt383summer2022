@@ -26,33 +26,6 @@ def yield_stuff
 end
 
 #
-# Yields the first n Fibonacci numbers.
-#
-# >> fib(5) {|x| puts x}
-# 1
-# 1
-# 2
-# 3
-# 5
-# => 5
-#
-def fib(n)
-    case n  # similar to a switch statement
-    when 1
-        yield 1
-    when 2
-        yield 1
-        yield 1
-    else # n > 2
-        a, b = 1, 1
-        n.times do |i|
-            yield a
-            a, b = b, a + b
-        end
-    end
-end
-
-#
 # Iterates from 0 up to, and including, n-1:
 #
 # >> mytimes(5) {|n| puts n**2}
@@ -88,11 +61,41 @@ class Integer
     end
 end
 
+#############################################################################
+
+#
+# Yields the first n Fibonacci numbers.
+#
+# >> fib(5) {|x| puts x}
+# 1
+# 1
+# 2
+# 3
+# 5
+# => 5
+#
+def fib(n)
+    case n  # case is similar to a switch statement
+    when 1
+        yield 1
+    when 2
+        yield 1
+        yield 1
+    else # n > 2
+        a, b = 1, 1
+        n.times do |i|
+            yield a
+            a, b = b, a + b
+        end
+    end
+end
+
+#############################################################################
 
 #
 # Iterates through the digits of the number, as integers e.g.:
 # 
-# >> 4589.digits {|d| puts d}
+# >> 4589.each_digit {|d| puts d}
 # 4
 # 5
 # 8
@@ -100,7 +103,7 @@ end
 # => "4589"
 #
 class Integer    
-    def digits
+    def each_digit
         s = self.to_s
         s.each_char do |c|
             yield c.to_i
@@ -108,28 +111,41 @@ class Integer
     end
 end
 
+#############################################################################
+
 #
-# String iterator that returns just the alphabetic characters that appear in a
-# string. The regular expression /^[a-zA-Z]$/ matches just the alphabetic
-# characters.
+# Our own implementations of the standard Array methods each and
+# each_with_index.
 #
-# For example:
-#
-# >> "96372f1..9b42511".just_letters {|c| puts c}
-# f
+# >> %w(a b c).myeach {|s| puts s}
+# a
 # b
-# => "96372f1..9b42511"
+# c
+# => 0...3
 #
-class String
-    def just_letters
-        self.each_char do |c|
-            if c =~ /^[a-zA-Z]$/
-                yield c
-            end
+# %w(a b c) is shorthand for ["a", "b", "c"]
+#
+# >> %w(a b c).myeach_with_index {|i,s| puts "#{i+1}. #{s}"}
+# 1. a
+# 2. b
+# 3. c
+# => 0...3
+#
+class Array
+    def myeach
+        for i in (0...self.size)
+            yield self[i]
         end
     end
-end # String
 
+    def myeach_with_index
+        for i in (0...self.size)
+            yield i, self[i]
+        end
+    end
+end
+
+#############################################################################
 
 class String
     #
@@ -180,14 +196,14 @@ class String
     # three
     # => ["one", "three"]
     #
-    # String.scan returns an array of all matches.
+    # String.scan(regex) returns an array of all substrings that match regex.
     #
     def just_words
         scan(/[a-zA-Z]+/).each {|w| yield w}
     end
 
     #
-    # Same as just_words, but unique words repeated words are excluded.
+    # Same as just_words, but repeated words are excluded.
     #
     # >> "yes or no or yes or no".just_unique_words {|w| puts w}
     # yes
@@ -206,6 +222,29 @@ class String
         end
     end
 end # String
+
+#############################################################################
+
+#
+# This example is based on this posting:
+# https://scoutapm.com/blog/ruby-yield-blocks
+#
+# You can use it to estimate the time it takes for a block to be executed.
+#
+def measure_seconds
+    start = Time.now
+    yield
+    elapsed = Time.now - start
+    puts "Elapsed seconds: #{elapsed}"
+end
+
+# measure_seconds do
+#     arr = (1..1000000).to_a
+#     arr.shuffle!
+#     arr.sort!
+# end
+
+#############################################################################
 
 class Integer 
     #
@@ -264,56 +303,3 @@ class Integer
         end       
     end
 end # Integer
-
-
-
-#
-# Our own implementations of the standard Array methods each and
-# each_with_index.
-#
-# >> %w(a b c).myeach {|s| puts s}
-# a
-# b
-# c
-# => 0...3
-#
-# %w(a b c) is shorthand for ["a", "b", "c"]
-#
-# >> %w(a b c).myeach_with_index {|i,s| puts "#{i+1}. #{s}"}
-# 1. a
-# 2. b
-# 3. c
-# => 0...3
-#
-class Array
-    def myeach
-        for i in (0...self.size)
-            yield self[i]
-        end
-    end
-
-    def myeach_with_index
-        for i in (0...self.size)
-            yield i, self[i]
-        end
-    end
-end
-
-#
-# This example is based on this posting:
-# https://scoutapm.com/blog/ruby-yield-blocks
-#
-# You can use it to estimate the time it takes for a block to be executed.
-#
-def measure_seconds
-    start = Time.now
-    yield
-    elapsed = Time.now - start
-    puts "Elapsed seconds: #{elapsed}"
-end
-
-# measure_seconds do
-#     arr = (1..1000000).to_a
-#     arr.shuffle!
-#     arr.sort!
-# end
