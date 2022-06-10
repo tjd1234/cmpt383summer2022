@@ -3,7 +3,7 @@
 #
 # To load this code into the Ruby interpreter:
 #
-#   $ irb -I . -r yield.rb --simple-prompt
+#   $ irb -I . -r yield2.rb --simple-prompt
 #
 
 #
@@ -23,33 +23,6 @@ def yield_stuff
     yield 'cow'
     yield 2.09
     puts "stop"
-end
-
-#
-# Yields the first n Fibonacci numbers.
-#
-# >> fib(5) {|x| puts x}
-# 1
-# 1
-# 2
-# 3
-# 5
-# => 5
-#
-def fib(n)
-    case n  # similar to a switch statement
-    when 1
-        yield 1
-    when 2
-        yield 1
-        yield 1
-    else # n > 2
-        a, b = 1, 1
-        n.times do |i|
-            yield a
-            a, b = b, a + b
-        end
-    end
 end
 
 #
@@ -89,47 +62,79 @@ class Integer
 end
 
 
+#############################################################################
+
 #
 # Iterates through the digits of the number, as integers e.g.:
 # 
-# >> 4589.digits {|d| puts d}
+# >> 4589.each_digit {|d| puts d}
 # 4
 # 5
 # 8
 # 9
 # => "4589"
 #
-class Integer    
-    def digits
+class Integer
+    #
+    # Generates each digit of the number, as an integer.
+    #
+    # Only works with non-negative numbers.
+    #
+    def each_digit
         s = self.to_s
         s.each_char do |c|
             yield c.to_i
         end
     end
-end
+
+    #
+    # Returns true if the digit d occurs in this number, and
+    # false otherwise.
+    #
+    def has_digit?(d)
+        each_digit do |a|
+            return true if d == a
+        end
+        return false
+    end
+end # Integer
+
+
+#############################################################################
 
 #
-# String iterator that returns just the alphabetic characters that appear in a
-# string. The regular expression /^[a-zA-Z]$/ matches just the alphabetic
-# characters.
+# Our own implementations of the standard Array methods each and
+# each_with_index.
 #
-# For example:
-#
-# >> "96372f1..9b42511".just_letters {|c| puts c}
-# f
+# >> %w(a b c).myeach {|s| puts s}
+# a
 # b
-# => "96372f1..9b42511"
+# c
+# => 0...3
 #
-class String
-    def just_letters
-        self.each_char do |c|
-            if c =~ /^[a-zA-Z]$/
-                yield c
-            end
+# %w(a b c) is shorthand for ["a", "b", "c"]
+#
+# >> %w(a b c).myeach_with_index {|i,s| puts "#{i+1}. #{s}"}
+# 1. a
+# 2. b
+# 3. c
+# => 0...3
+#
+class Array
+    def myeach
+        for i in (0...self.size)
+            yield self[i]
         end
     end
-end # String
 
+    def myeach_with_index
+        for i in (0...self.size)
+            yield i, self[i]
+        end
+    end
+end
+
+#############################################################################
 
 class String
     #
@@ -142,7 +147,7 @@ class String
     # => 5
     #
     def my_each_char
-        size.times do |i|
+        self.size.times do |i|
             yield self[i]
         end
     end
@@ -180,14 +185,14 @@ class String
     # three
     # => ["one", "three"]
     #
-    # String.scan returns an array of all matches.
+    # String.scan(regex) returns an array of all substrings that match regex.
     #
     def just_words
         scan(/[a-zA-Z]+/).each {|w| yield w}
     end
 
     #
-    # Same as just_words, but unique words repeated words are excluded.
+    # Same as just_words, but repeated words are excluded.
     #
     # >> "yes or no or yes or no".just_unique_words {|w| puts w}
     # yes
@@ -205,7 +210,47 @@ class String
             end
         end
     end
+
+    #
+    # Checks if word w occurs in the string as a complete word. Returns false
+    # if w only occurs as a substring of another word.
+    #
+    # >> "this is a test".has_word?("test")
+    # => true
+    # >> "this is a test".has_word?("his")
+    # => false
+    #
+    def has_word?(w)
+        just_unique_words do |a|
+            return true if w == a
+        end
+        return false
+    end
+
 end # String
+
+#############################################################################
+
+#
+# This example is based on this posting:
+# https://scoutapm.com/blog/ruby-yield-blocks
+#
+# You can use it to estimate the time it takes for a block to be executed.
+#
+def measure_seconds
+    start = Time.now
+    yield
+    elapsed = Time.now - start
+    puts "Elapsed seconds: #{elapsed}"
+end
+
+measure_seconds do
+    arr = (1..1000000).to_a
+    arr.shuffle!
+    arr.sort!
+end
+
+#############################################################################
 
 class Integer 
     #
@@ -265,55 +310,106 @@ class Integer
     end
 end # Integer
 
-
-
 #
-# Our own implementations of the standard Array methods each and
-# each_with_index.
+# Returns an infinite stream of prime numbers.
 #
-# >> %w(a b c).myeach {|s| puts s}
-# a
-# b
-# c
-# => 0...3
+# Ruby's loop do construct loops forever.
 #
-# %w(a b c) is shorthand for ["a", "b", "c"]
-#
-# >> %w(a b c).myeach_with_index {|i,s| puts "#{i+1}. #{s}"}
-# 1. a
-# 2. b
-# 3. c
-# => 0...3
-#
-class Array
-    def myeach
-        for i in (0...self.size)
-            yield self[i]
-        end
+def primes_forever
+    yield 2
+    n = 3
+    loop do
+        yield n if n.is_prime?
+        n += 2
     end
+end
 
-    def myeach_with_index
-        for i in (0...self.size)
-            yield i, self[i]
+#
+# Returns the number of primes less than n.
+#
+def num_primes_less_than(n)
+    count = 0
+    primes_forever do |p|
+        return count if p >= n
+        count += 1
+    end
+end
+
+def get_primes_less_than(n)
+    result = []
+    primes_forever do |p|
+        return result if p >= n
+        result.append(p)
+    end  
+end
+
+def get_first_n_primes(n)
+    result = []
+    primes_forever do |p|
+        return result if result.size >= n
+        result.append(p)
+    end  
+end
+
+#############################################################################
+
+#
+# Yields the first n Fibonacci numbers.
+#
+# >> fib(5) {|f| puts f}
+# 1
+# 1
+# 2
+# 3
+# 5
+# => 5
+#
+def fib(n)
+    case n  # case is similar to a switch statement
+    when 1
+        yield 1
+    when 2
+        yield 1
+        yield 1
+    else # n > 2
+        a, b = 1, 1
+        n.times do |i|
+            yield a
+            a, b = b, a + b
         end
     end
 end
 
 #
-# This example is based on this posting:
-# https://scoutapm.com/blog/ruby-yield-blocks
+# Returns an infinite stream of Fibonacci numbers.
 #
-# You can use it to estimate the time it takes for a block to be executed.
+# Ruby's loop do construct loops forever.
 #
-def measure_seconds
-    start = Time.now
-    yield
-    elapsed = Time.now - start
-    puts "Elapsed seconds: #{elapsed}"
+def fib_forever
+    a, b = 1, 1
+    loop do
+        yield a
+        a, b = b, a + b
+    end
 end
 
-# measure_seconds do
-#     arr = (1..1000000).to_a
-#     arr.shuffle!
-#     arr.sort!
-# end
+#
+# Prints the Fibonacci numbers less than max.
+#
+def fib_less_than(max)
+    fib_forever do |f|
+        return if f >= max
+        puts f
+    end
+end
+
+#
+# Prints the first n Fibonacci numbers.
+#
+def fibn(n)
+    fib_forever do |f|
+        return if n <= 0
+        puts f
+        n -= 1
+    end
+end

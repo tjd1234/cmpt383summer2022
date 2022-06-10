@@ -53,6 +53,7 @@ class Circle
     # instance variables of the class start with @.
     #
     def initialize(radius)
+        raise "Circle: radius must be > 0" if radius <= 0
         @radius = radius
     end
 
@@ -79,6 +80,7 @@ class Circle
     end
 end
 
+# duck typing
 def printShapeStats(s)
     begin
         puts s

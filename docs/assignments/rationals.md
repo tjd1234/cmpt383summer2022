@@ -82,8 +82,8 @@ doesn't demonstrate the understanding of the language we're looking for.
 
 Handling *invalid* fractions is important, and we want to see you use an
 error-handling strategy that is recommended for your language. *Don't* let the
-program crash when something *expected* goes wrong (e.g. dividing by 0 should
-never crash the program).
+program crash when *ordinary errors* occur (e.g. dividing by 0 should never
+crash the program).
 
 
 ## Go-specific Notes

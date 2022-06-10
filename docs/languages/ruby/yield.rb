@@ -3,7 +3,7 @@
 #
 # To load this code into the Ruby interpreter:
 #
-#   $ irb -I . -r yield.rb --simple-prompt
+#   $ irb -I . -r yield2.rb --simple-prompt
 #
 
 #
@@ -61,34 +61,6 @@ class Integer
     end
 end
 
-#############################################################################
-
-#
-# Yields the first n Fibonacci numbers.
-#
-# >> fib(5) {|x| puts x}
-# 1
-# 1
-# 2
-# 3
-# 5
-# => 5
-#
-def fib(n)
-    case n  # case is similar to a switch statement
-    when 1
-        yield 1
-    when 2
-        yield 1
-        yield 1
-    else # n > 2
-        a, b = 1, 1
-        n.times do |i|
-            yield a
-            a, b = b, a + b
-        end
-    end
-end
 
 #############################################################################
 
@@ -102,14 +74,31 @@ end
 # 9
 # => "4589"
 #
-class Integer    
+class Integer
+    #
+    # Generates each digit of the number, as an integer.
+    #
+    # Only works with non-negative numbers.
+    #
     def each_digit
         s = self.to_s
         s.each_char do |c|
             yield c.to_i
         end
     end
-end
+
+    #
+    # Returns true if the digit d occurs in this number, and
+    # false otherwise.
+    #
+    def has_digit?(d)
+        each_digit do |a|
+            return true if d == a
+        end
+        return false
+    end
+end # Integer
+
 
 #############################################################################
 
@@ -221,6 +210,23 @@ class String
             end
         end
     end
+
+    #
+    # Checks if word w occurs in the string as a complete word. Returns false
+    # if w only occurs as a substring of another word.
+    #
+    # >> "this is a test".has_word?("test")
+    # => true
+    # >> "this is a test".has_word?("his")
+    # => false
+    #
+    def has_word?(w)
+        just_unique_words do |a|
+            return true if w == a
+        end
+        return false
+    end
+
 end # String
 
 #############################################################################
@@ -303,3 +309,107 @@ class Integer
         end       
     end
 end # Integer
+
+#
+# Returns an infinite stream of prime numbers.
+#
+# Ruby's loop do construct loops forever.
+#
+def primes_forever
+    yield 2
+    n = 3
+    loop do
+        yield n if n.is_prime?
+        n += 2
+    end
+end
+
+#
+# Returns the number of primes less than n.
+#
+def num_primes_less_than(n)
+    count = 0
+    primes_forever do |p|
+        return count if p >= n
+        count += 1
+    end
+end
+
+def get_primes_less_than(n)
+    result = []
+    primes_forever do |p|
+        return result if p >= n
+        result.append(p)
+    end  
+end
+
+def get_first_n_primes(n)
+    result = []
+    primes_forever do |p|
+        return result if result.size >= n
+        result.append(p)
+    end  
+end
+
+#############################################################################
+
+#
+# Yields the first n Fibonacci numbers.
+#
+# >> fib(5) {|f| puts f}
+# 1
+# 1
+# 2
+# 3
+# 5
+# => 5
+#
+def fib(n)
+    case n  # case is similar to a switch statement
+    when 1
+        yield 1
+    when 2
+        yield 1
+        yield 1
+    else # n > 2
+        a, b = 1, 1
+        n.times do |i|
+            yield a
+            a, b = b, a + b
+        end
+    end
+end
+
+#
+# Returns an infinite stream of Fibonacci numbers.
+#
+# Ruby's loop do construct loops forever.
+#
+def fib_forever
+    a, b = 1, 1
+    loop do
+        yield a
+        a, b = b, a + b
+    end
+end
+
+#
+# Prints the Fibonacci numbers less than max.
+#
+def fib_less_than(max)
+    fib_forever do |f|
+        return if f >= max
+        puts f
+    end
+end
+
+#
+# Prints the first n Fibonacci numbers.
+#
+def fibn(n)
+    fib_forever do |f|
+        return if n <= 0
+        puts f
+        n -= 1
+    end
+end
