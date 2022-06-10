@@ -165,7 +165,8 @@ More details may be posted here closer to the assignment deadline.
   rationals called `MyRational` that *doesn't* use Ruby's `Rational` anywhere.
 
 - Use Ruby **exceptions** to handle errors. For example, use `raise` to cause
-  an exception due to an error, e.g. `raise 'MyRational: denominator cannot be 0'`.
+  an exception due to an error, e.g. `raise 'MyRational: denominator cannot be
+  0'`.
 
 - For part 2 and 3, name the methods `num` and `denom`, and implement them
   using `attr_reader`.
