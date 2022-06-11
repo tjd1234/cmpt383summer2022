@@ -241,12 +241,12 @@ More details may be posted here closer to the assignment deadline.
 
 - For part 7, call the function `r=`.
 
-- For part 8, call the function `r<`.
+- For part 8, call the function `r<`. Be careful about with negative values!
 
 - For part 9, call the function `is-int?`.
 
-- For parts 10, 11, 12, and 13, call the functions `add`, `multiply`,
-  `divide`, and `invert`.
+- For parts 10, 11, 12, and 13, call the functions `r+`, `r*`, `r/`, and
+  `invert`.
 
 - For part 14, call the function `to-lowest-terms`.
 

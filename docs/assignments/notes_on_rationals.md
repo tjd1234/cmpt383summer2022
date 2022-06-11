@@ -14,9 +14,18 @@ Any integer $n$ can be represented as the rational number $\frac{n}{1}$.
 
 ## Equality
 
-If $\frac{a}{b}$ and $\frac{c}{d}$ are rationals, then 
-$\frac{a}{b} = \frac{c}{d}$ if and only if $ad = bc$.
+If $\frac{a}{b}$ and $\frac{c}{d}$ are rationals, then $\frac{a}{b} =
+\frac{c}{d}$ if and only if $ad = bc$.
 
+## Ordering
+
+When *both denominators are positive*, then $\frac{a}{b} < \frac{c}{d}$ is
+true if, and only if, $ad < bc$.
+
+If *either denominator is negative*, then that fraction should be re-written
+as an equal fraction by changing the signs of its numerator and denominator.
+For example, $\frac{5}{-3}$ becomes $\frac{-5}{3}$. Then the formula above a
+can be used.
 
 ## Inverse
 
