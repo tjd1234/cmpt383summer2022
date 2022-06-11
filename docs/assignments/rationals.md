@@ -220,7 +220,9 @@ More details may be posted here closer to the assignment deadline.
 - For *part 1*, call your function `make-rational`. It should work if you pass
   it one or two parameters. For example, `(make-rational 3 7)` returns a
   rational representing $\frac{3}{7}$. `(make-rational 5)` returns a rational
-  representing $\frac{5}{1}$.
+  representing $\frac{5}{1}$. One way to handle multiple parameters is to
+  define your function like this: `(define (make-rational . args) ... )`.
+  `args` will then be a list of the passed-in arguments.
 
 - For part 2 and 3, name the functions `numerator` and `denominator`. For
   example, `(numerator (make-rational 3 7))` returns 3.
@@ -249,7 +251,6 @@ More details may be posted here closer to the assignment deadline.
 - For part 14, call the function `to-lowest-terms`.
 
 - For part 15, call the function `harmonic-sum`.
-
 
 More details may be posted here closer to the assignment deadline.
 
