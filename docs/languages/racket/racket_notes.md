@@ -17,9 +17,8 @@ files:
 ;; ... your Racket code ...
 ```
 
-While Racket/Scheme has loops, we are *not* going to be using them in our
-discussion of Racket. We will also *not* be using any mutating Racket
-functions.
+While Racket/Scheme has loops, we *won't* them in our discussion of Racket. We
+will also *not* be using any mutating Racket functions.
 
 Instead we will focus on functional programming, a style of programming
 pioneered by LISP. This is good preparation for Haskell (the language we'll

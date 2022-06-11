@@ -61,8 +61,7 @@ implementation to help the marker understand your code.
     the case where the numerator or denominator is negative.
 
 15. **Harmonic sum** Given an integer $n > 0$, return a rational equal to $H_n
-    = \frac{1}{1} + \frac{1}{2} + \frac{1}{3} + \ldots + \frac{1}{n}$. Please
-    name the function `harmonicSum(n)` so it easy to find and run.
+    = \frac{1}{1} + \frac{1}{2} + \frac{1}{3} + \ldots + \frac{1}{n}$.
 
 
 ## General Notes
@@ -203,12 +202,54 @@ More details may be posted here closer to the assignment deadline.
 
 ## Racket-specific Notes
 
-Represent rationals using a **regular list and functions**. **Don't** use any
-special Racket data structures for this.
+- Use only regular Racket lists, and basic Racket functions as discussed in
+  the notes. **Don't** use any special Racket data structures, e.g. *don't*
+  use vectors, or structs, or hashes, ....
 
-Racket has built-in support for rational numbers. **Don't** use them! Create
-your own original implementation of rationals that *doesn't* use the built-in
-rationals anywhere.
+  Importantly, **don't** use Racket's built-in rationals anywhere in your
+  rational code. Racket uses rational by default, e.g. `(/ 3 7)` returns the
+  rational `3/7`. Look up the Racket function `exact->inexact`.
+
+- Represent your rationals using lists. For example, you could represent
+  $\frac{3}{7}$ as `'(3 7)`.
+
+- Racket has exceptions, and so please use `raise` when something goes wrong.
+  For example, `(raise "invalid denominator")` will raise an exception that
+  can be caught by other code.
+
+- For *part 1*, call your function `make-rational`. It should work if you pass
+  it one or two parameters. For example, `(make-rational 3 7)` returns a
+  rational representing $\frac{3}{7}$. `(make-rational 5)` returns a rational
+  representing $\frac{5}{1}$.
+
+- For part 2 and 3, name the functions `numerator` and `denominator`. For
+  example, `(numerator (make-rational 3 7))` returns 3.
+
+- For part 4, call the function `num/denom`. It returns a list containing the
+  numerator and denominator, e.g. `(num/denom (make-rational 3 7))` returns
+  `'(3 7)`.
+
+- For part 5, call the function `to-string`. For example, `(num/denom
+  (make-rational 3 7))` returns the string `"3/7"`.
+
+- For part 6, call the function `to-float`. For example, `(to-float
+  (make-rational 3 7))` returns `0.42857142857142855` in DrRacket.
+  **Important**: the returned value should *not* be a Racket rational, e.g.
+  `(rational? (to-float r))` should always return `#f` (false).
+
+- For part 7, call the function `r=`.
+
+- For part 8, call the function `r<`.
+
+- For part 9, call the function `is-int?`.
+
+- For parts 10, 11, 12, and 13, call the functions `add`, `multiply`,
+  `divide`, and `invert`.
+
+- For part 14, call the function `to-lowest-terms`.
+
+- For part 15, call the function `harmonic-sum`.
+
 
 More details may be posted here closer to the assignment deadline.
 
