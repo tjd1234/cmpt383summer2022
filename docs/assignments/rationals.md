@@ -211,7 +211,7 @@ More details may be posted here closer to the assignment deadline.
   rational `3/7`. Look up the Racket function `exact->inexact`.
 
 - Represent your rationals using lists. For example, you could represent
-  $\frac{3}{7}$ as `'(3 7)`.
+  $\frac{3}{7}$ as `'(rational 3 7)`.
 
 - Racket has exceptions, and so please use `raise` when something goes wrong.
   For example, `(raise "invalid denominator")` will raise an exception that
@@ -227,11 +227,11 @@ More details may be posted here closer to the assignment deadline.
 - For part 2 and 3, name the functions `numerator` and `denominator`. For
   example, `(numerator (make-rational 3 7))` returns 3.
 
-- For part 4, call the function `num/denom`. It returns a list containing the
-  numerator and denominator, e.g. `(num/denom (make-rational 3 7))` returns
+- For part 4, call the function `num-denom`. It returns a list containing the
+  numerator and denominator, e.g. `(num-denom (make-rational 3 7))` returns
   `'(3 7)`.
 
-- For part 5, call the function `to-string`. For example, `(num/denom
+- For part 5, call the function `to-string`. For example, `(num-denom
   (make-rational 3 7))` returns the string `"3/7"`.
 
 - For part 6, call the function `to-float`. For example, `(to-float
