@@ -66,6 +66,7 @@ The **empty list** is a list with 0 values, and is written as `'()`. Use
 > **Aside** Some versions of LISP write `()` for the empty list, i.e. without
 > the quote. But not [Racket]. The empty list always starts with a `'`.
 
+
 ## List Processing
 
 [Racket] has many useful built-in list processing functions. 
@@ -138,6 +139,7 @@ of a given list:
 
 Since [Racket] lists are singly-linked, `first`, `rest`, and `cons` all run in
 worst-case *constant* time.
+
 
 ### The Consed-out Form of a List
 
@@ -285,20 +287,19 @@ in [Racket]. [Racket] uses **garbage collection**, which means that it keeps
 track of which pairs are in use, and automatically deletes the ones that
 aren't.
 
-LISPs were one of the first languages to use garbage collection, and was
+LISP was one of the first languages to use garbage collection, and was
 probably one of the reasons why it didn't become mainstream. Garbage
-collection is automatic, but it does take time. Many of the computers that
-LISP ran on in the 50s, 60s, 70s, and 80s were quite slow, and garbage
-collection pauses could be quite noticeable and occur at random times.
+collection is automatic, but it does take time. Computers in the 50s, 60s,
+70s, and 80s were quite slow, and garbage collection pauses could be
+noticeable and occur at random times.
 
 But nowadays, garbage collection is almost unnoticeable in many languages.
 Faster computers with more memory, along with more efficient garbage
-collection algorithms, have put garbage collection in the mainstream. Python,
-JavaScript, C#, and Go all use garbage collection.
+collection algorithms, have put garbage collection in the mainstream.
 
 ## Recursive Functions
 
-The built-in `length` function calculates the length of a list:
+The built-in `length` function calculates the number of items in a list:
 
 ```scheme
 > (length '(1 (2 3) 4))
@@ -361,9 +362,9 @@ value is 0. If `x` is not in `lst`, then return -1.
 For example:
 
 ```scheme
-> (index-of 'a '(a 1 2 3 4))
+> (index-of 'a '(a 1 2 3 4 a))
 0
-> (index-of 'a '(0 1 2 a 4))
+> (index-of 'a '(0 1 2 a 4 a))
 3
 > (index-of 'a '(one two three four))
 -1
@@ -372,7 +373,7 @@ For example:
 ## Counting
 
 The `symbol?` function tests if an object is a symbol (such as `'cat`). To
-calculate the number of symbols in a list, we can do this:
+count the number of symbols in a list, we can do this:
 
 ```scheme
 (define (count-sym1 lst)
@@ -402,7 +403,7 @@ cases is whether we add a 1 or a 0.
 > code harder to understand than straightforward code. But opinions differ.
 
 Now suppose we want to count *numbers* in a list instead of symbols. We can
-modify  `count-sym1` to get this:
+modify `count-sym1` to get this:
 
 ```scheme
 (define (count-num lst)
@@ -465,6 +466,7 @@ We can also write`count-fn1` in a slightly more compact way:
 ```
 
 ## Linear Search with a Predicate
+
 We can also do linear search using a predicate:
 
 ```scheme
@@ -492,7 +494,7 @@ We can re-write `contains` like this:
 ```scheme
 (define (contains x lst)
   (contains-fn (lambda (b) (equal? b x))
-             lst))
+               lst))
 ```
 
 > **Aside** [Racket] has a built-in variation of `contains-fn` called `ormap`.
@@ -521,7 +523,7 @@ list:
 ```
 
 The recursive idea for implementing `reverse` is to reverse the rest of the
-list, and then append the first item:
+list, and then append the first item to the end:
 
 ```scheme
 (define (rev lst)
@@ -551,6 +553,27 @@ list, one after the other:
 > (append '(once) '(upon a) '(time))
 '(once upon a time)
 ```
+
+## Challenge: adding an item to the end of a list
+
+The function `(snoc x lst)` returns a new list that is the same as `lst`
+except `x` has been added to the end:
+
+```scheme
+> (snoc 'done '(one three five))
+'(one three five done)
+> (snoc 4 '(0 3 9 1))
+'(0 3 9 1 4)
+```
+
+Implement three different versions of `snoc`:
+
+1. `snoc1` uses `append` and `list`, and no recursion
+2. `snoc2` uses `reverse` and `cons` (and *not* `append` or `list`), and no
+   recursion
+3. `snoc3` uses recursion, but *without* using `append`, `reverse`, or any
+   similar function that does most of the work
+
 
 ### Other Functions
 
@@ -756,8 +779,7 @@ top-level. For example, `'(7 (b 8 9) ((up (or 16 you))))` has 4 numbers in
 total.
 
 The solution to this problem is similar to `count-num`, except we need to
-recognize when an element is a list, and for that list recursively count the
-number numbers in it.
+recognize when an element is a list to count the numbers in it.
 
 ```scheme
 ;; Returns the number of numbers on lst, even numbers
@@ -822,15 +844,15 @@ Here's an implementation of `flatten`:
 ))
 ```
 
-Using `flatten` we can re-write `deep-count-num` like this:
+Using `my-flatten` we can re-write `deep-count-num` like this:
 
 ```scheme
 (define (deep-count-num lst)
-    (count-num (flatten lst)))
+    (count-num (my-flatten lst)))
 ```
 
-As long as you know what `count-num` and `flatten` do, this implementation of
-`deep-count-num` is easier to read than the original version. It's a good
+As long as you know what `count-num` and `my-flatten` do, this implementation
+of `deep-count-num` is easier to read than the original version. It's a good
 example of how a more complicated functions can be built out of simpler
 functions, an approach that is common in functional programming.
 
