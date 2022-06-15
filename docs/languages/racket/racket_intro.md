@@ -229,18 +229,6 @@ are some comments on that section.
 "a racket is \"an illegal scheme\""
 ```
 
-**Symbols** and **quoted lists** are usually indicated with a `'`.
-
-```scheme
-> 'a                   ;; a symbol
-'a
-> '(a b 1 (2 3) ())    ;; quoted list
-'(a b 1 (2 3) ())
-```
-
-We'll have more to say about quoted expressions in the next section. They're a
-key idea in [Racket].
-
 [Racket] has built-in support for rational numbers and complex numbers:
 
 ```scheme
@@ -738,9 +726,8 @@ would fail with an error. Since `and` is short-circuited, when `(string? x)`
 is `#f` the entire expression returns `#f` and the last two expressions are
 *never evaluated*.
 
-The `or` form is similar to `and`, and it evaluates logical "or": `(or <test1>
-<test2> ...)` returns `#t` if 1, or more, of the tests evaluate to `#t`, and
-`#f` otherwise. For example:
+The `or` form is similar to `and`: `(or <test1> <test2> ...)` returns `#t` if
+1, or more, of the tests evaluate to `#t`, and `#f` otherwise. For example:
 
 ```scheme
 > (or)

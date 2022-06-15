@@ -242,13 +242,14 @@ def measure_seconds
     yield
     elapsed = Time.now - start
     puts "Elapsed seconds: #{elapsed}"
+    return elapsed
 end
 
-measure_seconds do
-    arr = (1..1000000).to_a
-    arr.shuffle!
-    arr.sort!
-end
+# measure_seconds do
+#     arr = (1..1000000).to_a
+#     arr.shuffle!
+#     arr.sort!
+# end
 
 #############################################################################
 
