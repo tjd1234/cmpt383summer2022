@@ -40,7 +40,8 @@ $ irb -I . -r prog.rb
 
 ### Lecture 3 Ruby: Arrays, Slices, and Hashes
 
-- [linesize.rb](linesize.rb): prints lines in text files that are greater than
+- [linesize1.rb](linesize1.rb), [linesize2.rb](linesize2.rb): prints lines in
+  text files that are greater than
 - [Ruby array: each and map](each_and_map.md)
   80 characters
 - [Slices and ranges](slices_and_ranges.md)
