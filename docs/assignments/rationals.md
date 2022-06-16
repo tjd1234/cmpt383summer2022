@@ -208,7 +208,8 @@ More details may be posted here closer to the assignment deadline.
 
   Importantly, **don't** use Racket's built-in rationals anywhere in your
   rational code. Racket uses rational by default, e.g. `(/ 3 7)` returns the
-  rational `3/7`. Look up the Racket function `exact->inexact`.
+  rational `3/7`, and if you're not careful you could use them accidentally.
+  Look up the Racket function `exact->inexact`.
 
 - Represent your rationals using lists. For example, you could represent
   $\frac{3}{7}$ as `'(rational 3 7)`.
@@ -220,12 +221,13 @@ More details may be posted here closer to the assignment deadline.
 - For *part 1*, call your function `make-rational`. It should work if you pass
   it one or two parameters. For example, `(make-rational 3 7)` returns a
   rational representing $\frac{3}{7}$. `(make-rational 5)` returns a rational
-  representing $\frac{5}{1}$. One way to handle multiple parameters is to
-  define your function like this: `(define (make-rational . args) ... )`.
-  `args` will then be a list of the passed-in arguments.
+  representing $\frac{5}{1}$. To handle multiple parameters define your
+  function like this: `(define (make-rational . args) ... )`. `args` will then
+  be a list of the passed-in arguments.
 
-- For part 2 and 3, name the functions `numerator` and `denominator`. For
-  example, `(numerator (make-rational 3 7))` returns 3.
+- For part 2 and 3, name the functions `r-numerator` and `r-denominator`
+  (Racket already has built-in functions called `numerator` and
+  `denominator`). For example, `(r-numerator (make-rational 3 7))` returns 3.
 
 - For part 4, call the function `num-denom`. It returns a list containing the
   numerator and denominator, e.g. `(num-denom (make-rational 3 7))` returns
@@ -266,7 +268,8 @@ More details may be posted here closer to the assignment deadline.
 
 ## Prolog
 
-Prolog is quite different than the other languages in this course, and so an
-assignment more specific to Prolog will be put here when it's ready.
+Prolog is quite different than the other languages in this course, and so it's
+possible an assignment more specific to Prolog may be used instead of the
+rational numbers one.
 
 More details may be posted here closer to the assignment deadline.
