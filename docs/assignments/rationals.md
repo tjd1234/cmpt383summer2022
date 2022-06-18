@@ -204,7 +204,8 @@ More details may be posted here closer to the assignment deadline.
 
 - Use only regular Racket lists, and basic Racket functions as discussed in
   the notes. **Don't** use any special Racket data structures, e.g. *don't*
-  use vectors, or structs, or hashes, ....
+  use vectors, or structs, or hashes, .... It may be helpful to look at the
+  code in [point.rkt](point.rkt) for ideas.
 
   Importantly, **don't** use Racket's built-in rationals anywhere in your
   rational code. Racket uses rational by default, e.g. `(/ 3 7)` returns the

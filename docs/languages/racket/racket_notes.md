@@ -7,7 +7,7 @@ command-line version.
 
 ## Coding Style
 
-Racket supports many different languages, and we will be using the core Raket
+Racket supports many different languages, and we will be using the core Racket
 language. To ensure this, put this line at the top of all your Racket source
 files:
 
@@ -36,6 +36,7 @@ study after Racket), which does not allow loops or mutating functions.
 ### Lecture 3 Racket: Lists, Symbols, and Recursion
 
 - [Racket lists and recursion](racket_lists_and_recursion.md)
+- An implementation of (x, y) points: [point.rkt](point.rkt)
 - [count_up.rkt](count_up.rkt)
 - [count_down.rkt](count_down.rkt)
 - [numbered_list.rkt](numbered_list.rkt)

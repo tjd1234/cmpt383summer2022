@@ -338,18 +338,18 @@ function).
 ## Linear Search
 
 Recall that linear search determines if a value `x` is on a list. The
-`contains` function returns `#t` if `x` is on the list, and `#f` if it's not:
+`contains?` function returns `#t` if `x` is on the list, and `#f` if it's not:
 
 ```scheme
 ;; Returns true if x is in lst, and false otherwise.
-(define (contains x lst)
+(define (contains? x lst)
   (cond [(empty? lst)           #f]
         [(equal? x (first lst)) #t]
-        [else (contains x (rest lst))]
+        [else (contains? x (rest lst))]
 )))
 ```
 
-`contains` has *two* base cases: one for the empty list, and one for when `x`
+`contains?` has *two* base cases: one for the empty list, and one for when `x`
 is the first element.
 
 
