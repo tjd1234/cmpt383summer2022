@@ -255,6 +255,16 @@ More details may be posted here closer to the assignment deadline.
 
 - For part 15, call the function `harmonic-sum`.
 
+- You can time code (such as insertion sort) using [Racket's `(time ...)` form](https://docs.racket-lang.org/reference/time.html#%28form._%28%28lib._racket%2Fprivate%2Fmore-scheme..rkt%29._time%29%29), e.g.:
+
+  ```lisp
+  > (time (num-primes-less-than 10000))
+  cpu time: 1531 real time: 1528 gc time: 607
+  1229
+  ```
+
+  
+
 More details may be posted here closer to the assignment deadline.
 
 

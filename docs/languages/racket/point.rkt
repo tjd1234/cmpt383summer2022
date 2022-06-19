@@ -4,6 +4,7 @@
 ;; 2d points
 ;;
 ;; These points are immutable, i.e. after a point is created it can never change.
+;; This means we can end up creating a lot of copies of points, which can be inefficient.
 ;;
 
 ;;
@@ -102,11 +103,7 @@
 ;;
 ;; Point setters.
 ;;
-;; Points can't be modified (they're immutable), so a setter returns a new
-;; point.
-;;
-;; This isn't as efficient as actually modifying the passed-in point, but it's
-;; all we can do given our restriction that points are immutable.
+;; Points are immutable, so a setter returns a new point.
 ;;
 (define (set-x p new-x)
   (make-point new-x (get-y p)))
