@@ -238,7 +238,7 @@ More details may be posted here closer to the assignment deadline.
   numerator and denominator, e.g. `(num-denom (make-rational 3 7))` returns
   `'(3 7)`.
 
-- For part 5, call the function `to-string`. For example, `(num-denom
+- For part 5, call the function `to-string`. For example, `(to-string
   (make-rational 3 7))` returns the string `"3/7"`.
 
 - For part 6, call the function `to-float`. For example, `(to-float
