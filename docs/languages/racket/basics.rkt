@@ -18,9 +18,9 @@
       x))
 
 (define (sign n)
-  (cond ((< n 0) -1)
-        ((= n 0)  0)
-        (#t       1)))
+  (cond [(< n 0) -1]
+        [(= n 0)  0]
+        [else     1]))
 
 (define times2
   (lambda (n) (* 2 n)))
@@ -34,7 +34,37 @@
 
 (define g (twice sqr))
 
+(define (h x y)
+  (let* ([a (* x x)]
+         [b (* y y)]
+         )
+    (+ a b)
+    )
+  )
 
-  
+(define (my-second lst)
+  (first (rest lst)))
 
-  
+(define (my-length lst)
+  (if (empty? lst)
+      0
+      (+ 1 (my-length (rest lst)))))
+
+(define (count-sym lst)
+  (if (empty? lst)
+      0
+      (+ (if (symbol? (first lst)) 1 0)
+         (count-sym (rest lst)))))
+
+(define (count-num lst)
+  (if (empty? lst)
+      0
+      (+ (if (number? (first lst)) 1 0)
+         (count-num(rest lst)))))
+
+(define (count lst pred?)
+  (if (empty? lst)
+      0
+      (+ (if (pred? (first lst)) 1 0)
+         (count (rest lst) pred?))))
+

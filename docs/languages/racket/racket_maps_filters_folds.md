@@ -7,8 +7,8 @@ tags: ["#racket"]
 that take functions as arguments, or return functions as values.
 
 Three of the most useful higher-order functions are `map`, `filter`, and
-`fold`. Many other programming languages implement these functions, and they
-have a many different uses.
+`fold`. They appear in many other programming languages, and have many
+practical uses.
 
 
 ## Mapping

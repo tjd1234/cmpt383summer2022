@@ -207,10 +207,14 @@ More details may be posted here closer to the assignment deadline.
   use vectors, or structs, or hashes, .... It may be helpful to look at the
   code in [point.rkt](point.rkt) for ideas.
 
-  Importantly, **don't** use Racket's built-in rationals anywhere in your
-  rational code. Racket uses rational by default, e.g. `(/ 3 7)` returns the
-  rational `3/7`, and if you're not careful you could use them accidentally.
-  Look up the Racket function `exact->inexact`.
+- **Don't** use Racket's built-in rationals anywhere in your rational code.
+  Racket uses rational by default, e.g. `(/ 3 7)` returns the rational `3/7`,
+  and if you're not careful you could use them accidentally. Look up the
+  Racket function `exact->inexact`.
+
+- **Don't** use any mutating functions, like `set!`. Most mutating Racket
+  functions end with `!`, and so don't use any of those. Use just non-mutating
+  functions as shown in the notes and lectures.
 
 - Represent your rationals using lists. For example, you could represent
   $\frac{3}{7}$ as `'(rational 3 7)`.

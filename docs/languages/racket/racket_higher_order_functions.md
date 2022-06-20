@@ -342,10 +342,10 @@ variables that can only be accessed through functions.
 ## Composing Functions
 
 Another interesting feature of [Racket] is **composing** functions. Recall how
-function composition works in mathematics. If $f(x) = x^2$ and 
-$g(x) = 2x + 1$, the composition of $f$ and $g$ is 
-$f(g(x)) = g(x)^2 = (2x + 1)^2 = 4x^2 + 4x + 1$. This is denoted $f \circ g$, or 
-$f \circ g \;(x)= (2x + 1)^2 = 4x^2 + 4x + 1$.
+function composition works in mathematics. If $f(x) = x^2$ and $g(x) = 2x +
+1$, the composition of $f$ and $g$ is $f(g(x)) = g(x)^2 = (2x + 1)^2 = 4x^2 +
+4x + 1$. This is denoted $f \circ g$, or $f \circ g \;(x)= (2x + 1)^2 = 4x^2 +
+4x + 1$.
 
 In [Racket], we can compose functions directly by calling them:
 
