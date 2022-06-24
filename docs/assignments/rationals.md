@@ -243,8 +243,6 @@ More details may be posted here closer to the assignment deadline.
 
 - For part 6, call the function `to-float`. For example, `(to-float
   (make-rational 3 7))` returns `0.42857142857142855` in DrRacket.
-  **Important**: the returned value should *not* be a Racket rational, e.g.
-  `(rational? (to-float r))` should always return `#f` (false).
 
 - For part 7, call the function `r=`.
 
@@ -266,8 +264,6 @@ More details may be posted here closer to the assignment deadline.
   cpu time: 1531 real time: 1528 gc time: 607
   1229
   ```
-
-  
 
 More details may be posted here closer to the assignment deadline.
 

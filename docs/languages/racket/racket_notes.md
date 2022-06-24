@@ -48,6 +48,7 @@ study after Racket), which does not allow loops or mutating functions.
 ### Lecture 4 Racket: Functional Programming
 
 - [Racket maps, filters, and folds](racket_maps_filters_folds.md)
+- [Lecture notes on counting symbols](racketSymbolCountingNotes.md)
 
 ### Lecture 5,6 Racket: Higher Order Functions
 

@@ -50,9 +50,9 @@ Cons:
 
 ### Solution 2: Using filter
 
-`(filter pred? lst)` is a built-in Racket functions that contains only the
-elements if `lst` that satisfy `pred?`. In other words, `filter` *keeps* all
-the items on `lst` that satisfy `pred?`.
+`(filter pred? lst)` is a built-in Racket functions that returns a new list
+containing only the elements of `lst` that satisfy `pred?`. In other words,
+`filter` *keeps* all the items on `lst` that satisfy `pred?`.
 
 `pred?` is short for *predicate*. A predicate is a function that takes one
 input and returns either `#t` or `#f`.
@@ -80,11 +80,11 @@ using `filter`. We can count symbols like this:
   (length (filter symbol? lst)))
 ```
 
-This version is dramatically shorter. As long as you know how filter and
-length work, it's much more readable. Indeed, you could probably figure out
+This version is dramatically shorter. As long as you know how `filter` and
+`length` work, it's much more readable. Indeed, you could probably figure out
 this solution in your head without writing down code.
 
-How does `(filter pred? lst)` work? We can implement it like this:
+How does `(filter pred? lst)` work? We can implement it recursively like this:
 
 ```scheme
 (define (myfilter pred? lst)
@@ -101,8 +101,8 @@ Now you can replace `filter` with `myfilter` in `count-sym3`, and it will work
 the same.
 
 Pros:
-- The code is very short and simple. It's easy to read, and 
-  easy to believe it's correct. 
+- The code is very short and simple. It's easy to read, and easy to believe
+  it's correct.
 - It uses built-in functions that you don't need to write yourself.
 
 Cons:
