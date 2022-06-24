@@ -262,9 +262,14 @@ Their implementations all follow the same pattern that we will call
 `fold-right`:
 
 ```scheme
-;; (f a (f b (f c init)))
+;;
+;; (fold-right f init '(a b c)) calculates this:
+;;
+;;    (f a (f b (f c init)))
+;;
 (define (fold-right f init lst)
-  (if (empty? lst) init
+  (if (empty? lst) 
+      init
       (f (first lst) (fold-right f init (rest lst)))))
 ```
 

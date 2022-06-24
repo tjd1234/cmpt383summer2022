@@ -715,7 +715,9 @@ you can create an infinite loop just from calling lambda functions.
 
 
 ### The K Combinator
-The function `(K x)` returns a function that takes a single input `y`, and for any value of `y` returns `x`. In other words, it returns a *constant* function that always returns `x`:
+The function `(K x)` returns a function that takes a single input `y`, and for
+any value of `y` returns `x`. In other words, it returns a *constant* function
+that always returns `x`:
 
 ```scheme
 (define (K x) (lambda (y) x))
