@@ -741,6 +741,7 @@ Function `S3` takes 3 inputs:
 Intuitively, you can think of `S` as a generalization of regular function
 calling: `S` calls `x` on `y`, but *first* it calls `x` on `z` and `y` on `z`.
 
+
 ### I in Terms of S and K
 
 Interestingly, the identity function `I` can be defined in terms of `S` and
