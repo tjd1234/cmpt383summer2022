@@ -49,8 +49,8 @@
 (define (product lst)
   (apply * lst))
 
-(define (factorial n)
-  (product (range 1 (+ n 1))))
+#;(define (factorial n)
+    (product (range 1 (+ n 1))))
 
 
 ;;
@@ -194,6 +194,35 @@
 ;;
 ;; Here have an expression that causes an infinite loop, yet has no loops or recursion.
 ;;
+
+
+;;
+;; Y is a variation of the M combinator that can implement recursive functions.
+;; We won't go into the details, but just give it as an example.
+;;
+(define Y 
+  (lambda (f)
+    ((lambda (x) (x x))
+     (lambda (x) (f (lambda (y) ((x x) y)))))))
+
+(define factorial-helper
+  (lambda (f)
+    (lambda (n)
+      (if (= n 0)
+          1
+          (* n (f (- n 1)))))))
+
+(define factorial (Y factorial-helper))
+
+(define fibonacci-helper
+  (lambda (f)
+    (lambda (n)
+      (cond ((= n 0) 0)
+            ((= n 1) 1)
+            (else (+ (f (- n 1)) (f (- n 2))))))))
+
+(define fibonacci (Y fibonacci-helper))
+
 
 ;;
 ;; (K x) returns a function of one argument that returns x no matter what you give it.

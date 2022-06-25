@@ -713,6 +713,45 @@ Just like `(M M)`, this expression never returns a value and loops forever.
 There's no explicit loop or recursion here. It shows the non-obvious fact that
 you can create an infinite loop just from calling lambda functions.
 
+### The Y Combinator
+
+There is a variation of `M` called the **Y combinator** that can be used to
+implement recursion using only (unnamed) lambda functions. We won't go into
+the details here, but just provide it as an example:
+
+```
+(define Y 
+  (lambda (f)
+    ((lambda (x) (x x))
+     (lambda (x) (f (lambda (y) ((x x) y)))))))
+
+(define factorial-helper
+  (lambda (f)
+    (lambda (n)
+      (if (= n 0)
+          1
+          (* n (f (- n 1)))))))
+
+(define factorial (Y factorial-helper))
+
+(define fibonacci-helper
+  (lambda (f)
+    (lambda (n)
+      (cond ((= n 0) 0)
+            ((= n 1) 1)
+            (else (+ (f (- n 1)) (f (- n 2))))))))
+
+(define fibonacci (Y fibonacci-helper))
+```
+
+`Y` was made famous by [Haskell
+Curry](https://en.wikipedia.org/wiki/Haskell_Curry) in his work on
+[combinatory logic](https://en.wikipedia.org/wiki/Combinatory_logic) in the
+middle of the 1900s. If you're interested in more information about `Y` and
+related ideas, a good starting point is the [Wikipedia page on fixed-point
+combinators](https://en.wikipedia.org/wiki/Fixed-point_combinator), or [this
+blog post](https://mvanier.livejournal.com/2897.html)
+
 
 ### The K Combinator
 The function `(K x)` returns a function that takes a single input `y`, and for
@@ -773,7 +812,11 @@ This is the identity function: it returns unchanged whatever you pass it.
 
 Surprisingly, `S` and `K` can be combined to define *any* other pure function.
 Of course, the function might not be efficient or readable, but it can be
-done.
+done. For example, the Y combinator from above can be defined like this:
+
+```
+Y = (S (K (S I I)) (S (S (K S) K) (K (S I I))))
+```
 
 We won't go through the proof here, but check out [the Wikipedia page on
 combinatory
