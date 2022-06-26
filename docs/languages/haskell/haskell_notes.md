@@ -1,3 +1,33 @@
 # Haskell Notes
 
-Coming soon!
+## Installation
+
+Please use [GHC](https://www.haskell.org/). You can install Haskell on Ubuntu
+Linux with this command:
+
+```bash
+$ sudo apt install haskell-platform 
+```
+
+We'll mainly be using `ghci`, a Haskell interpreter.
+
+## Haskell Lectures
+
+### Lecture 1,2 Haskell: Basics
+
+- [Introduction to Haskell](haskell_intro.md)
+- [Haskell overview](haskell_firstSteps_chp2.md)
+- [Types and classes](haskell_typesAndClasses_chp3.md)
+
+### Lecture 3 Haskell: Defining Functions
+- [Defining functions](haskell_definingFunctions_chp4.md)
+- [Recursive functions](haskell_recursiveFunctions_chp6.md)
+
+### Lecture 4,5 Haskell: Higher Order Functions
+- [Higher order functions](haskell_higherOrderFunctions_chp7.md)
+
+### Lecture 6 Haskell: Type Classes
+- [Types and classes](haskell_declaringTypesAndClasses_chp8.md)
+
+### Lecture 7 Haskell: Interactive Programming
+- [Interactive programming](haskell_interactiveProgramming_chp10.md)
