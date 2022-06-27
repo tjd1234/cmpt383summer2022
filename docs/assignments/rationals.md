@@ -207,10 +207,9 @@ More details may be posted here closer to the assignment deadline.
   use vectors, or structs, or hashes, .... It may be helpful to look at the
   code in [point.rkt](point.rkt) for ideas.
 
-- **Don't** use Racket's built-in rationals anywhere in your rational code.
-  Racket uses rational by default, e.g. `(/ 3 7)` returns the rational `3/7`,
-  and if you're not careful you could use them accidentally. Look up the
-  Racket function `exact->inexact`.
+- **Don't** use Racket's built-in rationals to represent or process your
+  rationals, except in `to-float`. Look up the Racket function
+  `exact->inexact`.
 
 - **Don't** use any mutating functions, like `set!`. Most mutating Racket
   functions end with `!`, and so don't use any of those. Use just non-mutating
@@ -242,7 +241,8 @@ More details may be posted here closer to the assignment deadline.
   (make-rational 3 7))` returns the string `"3/7"`.
 
 - For part 6, call the function `to-float`. For example, `(to-float
-  (make-rational 3 7))` returns `0.42857142857142855` in DrRacket.
+  (make-rational 3 7))` returns `0.42857142857142855` in DrRacket. Look up the
+  Racket function `exact->inexact`.
 
 - For part 7, call the function `r=`.
 
