@@ -15,8 +15,8 @@ We'll mainly be using `ghci`, a Haskell interpreter.
 
 ### Lecture 1,2 Haskell: Basics
 
-- [Introduction to Haskell](haskell_intro.md)
-- [Haskell overview](haskell_firstSteps_chp2.md)
+- [General introduction to haskell](haskell_intro.md)
+- [Haskell programming overview](haskell_firstSteps_chp2.md)
 - [Types and classes](haskell_typesAndClasses_chp3.md)
 
 ### Lecture 3 Haskell: Defining Functions
