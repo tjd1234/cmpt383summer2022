@@ -270,15 +270,30 @@ More details may be posted here closer to the assignment deadline.
 
 ## Haskell-specific Notes
 
-Haskell has a standard `Rational` type. **Don't** use it in your
-implementation. Download the file [rational.hs](rational.hs) and type your
-answers there. The required functions are listed in the file.
+- Download the file [rational.hs](haskell/rational.hs) and type your answers
+  there. The required functions, including their type signatures, are given in
+  comments.
 
-**Important** We're changing the error-handling rules for this function. When
-an error occurs (such as division) by zero, your code should call the `error
-"some message"` function. This crashes the program with no way to recover,
-which is clearly bad. However, the "right" way of handling errors in Haskell
-takes more work than we have time for.
+- **Don't** use Haskell's standard `Rational` type in your implementation.
+
+- **The error-handling rules are changed for this assignment**. When an error
+  occurs (such as division by zero), your code should call the `error "some
+  message"` function. This crashes the program with no way to recover, which
+  is clearly bad. However, we don't have enough time in this course to learn
+  Haskell's preferred way of handling errors (e.g. something like the `Maybe`
+  type).
+
+- **The marking scheme has been adjusted for this assignment**. The three
+  sections *number sorting*, *string sorting*, and *rational sorting* have
+  been **removed**. Only marks for the insertion sort implementation (that
+  sorts any list of values implementing `Ord`) will be given. So this
+  assignment is out of 27 (instead of 36).
+
+- For calculating timings, please a `main` function to the end of your
+  [rational.hs](haskell/rational.hs) file and call the sorting code there.
+  *Compile* this file, and time it using the command-line *time* command. See
+  [helloWorld.hs](haskell/helloWorld.hs) for an example of how to write
+  `main`, and how to compile.
 
 More details may be posted here closer to the assignment deadline.
 

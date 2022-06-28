@@ -10,7 +10,7 @@
 --  - Use only functions from the standard prelude. Don't import any Haskell
 --    modules.
 --
--- You can add helper functions if you like.
+-- You can implement your own helper functions if you like.
 --
 
 data MyRational = Frac Integer Integer
@@ -68,15 +68,15 @@ instance Eq MyRational where
 --
 -- Implement an instance of compare x y that tests if the MyRationals x and y
 -- are the same (return EQ), or x is less than y (return LT), or x is greater
--- than y (return GT). Be careful with negative values, and when either is not
+-- than y (return GT). Be careful with negative values, and when x or y is not
 -- in lowest terms!
 --
 instance Ord MyRational where
 -- ...
 
 --
--- Return True if the given MyRational is an integer, and False otherwise. For
--- example, 4/1, 21/3, and 0/99 are all integers.
+-- Return True if the given MyRational represents an integer, and False
+-- otherwise. For example, 4/1, 21/3, and 0/99 are all integers.
 --
 isInt :: MyRational -> Bool
 -- ...
@@ -148,3 +148,12 @@ harmonicSum :: Integer -> MyRational
 --
 insertionSort :: Ord a => [a] -> [a]
 -- ...
+
+--
+-- When you're ready to test insertionSort, put a main function here that
+-- calls it. See helloWorld.hs in the same folder for an example of how to do
+-- this.
+--
+-- main = do putStrLn "Haskell!"
+--           putStrLn "Calling insertionSort ..."
+--
