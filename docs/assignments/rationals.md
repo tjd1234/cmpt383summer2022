@@ -271,8 +271,14 @@ More details may be posted here closer to the assignment deadline.
 ## Haskell-specific Notes
 
 Haskell has a standard `Rational` type. **Don't** use it in your
-implementation. Create your own original implementation of rationals in a
-typeclass called `MyRational` that doesn't use Haskell's `Rational` anywhere.
+implementation. Download the file [rational.hs](rational.hs) and type your
+answers there. The required functions are listed in the file.
+
+**Important** We're changing the error-handling rules for this function. When
+an error occurs (such as division) by zero, your code should call the `error
+"some message"` function. This crashes the program with no way to recover,
+which is clearly bad. However, the "right" way of handling errors in Haskell
+takes more work than we have time for.
 
 More details may be posted here closer to the assignment deadline.
 

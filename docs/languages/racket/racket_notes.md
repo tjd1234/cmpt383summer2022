@@ -61,3 +61,7 @@ quizzes or the final exam:
 
 - [The Racket match form](racket_match_form.md)
 - [Racket macros](racket_macros.md)
+
+There are details in the notes that were **not** covered in the lectures, and
+so use the lectures as a guide for what topics might appear in quizzes and the
+final exam.
