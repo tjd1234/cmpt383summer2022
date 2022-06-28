@@ -1,148 +1,24 @@
 #lang racket
 
-#;(define (count-symbols lst)
-    (cond [(empty? lst)
-           0]
-          [(symbol? (first lst))
-           (+ 1 (count-symbols (rest lst)))]
-          [else
-           (count-symbols (rest lst))]))  ;; tail-recursive
-
-#;(define (my-filter pred? lst)
-    (cond [(empty? lst)
-           '()]
-          [(pred? (first lst))
-           (cons (first lst)
-                 (my-filter pred? (rest lst)))]
-          [else
-           (my-filter pred? (rest lst))]))
-
-#;(define (count-symbols lst)
-    (length (my-filter symbol? lst)))
-
-#;(define (my-count pred? lst)
-    (length (my-filter pred? lst)))
-
-#;(define (count-symbols lst)
-    (my-count symbol? lst))
-
-#;(define (deep-count-symbols lst)
-    (count-symbols (flatten lst)))
-
-#;(define (deep-count pred? lst)
-    (my-count pred? (flatten lst)))
-
-
-#;(define (parity x)
-    (cond [(not (integer? x))
-           'not-an-int]
-          [(even? x)
-           'even]
-          [else
-           'odd]))
-
-#;(define (divisors n)
-    (filter (lambda (x) (= 0 (remainder n x)))
-            (range 1 (+ n 1))))
-         
-#;(define (is-prime? n)
-    (cond [(< n 2) #f]
-          [(= n 2) #t]
-          [(= 0 (remainder n 2))
-           #f]
-          [else
-           (= 2 (length (divisors n)))]))
-
-#;(define (sum lst)
-    (if (empty? lst)
-        0
-        (+ (first lst) (sum (rest lst)))))
-
-#;(define (prod lst)
-    (if (empty? lst)
-        1
-        (* (first lst) (prod (rest lst)))))
-
-#;(define (my-length lst)
-    (if (empty? lst)
-        0
-        (+ 1 (length (rest lst)))))
-
-#;(define (fold-right f init lst)
-    (if (empty? lst)
-        init
-        (f (first lst) (fold-right f init (rest lst)))))
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; Review of some ways to write a summation function.
+;; Warm-up
 ;;
-(define (sum1 lst)
-  (if (empty? lst)
-      0
-      (+ (first lst) (sum1 (rest lst)))))
-
+;; What do these expressions evaluate to?
 ;;
-;; (fold-right f init '(a b c)) calculates this:
+;; 1. (list list)
+;; 2. (list 'list)
+;; 3. (list and or)
 ;;
-;;    (f a (f b (f c init)))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-(define (fold-right f init lst)
-  (if (empty? lst)
-      init
-      (f (first lst) (fold-right f init (rest lst)))))
-
-(define (sum2 lst)
-  (fold-right + 0 lst))
-
-(define (sum3 lst)
-  (apply + lst))
-
-(define (factorial n)
-  (apply * (range 1 (+ n 1))))
-
-
-
-
-
-
-
-
-
-
-
-#;(define (my-flatten lst)
-    (cond [(empty? lst)
-           '()]
-          [(list? (first lst))
-           (append (my-flatten (first lst))
-                   (my-flatten (rest lst)))]
-          [else
-           (cons (first lst) (my-flatten (rest lst)))]))
-
-
-(define (deep-count-numbers lst)
-  (length (filter number? (flatten lst))))
-
-
-;; an alternate implementation of flatten ...
-(define (my-flatten lst)
-  (apply append
-         (map (lambda (item)
-                (if (list? item)
-                    (my-flatten item)
-                    (list item)))
-              lst
-              )))
-
-
-  
-
-
-
 ;; composing functions
-
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define (comp f g)
   (lambda (x)
@@ -153,11 +29,106 @@
 #;(define (my-second x)
     (first (rest x)))
 
-
+;;
+;; Racket's built-in compose functions lets you compose 2 or more
+;; functions.
+;;
 (define my-third (compose first rest rest))
 
-
+;;
 ;; flipping functions
+;;
+(define (flip f)
+  (lambda (x y)
+    (f y x)))
+
+(define fcons (flip cons))
+
+(define chain (flip comp))
+
+;;
+;; curried functions
+;;
+(define c+ (curry +))
+(define inc (c+ 1))
+
+(define c-cons (curry cons))
+(define cherry (c-cons 'cherry))
+
+
+;; doubles every number in lst
+(define (double-all1 lst)
+  (map (lambda (x) (* 2 x)) lst))
+
+(define c* (curry *))
+(define c-map (curry map))
+
+;; No mention of lst!
+(define double-all2 (c-map (c* 2)))
+
+;; assumes f takes 2 inputs
+(define (my-curry f)
+  (lambda (a)
+    (lambda (b)
+      (f a b))))
 
 
 ;; I, M, and K
+
+(define (I x) x)
+
+
+(define (M x) (x x))
+
+;; Y gives your recursion
+(define Y 
+  (lambda (f)
+    ((lambda (x) (x x))
+     (lambda (x) (f (lambda (y) ((x x) y)))))))
+
+(define factorial-helper
+  (lambda (f)
+    (lambda (n)
+      (if (= n 0)
+          1
+          (* n (f (- n 1)))))))
+
+(define factorial (Y factorial-helper))
+
+(define fibonacci-helper
+  (lambda (f)
+    (lambda (n)
+      (cond ((= n 0) 0)
+            ((= n 1) 1)
+            (else (+ (f (- n 1)) (f (- n 2))))))))
+
+(define fibonacci (Y fibonacci-helper))
+
+
+;; K makes constant functions
+(define (K x) (lambda (y) x))
+
+
+;; S3 is a generalization of function application. Instead giving you (x y),
+;; it gives you ((x z) (y z)).
+(define (S3 x y z)
+  ((x z) (y z)))
+
+;; S is a curried version of S3. You can pass 1 or 2 arguments, and it returns a
+;; function ready to accept the remaining arguments.
+(define S (curry S3))
+
+
+;; I can be written in terms of S and K
+(define (I2 x) ((S K K) x))
+
+(define (I3 x) ((S K S) x))
+
+;; M can be written in terms of S and K
+(define (M2 x) (S I I x))
+
+;; Fact: any pure function can written in terms of S and K.
+
+
+
+

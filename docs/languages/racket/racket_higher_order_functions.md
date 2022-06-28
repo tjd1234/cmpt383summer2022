@@ -808,15 +808,20 @@ re-write the lambda function for `(S K K)` as:
 This is the identity function: it returns unchanged whatever you pass it.
 
 
+### M in Terms of S and K
+
+The `M` combinator can be defined like this:
+
+```scheme
+(define (M x) 
+    (S I I x))
+```
+
 ### Completeness of S and K
 
 Surprisingly, `S` and `K` can be combined to define *any* other pure function.
 Of course, the function might not be efficient or readable, but it can be
-done. For example, the Y combinator from above can be defined like this:
-
-```
-Y = (S (K (S I I)) (S (S (K S) K) (K (S I I))))
-```
+done.
 
 We won't go through the proof here, but check out [the Wikipedia page on
 combinatory
