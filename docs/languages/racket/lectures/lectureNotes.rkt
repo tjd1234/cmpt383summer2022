@@ -8,7 +8,7 @@
 ;;
 ;; 1. (list list)
 ;; 2. (list 'list)
-;; 3. (list first rest)
+;; 3. (list first '(rest))
 ;; 4. (list and or)
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -24,6 +24,9 @@
 (define (comp f g)
   (lambda (x)
     (f (g x))))
+
+#;(define (chain args)
+  (apply compose (reverse args)))
 
 (define my-second (comp first rest))
 
@@ -51,7 +54,9 @@
 ;; curried functions
 ;;
 (define c+ (curry +))
-(define inc (c+ 1))
+(define (add x y) (+ x y))
+(define cadd (curry add))
+(define inc (cadd 1))
 
 (define c-cons (curry cons))
 (define cherry (c-cons 'cherry))
@@ -78,8 +83,10 @@
 
 (define (I x) x)
 
-
 (define (M x) (x x))
+
+#;((lambda (x) (x x))
+ (lambda (x) (x x)))
 
 ;; Y gives your recursion
 (define Y 
@@ -108,6 +115,7 @@
 
 ;; K makes constant functions
 (define (K x) (lambda (y) x))
+(define just-cow (K 'cow))
 
 
 ;; S3 is a generalization of function application. Instead giving you (x y),
