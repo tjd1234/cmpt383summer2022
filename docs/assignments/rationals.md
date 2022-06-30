@@ -289,11 +289,11 @@ More details may be posted here closer to the assignment deadline.
   sorts any list of values implementing `Ord`) will be given. So this
   assignment is out of 27 (instead of 36).
 
-- For calculating timings, please a `main` function to the end of your
+- For calculating timings, please add a `main` function to the end of your
   [rational.hs](haskell/rational.hs) file and call the sorting code there.
   *Compile* this file, and time it using the command-line *time* command. See
-  [helloWorld.hs](haskell/helloWorld.hs) for an example of how to write
-  `main`, and how to compile.
+  [mainDemo.hs](haskell/mainDemo.hs) for an example of how to write `main`,
+  how to get a list of random numbers, and how to compile it with `ghc`.
 
 More details may be posted here closer to the assignment deadline.
 
