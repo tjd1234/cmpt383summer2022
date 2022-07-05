@@ -144,9 +144,9 @@ sorted:
 
 ```haskell
 insert :: Ord a => a -> [a] -> [a]
-insert a [] = [a]
-insert a (x:xs) | a <= x    = a:x:xs
-                | otherwise = x : (insert a xs)
+insert x [] = [x]
+insert x (y:ys) | x <= y    = x:y:ys
+                | otherwise = y : (insert x ys)
 
 > insert 4 [1..5]
 [1,2,3,4,4,5]
@@ -154,7 +154,7 @@ insert a (x:xs) | a <= x    = a:x:xs
 "abcde"
 ```
 
-`insert` lets us implement **insertion sort**:
+`insert` lets us implement this variation of **insertion sort**:
 
 ```haskell
 isort :: Ord a => [a] -> [a]

@@ -250,7 +250,7 @@ sum [1..100]  -- sum the numbers from 1 to 100
 sum [1..100]
 ```
 
-## A Few Simple FunctionDefinitions
+## A Few Simple Function Definitions
 
 Haskell functions are written in an *equational* style similar to mathematics:
 

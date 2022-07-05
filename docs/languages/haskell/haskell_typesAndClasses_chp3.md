@@ -178,7 +178,7 @@ single value of type `b` as output. For example:
 - `even :: Int -> Bool` (tests if a number is even)
 
 The input type and result type can be any types, including lists, tuples, or
-even other fucntions. For example:
+even other functions. For example:
 
 ```haskell
 add :: (Int, Int) -> Int   -- type signature
@@ -212,7 +212,7 @@ have an undefined result:
 elements, and so `head []` causes an error.
 
 
-## Curried  functions
+## Curried functions
 
 Consider this definition:
 

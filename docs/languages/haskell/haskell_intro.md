@@ -1,4 +1,4 @@
-# Moving from Racket to Haskell
+6# Moving from Racket to Haskell
 
 ## Racket Overview
 

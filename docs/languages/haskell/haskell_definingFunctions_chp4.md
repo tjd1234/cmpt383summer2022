@@ -15,7 +15,7 @@ of equations. For example:
 middle1 :: [a] -> [a]  -- type signature
 middle1 []     = []
 middle1 [x]    = []
-middle1 (_:xs) = reverse (tail (reverse xs))
+middle1 (_:xs) = init xs   -- init "apple" ==> "appl"
 ```
 
 ```haskell
@@ -25,11 +25,11 @@ middle1 (_:xs) = reverse (tail (reverse xs))
 [2,3,4]
 ```
 
-The type signature comes first. It's optional, but we almost always include it
-for documentation. The function body is written as a series of **equations**.
-In the case of `middle1`, the first equation handles the empty list, the
-second equation handles lists with a single element, and the third handles
-lists with 2 or more elements.
+The type signature comes first. It's optional, but we usually include it for
+documentation. The function body is written as a series of **equations**. In
+the case of `middle1`, the first equation handles the empty list, the second
+equation handles lists with a single element, and the third handles lists with
+2 or more elements.
 
 The third equation uses a **cons pattern** to get the first and rest of a
 list.  `xs` is all the elements *after* the first element of the passed-in
@@ -458,12 +458,14 @@ Also write the most general type signature. The return value is `Int`.
 
 ### Challenge: consed-out apple
 
-Write "apple" in consed-out form. Strings in [Haskell] are just lists of characters. Use single-quotes for characters, e.g. `'a'` is a character.
+Write "apple" in consed-out form. Strings in [Haskell] are just lists of
+characters. Use single-quotes for characters, e.g. `'a'` is a character.
 
 
 ### Explain the bug: same_bug1
 
-In your own words, explain the bug in this code, and how you would fix it (i.e. re-write the code so it works):
+In your own words, explain the bug in this code, and how you would fix it
+(i.e. re-write the code so it works):
 
 ```haskell
 diff_heads_bug1 :: [a] -> [a] -> Bool
