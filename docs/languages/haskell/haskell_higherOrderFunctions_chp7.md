@@ -59,8 +59,8 @@ The type signature `Int -> Int -> Int` says two arguments are needed, but
 thanks to currying we can pass in only a single argument to make functions
 like `plus5`.
 
-> **Note** Haskell lets you use the ``'`` character in the name of a function.
-> It doesn't have any special meaning to Haskell. Instead of `makeAdder'`, we
+> **Note** Haskell allows the ``'`` character in the name of a function. It
+> doesn't have any special meaning to Haskell. Instead of `makeAdder'`, we
 > could have used a name like `makeAdder2`.
 
 
@@ -68,9 +68,7 @@ like `plus5`.
 
 `flip` is a standard [Haskell] function that takes a two-input function `f` as
 input, and returns a two-input function as output that does the same thing as
-`f` except the order of the input arguments is swapped. In practice, `flip` is
-usually used as a helper function to change the order of the parameters of a
-function, which can be useful some situations.
+`f` except the order of its arguments is swapped.
 
 For example:
 
@@ -106,7 +104,7 @@ function that takes two inputs of any type and returns an output of any type.
 its parameters switched.
 
 
-## Processing lists
+## Higher-order List Functions
 
 A number of standard prelude functions have nice recursive definitions, and
 it's instructive to create our own implementations.
@@ -177,8 +175,8 @@ functions**, or just **predicates**. If `p` is a predicate and `p x` evaluates
 to `True`, we say **`x` satisfies `p`**. If instead `p x` evaluates to
 `False`, we  say **`x` doesn't satisfy `p`**, or **`x` fails to satisfy `p`**.
 
-So we can say that `filter p lst` return all the elements in `lst` that
-satisfy `p`.
+So we say that `filter p lst` return all the elements in `lst` that satisfy
+`p`.
 
 
 ### Challenge: removeIf
@@ -262,12 +260,11 @@ Include the most general type signature for the `none`.
 the elements at the *start* of `lst` that satisfy `pred`. For instance:
 
 ```haskell
-> takeWhile (\c -> c `elem` "aeiou") "eat well!"
+isVowel c = c `elem` "aeiou"
+
+> takeWhile isVowel "eat well!"
 "ea"
 ```
-
-``\c -> c `elem` "aeiou"`` is a lambda function  that takes a character as
-input and returns `True` just when it's a lowercase vowel.
 
 Here's a recursive implementation:
 
@@ -345,12 +342,11 @@ As part of your answer, include the most general type signature for the
 `change_val`.
 
 
-## The `foldr` function
+## Folding with foldr
 
-`foldr` and `foldl` implement a recursive pattern that appears in many
-functions. So we begin with two concrete examples of folding functions.
-
-`mysum lst` sums the elements of `lst`:
+The `foldr` function implements a recursive pattern that appears in many
+functions. For example, thet standard recursive way of summing numbers in a
+list looks like this:
 
 ```haskell
 mysum :: Num a => [a] -> a
@@ -363,7 +359,7 @@ mysum (x:xs) = x + mysum xs
 9.1
 ```
 
-It's instructive to trace out a calculation with `mysum` step-by-step:
+The step-by-step evaluation of `mysum [4,1,2]` goes like this:
 
 ```haskell
 mysum [4,1,2]
@@ -376,11 +372,12 @@ mysum [4,1,2]
 = 7
 ```
 
-In particular, notice the expression `4 + (1 + (2 + 0))`. Due to the
-bracketing, the individual sub-expressions are evaluated from right to left,
-and so this is a **right fold**.
+Notice the expression `4 + (1 + (2 + 0))`. Because of the bracketing, the
+individual sub-expressions are evaluated from right to left, and so this is an
+example of a **right fold**.
 
-`myprod lst` calculates the product of the elements on `lst`:
+`myprod lst` is implemented similarly to `mysum`, and calculates the *product*
+of the elements on `lst`:
 
 ```haskell
 myprod :: Num a => [a] -> a
@@ -393,19 +390,18 @@ myprod (x:xs) = x * myprod xs
 120
 ```
 
-`mysum` and `myprod` follow the same implementation pattern, but with these
+The implementations of `mysum` and `myprod`are very similar, with these
 differences:
 
 - `mysum` is renamed to `myprod`
 
-- the base case for `mysum` returns 0, but for `myrpod` the base case returns
-  1
+- the base case for `mysum` returns 0, but for `myrpod` it returns 1
 
 - the recursive case for `mysum` uses `+`, and for `myprod` it uses `*`
 
-This similarity suggests we can write a higher-order function that does the
-same thing, taking the base-case value and operator as input. A function that
-does this is often called **right fold**, or **fold right**:
+This suggests we could write a single function that takes the base case value
+and the combining operation as input. The function that does this is called
+**right fold**, or **fold right**:
 
 ```haskell
 myfoldr :: (a -> b -> b) -> b -> [a] -> b
@@ -422,13 +418,7 @@ myfoldr op emptyval (x:xs) = x `op` (myfoldr op emptyval xs)
 
 `myfoldr` is a *right* fold, which means it evaluates operators starting at
 the right. For example, to calculate the sum `1+2+3`, right fold calculates
-`(1 + (2 + (3 + 0)))`.  The `(+)` operator happens to be **commutative**,
-meaning that it doesn't matter what order you do addition in, e.g.  `a + b ==
-b + a` for all numbers `a` and `b`. So the exact order of additions *doesn't*
-matter for `(+)`.
-
-But order matters for non-commutative operators like `(-)`. For example, `(1 -
-(2 - (3 - 4)))` is -2, while `(((1 - 2) - 3) - 4)` is -8.
+`(1 + (2 + (3 + 0)))`. 
 
 
 ### Challenge: counting with fold
@@ -453,18 +443,18 @@ Include the type signature for `fcount`.
 
 ### Deriving the type signature for foldr
 
-The type signature of `myfoldr` can be tricky to understand. A good way to see
-what it should be is to look at a specific fold expression, e.g. `myfoldr op 0
-[4,1,2]` evaluates to the same thing as:
+The type signature of `myfoldr` can be tricky to understand. We can derive it
+by looking at a concrete example. For instance, `myfoldr op 0 [4,1,2]`
+evaluates to the same thing as:
 
 ```haskell
 4 `op` (1 `op` (2 `op` 0))
 ```
 
 Think about the type of `op`. It takes two inputs, and in general they could
-be of any type `a` and type `b`. The output of a call to `op` is passed as the
-second parameter to another `op`, and so the second parameter and return type
-must be the same:
+be of *any* type `a` and *any* type `b`. The output of a call to `op` is
+passed as the second parameter to another `op` call, and so the second
+parameter and return type of `op` must be the same:
 
 ```haskell
 op :: a -> b -> b
@@ -473,9 +463,9 @@ op :: a -> b -> b
 The initial value, 0 in this example, is passed as the second argument of an
 `op`, and so it must be of type `b`.
 
-What is the type of the list of values itself? From looking at the expression,
-every list value is the first parameter of an `op`, and so those values must
-be of type `a`. Thus the entire list is of type `[a]`.
+What is the type of the list of values? From looking at the expression, every
+list value is the first parameter of an `op`, and so those values must be of
+type `a`. Thus the entire list is of type `[a]`.
 
 Finally, what is the type of the return value? The last expression evaluated
 is a call to `op`, and `op` returns a value of type `b`, and so the entire
@@ -495,24 +485,22 @@ foldr :: Foldable t => (a -> b -> b) -> b -> t a -> b
 
 The difference here is that the *third* input is of type `t a`, where `t`
 satisfies the `Foldable` class. Basically, a `Foldable` is any list-like type
-that works with `foldr`. Lists satisfy `Foldable`, and so in `myfoldr` we used
-`[a]` for simplicity.
+that works with `foldr`.
 
 
 ### foldr and the consed-out form of a list
 
-What does `myfoldr (:) [] [2,1,3,4]` evaluate to? This is a tricky question if
-you think about `mfoldr` in terms of its implementation.
+What does `myfoldr (:) [] [2,1,3,4]` evaluate to?
 
-But it becomes easier to answer if you think about right folds in terms of
-it's **consed-out form**. The consed-out form of `[2,1,3,4]` is `2 : (1 : (3 :
-(4 : [])))`. `:` is the *cons*, or *construction* operator, and `x:xs`
-evaluates to a list that starts with `x` and is followed by the elements of
-`xs`.
+A good way to approach this question is to re-write `[2,1,3,4]` in it's
+**consed-out form**. The consed-out form of `[2,1,3,4]` is `2 : (1 : (3 : (4 :
+[])))`. `:` is the *cons*, or *construction* operator, and `x:xs` evaluates to
+a list that starts with `x` and is followed by the elements of `xs`.
 
-The expression `myfoldr (+) 0 [2,1,3,4]` can be re-written  `myfoldr (+) 0 (2
-: (1 : (3 : (4 : []))))`. You can think of `myfold` as replacing each `:` with
-`+`, and the `[]` with 0: `2 + (1 + (3 + (4 + 0)))`.
+`myfoldr (+) 0 [2,1,3,4]` can be re-written 
+`myfoldr (+) 0 (2 : (1 : (3 : (4 : []))))`. 
+You can think of `myfoldr` as replacing each `:` with `+`, and the `[]` with 0:
+`2 + (1 + (3 + (4 + 0)))`.
 
 Similarly, `myfoldr (-) 0 (2 : (1 : (3 : (4 : []))))` evaluates to the same
 thing as `2 - (1 - (3 - (4 - 0)))`, which is 0.
@@ -525,17 +513,17 @@ From this point of view it is easy to see what `myfoldr (:) [] (2 : (1 : (3 :
 
 ### Mapping a list with foldr
 
-`foldr` can implement the standard `map` function. A way to figure this out is
-to look at a concrete example. For the list `[1,2,3]`, a right fold looks like
-this:
+`foldr` can implement the standard `map` function. For the list `[1,2,3]`, a
+right fold looks like this:
 
 ```haskell
-1 op (2 op (3 op init))
+1 op (2 op (3 op initVal))
 ```
 
-To write `map` using `foldr`, we need to find `op` and `init` that transforms
-`1 op (2 op (3 op init))` into `[f 1, f 2, f 3]`. Looking just at `3 op init`,
-we need this to evaluate to `[f 3]`. So we can define  `op` like this:
+To write `map` using `foldr`, we need to find an `op` and `initVal` that
+transforms `1 op (2 op (3 op initVal))` into `[f 1, f 2, f 3]`. Looking just
+at `3 op initVal`, we need this to evaluate to `[f 3]`. This suggests
+`initVal` ought to be `[]`, and `op` is this:
 
 ```haskell
 op x lst = (f x) : lst
@@ -554,18 +542,17 @@ mymap2 f xs = myfoldr op [] xs
 
 The standard list reverse function can implemented as a right fold.
 
-As with `map`, it helps to look at a concrete example. For the list `[1,2,3]`,
-a right fold will look like this:
+For the list `[1,2,3]`, a right fold will look like this:
 
 ```haskell
-1 op (2 op (3 op init))
+1 op (2 op (3 op initVal))
 ```
 
-To evaluate reverse using `foldr`, we need to find an `op` and `init` that
-transforms `1 op (2 op (3 op init))` into `[3,2,1]`.  Looking at `3 op init`,
-we want it to evaluate to `[3]`. That would give us `1 op (2 op [3])`, and
-here we want `2 op [3]` to evaluate to `[3,2]`. So `op` appends its first
-input to the *end* of its second input:
+To evaluate reverse using `foldr`, we need to find an `op` and `initVal` that
+transforms `1 op (2 op (3 op initVal))` into `[3,2,1]`.  Looking at `3 op
+initVal`, we want it to evaluate to `[3]`. That would give us `1 op (2 op
+[3])`, and here we want `2 op [3]` to evaluate to `[3,2]`. So `op` appends its
+first input to the *end* of its second input:
 
 ```haskell
 op x accum = accum ++ [x]
@@ -588,9 +575,9 @@ myrev xs = myfoldr op [] xs
 The expression `filter even [1,2,3]` returns `[2]`, i.e. all the elements on
 `[1,2,3]` that are even.
 
-To evaluate `filter` using `foldr`, we need to find `op` and `init` that
-transforms `1 op (2 op (3 op init))` into `[2]`.  Intuitively, if we set
-`init` to the empty list, then each `op` should *cons* the number onto the
+To evaluate `filter` using `foldr`, we need to find an `op` and `initVal` that
+transforms `1 op (2 op (3 op initVal))` into `[2]`.  Intuitively, if we set
+`initVal` to the empty list, then each `op` should *cons* the number onto the
 passed-in list just when the number is even. So `op` should be defined like
 this:
 
@@ -695,13 +682,13 @@ first applies `g`, and then applies `f` to what `g` returns. You can think of
 `f . g` as meaning "`f` after `g`".
 
 The definition of `h` does *not* explicitly give an input parameter. We could
-have written it as `h n = (f . g) n`, but the `n` isn't necessary. Function
-definitions *without* parameters, e.g. `h = f . g`, is called [**point-free
+have written it as `h x = (f . g) x`, but the `x` isn't necessary. Defining
+functions *without* parameters, e.g. `h = f . g`, is called [**point-free
 style**](https://wiki.haskell.org/Pointfree). It is often used in [Haskell] to
 shorten function definitions.
 
-> **Note** The website [http://pointfree.io/](http://pointfree.io/) can help
-> you convert [Haskell] definitions into point-free style.
+> **Note** The website [http://pointfree.io/](http://pointfree.io/) can
+> convert [Haskell] definitions into point-free style.
 
 How you bracket function call expressions matters. The expressions `f g 1` and
 `f (g 1)` are different. `f g 1` is the same as `(f g) 1`, and in our case
