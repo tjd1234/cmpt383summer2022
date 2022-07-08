@@ -289,12 +289,25 @@ More details may be posted here closer to the assignment deadline.
   sorts any list of values implementing `Ord`) will be given. So this
   assignment is out of 27 (instead of 36).
 
-- For calculating timings, please add a `main` function to the end of your
-  [rational.hs](haskell/rational.hs) file and call the sorting code there.
-  *Compile* this file, and time it using the command-line *time* command. See
-  [mainDemo.hs](haskell/mainDemo.hs) for an example of how to write `main`,
-  how to get a list of random numbers, and how to compile it with `ghc`.
+- Here are two ways to calculate timings for your Haskell code:
 
+  1. Add a `main` function to the end of your
+     [rational.hs](haskell/rational.hs) file and call the sorting code there.
+     *Compile* this file, and time it using the command-line *time* command.
+     See [mainDemo.hs](haskell/mainDemo.hs) for an example of how to write
+     `main`, how to get a list of random numbers, and how to compile it with
+     `ghc`.
+
+  2. In the Haskell interpreter `ghci` use the command `:set +s`. This will
+     show you the running time, in seconds, for each evaluated expression:
+
+     ```haskell
+     > :set +s
+     > product [1..10000]
+     ... huge number ...
+     (0.54 secs, 112,187,640 bytes)
+     ```
+  
 More details may be posted here closer to the assignment deadline.
 
 
