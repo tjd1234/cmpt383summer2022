@@ -311,6 +311,27 @@ mydropWhile p (x:xs) = if p x
 [3,2,4,7,8]
 ```
 
+Here is a recursion-free implementation of inserting into a sorted list using
+`takeWhile` and `dropWhile`:
+
+```haskell
+-- 
+-- Returns a new list with x inserted into it such that it is sorted.
+--
+-- Assumes the input list is sorted.
+--
+insert :: Ord a => a -> [a] -> [a]
+insert n lst = smalls ++ [n] ++ bigs
+             where smalls = takeWhile (<n) lst
+                   bigs   = dropWhile (<n) lst
+
+> insert 4 [1..5]
+[1,2,3,4,4,5]
+> insert 'c' "abde"
+"abcde"
+```
+
+
 ### Challenge: changing a value of a function
 
 Implement a function called `change_val f x y` that returns a new function
@@ -418,8 +439,70 @@ myfoldr op emptyval (x:xs) = x `op` (myfoldr op emptyval xs)
 
 `myfoldr` is a *right* fold, which means it evaluates operators starting at
 the right. For example, to calculate the sum `1+2+3`, right fold calculates
-`(1 + (2 + (3 + 0)))`. 
+`(1 + (2 + (3 + 0)))`.
 
+We can think of sorting as fold. For instance, suppose we want to sort the
+list `[7,1,8,2,4]` into ascending sorted order. A reasonable first guess is
+there might be some `op` that would make this fold evaluate to a sorted list:
+
+```
+(7 op (1 op (8 op (2 op (4 op []))))    -- a right fold
+```
+
+What could `op` be? Clearly, it must take two inputs, and the first input is
+always going to be a single number. The second input will be a list. If we
+assume that list is in sorted order, then `op` should insert its first element
+into the list at the proper place to ensure it is sorted. In previous notes,
+we saw a function that did exactly that:
+
+
+```haskell
+-- 
+-- Returns a new list with x inserted into it such that it is sorted.
+--
+-- Assumes the input list is sorted.
+--
+insert :: Ord a => a -> [a] -> [a]
+insert x [] = [x]
+insert x (y:ys) | x <= y    = x:y:ys
+                | otherwise = y : (insert x ys)
+
+> insert 4 [1..5]
+[1,2,3,4,4,5]
+> insert 'c' "abde"
+"abcde"
+```
+
+Using `myfoldr`, we can sort a list like this:
+
+```haskell
+> myfoldr insert [] [7,1,8,2,4]
+[1,2,4,7,8]
+> myfoldr insert "" "cheese please!"
+" !aceeeeehlpss"
+```
+
+This is a variation of insertion sort:
+
+```haskell
+-- 
+-- Returns s sorted copy of a list
+--
+isort :: Ord a => [a] -> [a]
+isort = myfoldr insert []
+
+> isort [7,1,8,2,4]
+[1,2,4,7,8]
+> isort "cheese please!"
+" !aceeeeehlpss"
+```
+
+Notice that the equation defining `sort` does *not* explicitly mention it's
+list parameter. If you prefer, you could write with a list parameter:
+
+```haskell
+isort lst = myfoldr insert [] lst
+```
 
 ### Challenge: counting with fold
 

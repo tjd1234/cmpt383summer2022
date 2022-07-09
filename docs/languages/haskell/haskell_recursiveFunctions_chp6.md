@@ -154,7 +154,7 @@ insert x (y:ys) | x <= y    = x:y:ys
 "abcde"
 ```
 
-`insert` lets us implement this variation of **insertion sort**:
+With `insert` we can implement this variation of **insertion sort**:
 
 ```haskell
 isort :: Ord a => [a] -> [a]
@@ -166,12 +166,6 @@ isort (x:xs) = insert x (isort xs)
 > isort [9,2,5,1,9,0,2]
 [0,1,2,2,5,9,9]
 ```
-
-Our aim here is to make functions that are correct, flexible, and easy to
-read. We have chosen not to be too concerned with performance. Indeed,
-recursion plus [Haskell]'s immutable lists can often result in code that is
-less efficient than straightforward loop-based implementations in languages
-like C++ or Python.
 
 
 ### Challenge: recursive counting
