@@ -17,7 +17,7 @@ We'll mainly be using `ghci`, a Haskell interpreter.
 
 - [General introduction to haskell](haskell_intro.md)
 - [Haskell programming overview](haskell_firstSteps_chp2.md)
-- [Types and classes](haskell_typesAndClasses_chp3.md)
+- [Basic types and classes](haskell_typesAndClasses_chp3.md)
 
 ### Lecture 3 Haskell: Defining Functions
 - [Defining functions](haskell_definingFunctions_chp4.md)
@@ -27,7 +27,7 @@ We'll mainly be using `ghci`, a Haskell interpreter.
 - [Higher order functions](haskell_higherOrderFunctions_chp7.md)
 
 ### Lecture 6 Haskell: Type Classes
-- [Types and classes](haskell_declaringTypesAndClasses_chp8.md)
+- [Declaring types and classes](haskell_declaringTypesAndClasses_chp8.md)
 
 ### Lecture 7 Haskell: Interactive Programming
 - [Interactive programming](haskell_interactiveProgramming_chp10.md)
