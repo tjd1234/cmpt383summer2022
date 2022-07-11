@@ -100,25 +100,25 @@ x y z
 ```
 
 The relation consists of nine 3-tuples, and we've written it like a database
-table. It represents all values of $x,y,z$, in the range 1 to 6, that
-satisfy the equation $x+y=z$.
+table. It represents all values of $x,y,z$, in the range 1 to 6, that satisfy
+the equation $x+y=z$.
 
 Now we can use this table to answer some computational questions:
 
 - **Is $2 + 1 = 3$?** To answer this, we *search* the table to see if it has
-  the triple $(2,1,3)$. It's there, and so we know that $2 + 1 = 3$ is
-  true. Similarly, we know that $2 + 2 = 1$ is *not* true because the triple
+  the triple $(2,1,3)$. It's there, and so we know that $2 + 1 = 3$ is true.
+  Similarly, we know that $2 + 2 = 1$ is *not* true because the triple
   $(2,2,1)$ is not anywhere in the table.
 
-- **What is $x$ in the equation $x + 1 = 4$?** To solve this, we have to
-  find a triple that matches $(x,1,4)$. By searching the table, we can see
-  that there is only one such triple, $(3,1,4)$, and so the only solution to
-  this equation $x=4$.
+- **What is $x$ in the equation $x + 1 = 4$?** To solve this, we have to find
+  a triple that matches $(x,1,4)$. By searching the table, we can see that
+  there is only one such triple, $(3,1,4)$, and so the only solution to this
+  equation $x=4$.
 
-- **What values of $x$ and $y$ satisfy $x + y = 4$?** Here, we need to
-  serch for triples that look like $(x,y,4)$. There are two such triples in
-  the table: $(1,3,4)$ and $(3,1,4)$, and so the equation has two
-  different solutions: $x=1$ and $y=3$, or $x=3$ and $y=1$.
+- **What values of $x$ and $y$ satisfy $x + y = 4$?** Here, we need to serch
+  for triples that look like $(x,y,4)$. There are two such triples in the
+  table: $(1,3,4)$ and $(3,1,4)$, and so the equation has two different
+  solutions: $x=1$ and $y=3$, or $x=3$ and $y=1$.
 
 The interesting thing here is that we have converted the problem of solving
 equations into looking up tuples in a table. And this is essentially what
