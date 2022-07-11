@@ -52,39 +52,38 @@ which are important in large-scale software engineering.
 > It's a good book to get if you'd like to learn more Prolog.
 
 A helpful way to think about Prolog is that it is about **relational
-programming**. In mathematics, a **relation** is set of tuples. If $`A`$ and $`B`$ are sets, then a relation is any subset of their cross
+programming**. In mathematics, a **relation** is set of tuples. If $A$ and $B$ are sets, then a relation is any subset of their cross
 product:
 
 ```math
 A \times B = \{(a, b) : a \in A, b \in B \}
 ```
 
-For example, if $`A=\{2,3,6\}`$ and $`B=\{2,4\}`$, then $`A \times B =
-\{(2,2), (2,4), (3,2), (3,4), (6,2), (6,4)\}`$. Every subset $`A \times B`$ is
-a relation..
+For example, if $A=\{2,3,6\}$ and $B=\{2,4\}$, then $A \times B =
+\{(2,2), (2,4), (3,2), (3,4), (6,2), (6,4)\}$. Every subset $A \times B$ is a
+relation..
 
-More generally, if $`A_1, A_2, \ldots, A_n`$ are all non-empty sets, then
-a relation on them is any subset of this cross-product:
+More generally, if $A_1, A_2, \ldots, A_n$ are all non-empty sets, then a
+relation on them is any subset of this cross-product:
 
 ```math
 A_1 \times A_2 \times \ldots \times A_n = \{(a_1,a_2,\ldots,a_n) : a_1\in A_1, a_2\in A_2, \ldots, a_n \in A_n \}
 ```
 
-$`(a_1,a_2,\ldots,a_n)`$ is an n-tuple, i.e. an ordered collection of n
+$(a_1,a_2,\ldots,a_n)$ is an n-tuple, i.e. an ordered collection of n
 different values. A relation is just a set of 0 or more n-tuples
 
-For example, suppose the set $`A=\{18,19,20\}`$, and the set
-$`P=\{\textrm{yi}, \textrm{veronica}, \textrm{pat}, \textrm{gary}\}`$. We
-could then define the *age* relation like this: $`\{(\textrm{veronica},19),
-(\textrm{pat},19), (\textrm{yi},18)\}`$. This relation is a set of pairs,
-where the first element is from $`A`$, and the second element is from $`P`$.
-Another relation would be $`\{(\textrm{yi},19), (\textrm{yi},20),
-(\textrm{yi},18)\}`$. There is no requirement that all values from $`A`$ or
-$`P`$ be present.
+For example, suppose the set $A=\{18,19,20\}$, and the set $P=\{\textrm{yi},
+\textrm{veronica}, \textrm{pat}, \textrm{gary}\}$. We could then define the
+*age* relation like this: $\{(\textrm{veronica},19), (\textrm{pat},19),
+(\textrm{yi},18)\}$. This relation is a set of pairs, where the first element
+is from $A$, and the second element is from $P$. Another relation would be
+$\{(\textrm{yi},19), (\textrm{yi},20), (\textrm{yi},18)\}$. There is no
+requirement that all values from $A$ or $P$ be present.
 
 Relations turn out to be a very powerful way of thinking about computation.
-For example, consider this relation on $`A \times A \times B`$, where
-$`A=\{1,2,3\}`$ and $`B=\{1,2,3,4,5,6\}`$:
+For example, consider this relation on $A \times A \times B$, where
+$A=\{1,2,3\}$ and $B=\{1,2,3,4,5,6\}$:
 
 ```
 x y z
@@ -101,25 +100,25 @@ x y z
 ```
 
 The relation consists of nine 3-tuples, and we've written it like a database
-table. It represents all values of $`x,y,z`$, in the range 1 to 6, that
-satisfy the equation $`x+y=z`$.
+table. It represents all values of $x,y,z$, in the range 1 to 6, that
+satisfy the equation $x+y=z$.
 
 Now we can use this table to answer some computational questions:
 
-- **Is $`2 + 1 = 3`$?** To answer this, we *search* the table to see if it has
-  the triple $`(2,1,3)`$. It's there, and so we know that $`2 + 1 = 3`$ is
-  true. Similarly, we know that $`2 + 2 = 1`$ is *not* true because the triple
-  $`(2,2,1)`$ is not anywhere in the table.
+- **Is $2 + 1 = 3$?** To answer this, we *search* the table to see if it has
+  the triple $(2,1,3)$. It's there, and so we know that $2 + 1 = 3$ is
+  true. Similarly, we know that $2 + 2 = 1$ is *not* true because the triple
+  $(2,2,1)$ is not anywhere in the table.
 
-- **What is $`x`$ in the equation $`x + 1 = 4`$?** To solve this, we have to
-  find a triple that matches $`(x,1,4)`$. By searching the table, we can see
-  that there is only one such triple, $`(3,1,4)`$, and so the only solution to
-  this equation $`x=4`$.
+- **What is $x$ in the equation $x + 1 = 4$?** To solve this, we have to
+  find a triple that matches $(x,1,4)$. By searching the table, we can see
+  that there is only one such triple, $(3,1,4)$, and so the only solution to
+  this equation $x=4$.
 
-- **What values of $`x`$ and $`y`$ satisfy $`x + y = 4`$?** Here, we need to
-  serch for triples that look like $`(x,y,4)`$. There are two such triples in
-  the table: $`(1,3,4)`$ and $`(3,1,4)`$, and so the equation has two
-  different solutions: $`x=1`$ and $`y=3`$, or $`x=3`$ and $`y=1`$.
+- **What values of $x$ and $y$ satisfy $x + y = 4$?** Here, we need to
+  serch for triples that look like $(x,y,4)$. There are two such triples in
+  the table: $(1,3,4)$ and $(3,1,4)$, and so the equation has two
+  different solutions: $x=1$ and $y=3$, or $x=3$ and $y=1$.
 
 The interesting thing here is that we have converted the problem of solving
 equations into looking up tuples in a table. And this is essentially what

@@ -6,8 +6,8 @@ combinatorial problems.
 
 ## Pythagorean Triples
 
-Three integers $`(a, b, c)`$ form a **Pythagorean triple** if $`a^2 + b^2 =
-c^2`$. Here's a Prolog functions that tests for Pythagorean triples:
+Three integers $(a, b, c)$ form a **Pythagorean triple** if $a^2 + b^2 = c^2$.
+Here's a Prolog functions that tests for Pythagorean triples:
 
 ```prolog
 is_triple(A, B, C) :- 
@@ -114,7 +114,7 @@ Prolog programs. But it's worth noting that we can implement this same style
 of generate and test straightforwardly in other languages. For instance, in
 Python we could write this:
 
-```prolog
+```python
 def solve_triple(n):            # Python
     for a in xrange(1, n + 1):
         for b in xrange(1, n + 1):
@@ -225,12 +225,12 @@ the value 0. This is a valid assignment, and so we have the first bit string:
 unassigns `C` and then tries to find another value that satisfies `C`. It
 does: it finds that `C` could be 1. And so we have the second bit string: `[0,
 0, 1]`. Prolog backtracks to `C`, unassigns it, and discovers that there are
-no other values that it can assign to `C`. So now it backtracks to `B`, and
-unassigns `B`. It tries to find a different assignment to `B`, and ends up
-assigning 1 to `B`. Now it tries to find a value for `C`. The first value it
-finds is `0`, and so `C` gets assigned that. This gives the third bit string:
-`[0, 1, 0]`. Backtracking and continues in this fashion until all bit strings
-have been generated.
+no other values that it can assign to `C`. So it unassigns `C` and backtracks
+to `B`, and then unassigns `B`. It tries to find a different assignment to
+`B`, and ends up assigning 1 to `B`. Now it tries to find a value for `C`. The
+first value it finds is `0`, and so `C` gets assigned that. This gives the
+third bit string: `[0, 1, 0]`. Backtracking continues in this fashion until
+all bit strings have been generated.
 
 While this is a simple way to generate bit strings in Prolog, it would be more
 convenient to have a function that calculates all bit strings of length `N`,
@@ -261,9 +261,6 @@ nbits(N, [B|Bs]) :-  % recursive case
   N1 is N - 1, 
   nbits(N1, Bs).
 ```
-
-Study this function: understand every line!
-
 
 ## Four-by-four Sudoku
 
@@ -300,10 +297,10 @@ Each row and column must be a permutation of the numbers 1, 2, 3, 4. Also, the
 Here's how we could solve this puzzle in Prolog:
 
 ```prolog
-solution(A, B,  C, D,
-         E, F,  G, H,
-         I, J,  K, L,
-         M, N,  O, P) :-
+solution(A, B, C, D,
+         E, F, G, H,
+         I, J, K, L,
+         M, N, O, P) :-
     % row constraints
     permutation([1, 2, 3, 4], [A, B, C, D]),
     permutation([1, 2, 3, 4], [E, F, G, H]),
@@ -405,13 +402,13 @@ to Sudoku. It solves the puzzle by pure brute force: it generates all possible
 permutations and tests which ones satisfy the constraints.
 
 We can get a rough estimate of the number of different 9-by-9 Sudoku boards as
-follows. Each row has $`9! = 362880`$ possible permutations, and since there
-are 9 rows there are $`9!^9 \approx 1.1 \times 10^{51}`$ possibilities for
+follows. Each row has $9! = 362880$ possible permutations, and since there
+are 9 rows there are $9!^9 \approx 1.1 \times 10^{51}$ possibilities for
 this generate-and-test program to try.
 
-Assuming we could generate a *trillion* ($`10^{12}`$) permutations per second,
-it would take on the order of $`10^{39}`$ seconds to solve, which is about $`3
-\times 10^{29}`$ *centuries*.
+Assuming we could generate a *trillion* ($10^{12}$) permutations per second,
+it would take on the order of $10^{39}$ seconds to solve, which is about $3
+\times 10^{29}$ *centuries*.
 
 People can obviously solve 9-by-9 puzzles much more quickly than that. They do
 it by using knowledge specific to Sudoku to more efficiently figure out
