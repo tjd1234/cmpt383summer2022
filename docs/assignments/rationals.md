@@ -205,7 +205,7 @@ More details may be posted here closer to the assignment deadline.
 - Use only regular Racket lists, and basic Racket functions as discussed in
   the notes. **Don't** use any special Racket data structures, e.g. *don't*
   use vectors, or structs, or hashes, .... It may be helpful to look at the
-  code in [point.rkt](point.rkt) for ideas.
+  code in [point.rkt](../languages/racket/point.rkt) for ideas.
 
 - **Don't** use Racket's built-in rationals to represent or process your
   rationals, except in `to-float`. Look up the Racket function
