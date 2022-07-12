@@ -189,7 +189,7 @@ For instance:
 ```haskell
 safeHead :: [a] -> Maybe a
 safeHead []    = Nothing
-safeHead (x:_) = x
+safeHead (x:_) = Just x
 ```
 
 ```haskell
@@ -285,6 +285,14 @@ add2 (Just m) (Just n) = Just (m + n)
 Just 6.0
 > add2 (Just 2) Nothing
 Nothing
+```
+
+The implementation of `add2` can be shortened to:
+
+```haskell
+add2' :: Maybe Double -> Maybe Double -> Maybe Double
+add2' (Just m) (Just n) = Just (m + n)
+add2' _        _        = Nothing
 ```
 
 Whether `add1` or `add2` --- or some other add-like function --- is better

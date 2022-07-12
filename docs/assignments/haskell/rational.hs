@@ -139,7 +139,7 @@ harmonicSum :: Integer -> MyRational
 -- > insertionSort [5,6,2,3,1,4]
 -- [1,2,3,4,5,6]
 --
--- > insertion_sort ["one","two","three","four"]
+-- > insertionSort ["one","two","three","four"]
 -- ["four","one","three","two"]
 --
 -- > insertionSort [makeRational 2 2,makeRational 0 1,
