@@ -44,7 +44,7 @@ it does not have a standard implementation of objects or modules, both of
 which are important in large-scale software engineering.
 
 
-## Prolog Overview
+## Relations and Computation
 
 > **Note** Much of what follows is based on the book [Programming in Prolog,
 > by Clocksin and
@@ -78,7 +78,7 @@ is from $A$, and the second element is from $P$. Another relation would be
 $ \{ (\textrm{yi},19), (\textrm{yi},20), (\textrm{yi},18) \} $. There is no
 requirement that all values from $A$ or $P$ be present.
 
-Relations are a powerful way of thinking about computation.
+Relations are a provocative way of thinking about computation.
 For example, consider this relation on $A \times A \times B$, where
 $A=\{ 1,2,3 \}$ and $B=\{ 1,2,3,4,5,6 \}$:
 
@@ -100,7 +100,7 @@ The relation consists of nine 3-tuples, and we've written it like a database
 table. It represents all values of $x,y,z$, in the range 1 to 6, that satisfy
 the equation $x+y=z$.
 
-Now we can use this table to answer some computational questions:
+Now we can answer some computational questions by searching this table:
 
 - **Is $2 + 1 = 3$?** To answer this, we *search* the table to see if it has
   the triple $(2,1,3)$. It's there, and so we know that $2 + 1 = 3$ is true.
@@ -109,32 +109,35 @@ Now we can use this table to answer some computational questions:
 
 - **What is $x$ in the equation $x + 1 = 4$?** To solve this, we have to find
   a triple that matches $(x,1,4)$. By searching the table, we can see that
-  there is only one such triple, $(3,1,4)$, and so the only solution to this
-  equation $x=4$.
+  there is only one such triple, $(3,1,4)$, and so the only solution is $x=4$.
 
-- **What values of $x$ and $y$ satisfy $x + y = 4$?** Here, we need to serch
+- **What values of $x$ and $y$ satisfy $x + y = 4$?** Here, we need to search
   for triples that look like $(x,y,4)$. There are two such triples in the
   table: $(1,3,4)$ and $(3,1,4)$, and so the equation has two different
   solutions: $x=1$ and $y=3$, or $x=3$ and $y=1$.
 
 The interesting thing here is that we have converted the problem of solving
-equations into looking up tuples in a table. And this is essentially what
-Prolog does: it turns many computational problems into questions about tables.
+equations into *database queries*, i.e. looking up tuples in a table. We will
+come back to this way of thinking about computation when we look we start to
+define Prolog predicates.
 
 
 ## Structure of a Prolog Program
 
 Prolog programs consist of these main elements:
 
-- **Facts** about values and their relationships. For example, the values
-  *Kia* and *Jody* are values representing people, and "Kia is Jody's mother"
-  is a fact that relates them.
+- **Facts** about values and their relationships. For example, *kia* and
+  *jody* are values representing people, and "Kia is Jody's mother" is a fact
+  that relates them.
 
   A value could be anything, e.g. a number, a string, a list, a function, etc.
-  We will sometimes refer to values as *objects*, but please keep in mind
+  Prolog supports symbols, e.g. lowercase identifiers like *kia* and *jody*
+  are Prolog symbols.
+
+  Sometimes we'll refer to values as *objects*, but please keep in mind
   these are **not** objects in the sense of object-oriented programming.
 
-  There are two useful ways to think about Prolog facts. You can think of them
+  There are two common ways to think about Prolog facts. You can think of them
   as:
 
   1. **logical predicates**, as in first-order quantified logic
@@ -145,12 +148,12 @@ Prolog programs consist of these main elements:
   the rule "if X and Y have the same parents, then they're siblings".
 
 - **Questions** that can be asked about objects and their relationships. These
-  are similar to *queries* in a database system. For example, you might ask
-  "Who are Jody's parents?"
+  are like *queries* in a database system. For example, you might ask "Who are
+  Jody's parents?"
 
-Facts and rules together form what is often called a **knowledge base**. Many
-useful Prolog programs are structured as a knowledge base, plus queries on
-that knowledge base.
+Facts and rules together form what is often called a **knowledge base**
+(**KB**). Many useful Prolog programs are structured as a knowledge base, plus
+queries on that knowledge base.
 
 
 ## Running Prolog
@@ -223,11 +226,11 @@ that `john` doesn't like `iron_man`.
 But that's a pretty aggressive conclusion: more accurately, we simply don't
 know whether or not `john` likes `iron_man` because we don't know anything
 about that. So a more accurate answer would be "I don't know if `john` likes
-`iron_man`". But Prolog does not do that: **if Prolog cannot prove something
-is true, it assumes that it is false**.
+`iron_man`". But Prolog does not do that. Instead, **if Prolog cannot prove
+something is true, it assumes that it is false**.
 
-> **Note** The rule of assuming something is false if it cannot be proven to
-> be true is known as the [closed world
+> **Note** Assuming something is false if it cannot be proven to be true is
+> known as the [closed world
 > assumption](https://en.wikipedia.org/wiki/Closed-world_assumption).
 
 
@@ -247,16 +250,16 @@ Note the following:
 - Names of relationships and objects must start with a *lowercase* letter. In
   Prolog, uppercase letters are variables.
 
-- The name of a relationship is often called a **predicate**, i.e. `likes` is
+- The name of a relationship is often called a **predicate**, e.g. `likes` is
   a predicate.
 
-- The `likes` predicate is *binary*, i.e. it has an *arity* of 2. It has two
-  **arguments**, `john` and `mary`.
+- The `likes` predicate is *binary*, i.e. it has an *arity* of 2, meaning it
+  takes exactly two **arguments**.
 
 - In general, the order of arguments matters, i.e. `likes(john, mary).` is
   *not* the same fact as `likes(mary, john)`.
 
-- Object names, such as  `john` and `mary`, are symbols. They are *not*
+- Object names, such as  `john` and `mary`, are *symbols*. They are *not*
   strings. All we can do is test if two symbols are the same or different ---
   we can't access their individual characters.
 
@@ -266,7 +269,7 @@ Here are a few more examples of facts:
 
 ```prolog
 fat(homer).                  % homer is fat
-male(homer).                 % homer is a male
+dad(homer).                  % homer is a dad
 father_of(homer, bart).      % homer is bart's father
 kicked(itchy, scratchy).     % itchy kicked scratchy
 stole(bart, donut, homer).   % bart stole the donut from homer
@@ -299,7 +302,7 @@ words and names to make them easy to read.
 
 - Jimi kissed the sky. 
 
-- Mr. Whispers fell asleep on the couch.
+- Mr. Whiskers fell asleep on the couch.
 
 - Randy stole the book from Stan and gave it to Kyle.
 
@@ -347,9 +350,8 @@ So, for example, `likes(john, mary)` and `likes(john, mary)` unify, while
 
 ## Variables
 
-We often want to asks questions of the form "Who does john like?", or "Who
-likes john?". To deal with the "Who" in these questions, we need to introduce
-variables.
+To asks questions like "Who does john like?", or "Who likes john?", we need to
+introduce variables.
 
 Variables in Prolog are **logic variables**, and they are different than
 variables in other programming languages:
@@ -398,15 +400,15 @@ variable unify with *any* value in the same position for a predicate with the
 same name.
 
 To answer the question `likes(john, X).` Prolog searches through its knowledge
-base to see which facts, if any, unify with `likes(john, X).` You could
-imagine the search going like this:
+base to see which facts, if any, unify with `likes(john, X).` You can imagine
+the search going like this:
 
 - Can `likes(john, X).` unify with `likes(john, mary).`? Yes it can if `X =
   mary`.
 
 - Can `likes(john, X).` unify with `likes(mary, skiing).`? No, there is no
-  possible value that can be assigned to `X` that will make `likes(john, X).`
-  the same as `likes(mary, skiing).`.
+  possible value that can be assigned to `X` that makes `likes(john, X).` the
+  same as `likes(mary, skiing).`.
 
 - Can `likes(john, X).` unify with `likes(john, skiing).`? Yes it can if
   `X = skiing`.
@@ -415,15 +417,15 @@ imagine the search going like this:
   flowers`.
 
 - Can `likes(john, X).` unify with `likes(mary, surprises).`? No, there is no
-  possible value that can be assigned to `X` that will make `likes(john, X).`
-  the same as`likes(mary, surprises).`.
+  possible value that can be assigned to `X` that makes `likes(john, X).` the
+  same as`likes(mary, surprises).`.
 
 When Prolog successfully unifies a fact, it internally *marks* the place in
 the knowledge base where the unification occurred so that it can later
 *backtrack* to that point and try to find a different match. When the user
-types `;`, that tells Prolog to continue searching by starting immediately
-after the fact that was just unified. If, instead, the user types a `.`, it
-tells Prolog to immediately stop searching.
+types `;` in the interpreter, that tells Prolog to continue searching by
+starting immediately after the fact that was just unified. If, instead, the
+user types a `.`, it tells Prolog to immediately stop searching.
 
 Here's another example:
 
@@ -521,11 +523,11 @@ matches, and so returns `false`.
 
 ## Rules
 
-Rules let us encode things like "john likes anyone who likes wine". For
+Rules let us encode things like "john likes anyone who likes cheese". For
 example:
 
 ```prolog
-likes(john, X) :- likes(X, wine). % the rule "john likes anyone who likes wine"
+likes(john, X) :- likes(X, cheese). % the rule "john likes anyone who likes cheese"
 ```
 
 The `:-` in a Prolog rule means "if". On the left of the `:-` is the **head**
@@ -535,11 +537,11 @@ rule must end with a `.`.
 Here's another rule:
 
 ```prolog
-likes(john, X) :- likes(X, wine), likes(X, food).    % a rule
+likes(john, X) :- likes(X, cheese), likes(X, food).    % a rule
 ```
 
-This encodes "john likes anyone who likes both food and wine". Or,
-equivalently, "john likes X if X likes wine and X likes food".
+This can be read "john likes anyone who likes both food and cheese". Or,
+equivalently, "john likes X if X likes cheese and X likes food".
 
 Lets see a more complex rule. We will use this knowledge base:
 
@@ -814,7 +816,7 @@ OtherGrain = very_coarse.
 
 Prolog functions *don't* return values like functions in most other languages.
 You need to use extra parameters to get the results of a calculation. For
-instance, this function converts fahrenheit to celsius:
+instance, this function converts Fahrenheit to Celsius:
 
 ```prolog
 to_celsius(F, C) :- C is (F - 32) * 5 / 9.
@@ -880,8 +882,7 @@ Rest = [c, d].
 
 ## The Member Function
 
-Prolog rules are flexible enough to implement *any* function we like, and so
-it is possible to use Prolog as a general-purpose programming language.
+Prolog rules are flexible enough to implement *any* function we like.
 
 Lets write a function called `member(X, L)` that succeeds just when `X` is
 somewhere on the list `L`. Prolog has no loops, so we use recursion:
@@ -923,8 +924,8 @@ meaning "no more 5s were found". If you only care about whether or not there
 is a 5 somewhere in the list, then you can stop (type `.`) as soon as `true`
 is returned.
 
-Now comes a very nice feature of Prolog. We can use `member` to generate items
-on a list one by one. For example:
+Now comes a very nice feature of Prolog. We can use `member` to *generate*
+items on a list one by one. For example:
 
 ```prolog
 ?- member(X, [6, 8, 1, 15]).
@@ -936,9 +937,9 @@ false.
 ```
 
 This essentially iterates through the list an element at a time, similar to a
-loop in an imperative language.
+loop.
 
-We can also write queries:
+It can also handle variables in the list:
 
 ```prolog
 ?- member(5, [6, 8, X, 1, 15]).
@@ -946,11 +947,11 @@ X = 5 ;
 false.
 ```
 
-These examples show that `member` can do much more than just test if a number
-is on a list. Prolog programmers often try to write functions in a way that
-allows variables to appear anywhere in the arguments. It isn't always possible
-to do so (see `to_celsius` above), but when you can do it, the results can be
-quite useful.
+These examples show that `member` can do more than just test if a number is on
+a list. Prolog programmers often try to write functions in a way that allows
+variables to appear anywhere in the arguments. It isn't always possible to do
+so (see `to_celsius` above), but when you can do it, the results can be quite
+useful.
 
 
 ## The Length Function
@@ -1008,9 +1009,12 @@ N = 4
 ...
 ```
 
-This generates an infinite number of lists of lengths 0, 1, 2, 3, ....
+This generates an infinite number of lists of lengths 0, 1, 2, 3, .... The
+items on the list (e.g. `_G1997`, `_G2000`, ...) are new variables created by
+Prolog, and their values can be anything. `[_G1997, _G2000]` can unify with
+*any* 2-element list.
 
-`length` is built-in, and it is instructive to write our own version of it.
+`length` is built-in, but it is instructive to write our own version of it.
 For example:
 
 ```prolog
@@ -1076,8 +1080,8 @@ to be very common or useful.
 
 ## Simple Statistics
 
-Suppose you want to calculate the sum of a list of numbers. Here's how you
-could do it in Prolog:
+Suppose you want to sum a list of numbers. Here's how you could do it in
+Prolog:
 
 ```prolog
 sum([], 0).             % base case
@@ -1095,8 +1099,8 @@ mean(X, Avg) :-
     Avg is Total / N.
 ```
 
-Next, lets write a function that calculates the minimum value of a list.
-First, we write the `min` function that determines the smaller of two inputs:
+Next, lets write a function that calculates the minimum value on a list.
+First, we write the `min` function that determines the smaller of two values:
 
 ```prolog
 min(X, Y, X) :- X =< Y.  % =< is less than or equal to
