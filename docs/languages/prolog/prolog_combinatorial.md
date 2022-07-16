@@ -431,24 +431,17 @@ There are a couple of ways to solve this problem in Prolog. One way is like
 this:
 
 ```prolog
-alpha1(S, E, N, D, M, O, R, Y, [S, E, N, D, M, O, R, E, M, O, N, E, Y]) :-
+alpha1(S, E, N, D, M, O, R, Y], Send, More, Money) :-
     between(1, 9, S),
-    between(0, 9, E),
-    E \=S,
-    between(0, 9, N),
-    N \= E, N \= S,
-    between(0, 9, D),
-    D \= N, D \= E, D \= S,
-    between(1, 9, M),
-    M \= D, M \= N, M \= E, M \= S,
-    between(0, 9, O),
-    O \= M, O \= D, O \= N, O \= E, O \= S,
-    between(0, 9, R),
-    R \= O, R \= M, R \= D, R \= N, R \= E, R \= S,
-    between(0, 9, Y),
-    Y \= R, Y \= O, Y \= M, Y \= D, Y \= N, Y \= E, Y \= S,
-    Send is S*1000 + E*100 + N*10 + D,
-    More is M*1000 + O*100 + R*10 + E,
+    between(0, 9, E), S \= E,
+    between(0, 9, N), \+ member(N, [S,E]),       % \+ means "not"
+    between(0, 9, D), \+ member(D, [S,E,N]),
+    between(1, 9, M), \+ member(M, [S,E,N,D]),
+    between(0, 9, O), \+ member(O, [S,E,N,D,M]),
+    between(0, 9, R), \+ member(R, [S,E,N,D,M,O]),
+    between(0, 9, Y), \+ member(Y, [S,E,N,D,M,O,R]),
+    Send  is           S*1000 + E*100 + N*10 + D,
+    More  is           M*1000 + O*100 + R*10 + E,
     Money is M*10000 + O*1000 + N*100 + E*10 + Y,
     Money is Send + More.
 ```
@@ -457,7 +450,7 @@ This takes a few seconds to run on a typical desktop computer, and it finds
 the one unique solution:
 
 ```prolog
-?- alpha1(S, E, N, D, M, O, R, Y, Sol).
+?- alpha1([S, E, N, D, M, O, R, Y], Send, More, Money).
 S = 9,
 E = 5,
 N = 6,
@@ -466,15 +459,20 @@ M = 1,
 O = 0,
 R = 8,
 Y = 2,
-Sol = [9, 5, 6, 7, 1, 0, 8, 5, 1|...] .
+Send = 9567,
+More = 1085,
+Money = 10652 ;
+false.
 ```
 
-Importantly, as soon as values are assigned to variables, we enforce the dis-
-equality constraints so that failure will happen as soon as possible. It would
-run much more slowly if you put all the `\=` constraints in one group at the
-bottom of the function.
+Importantly, as soon as values are assigned to variables, we enforce the
+not-equal constraints so that failure will happen as soon as possible. `\+` is
+means "not", and in this case tells when a value is not member of a list. The
+predicate would run much more slowly if you put all the `\=` constraints in
+one group at the bottom of the function.
 
-An even more efficient approach is to mimic how people do addition:
+An even more efficient approach is to mimic how people do addition digit by
+digit using carries:
 
 ```prolog
 alpha2(S, E, N, D, M, O, R, Y, [S, E, N, D, M, O, R, E, M, O, N, E, Y]) :-
@@ -519,10 +517,10 @@ What's nice about this general approach is that the program is essentially
 just a list of the constraints on the variables. We then let Prolog do the
 work of finding satisfying values.
 
-While this approach is great in theory, in practice it usually too slow for
-problems where the range of the variables is big. Such problems typically
-require a lot of extra problem-specific knowledge to make them run
-efficiently.
+While good in theory, in practice this is usually too slow for problems where
+the range of the variables is big (the range of these variables is only 0 to
+9). Bigger problems like this typically require a lot of extra
+problem-specific knowledge to make them run efficiently.
 
 
 ## Map Coloring
@@ -582,17 +580,17 @@ efficient way to solve a coloring problem. For large maps, it is far too
 inefficient: if Prolog did smarter backtracking, or used heuristics specific
 to map coloring, it could run much quicker.
 
+
 ## Concluding Thoughts
 
 The example shown here suggest Prolog is a good way to *represent* many
-combinatorial problems, but not necessarily a good way to solve them. Relying
-solely on Prolog's backtracking is too slow for all but the smallest examples.
+combinatorial problems, but not necessarily an efficient way to *solve* them.
+Relying solely on Prolog's depth-first backtracking is too slow for all but
+the smallest examples.
 
 To make faster solvers, you typically need to add lots of problem-specific
 knowledge, and use data structures and algorithms tuned to the problem. That's
 usually easier to do in other languages than in Prolog.
 
-You can think of the trade-off like this: do you a general-purpose but slow
-problem solver that is relatively quick and easy to create, or do you want a
-problem-specific solver that is more efficient, but requires much more time
-and effort to create?
+You can think of the trade-off like this: do you want a problem solver that
+can solve lots of different problems *slowly*, or a single problem quickly?
