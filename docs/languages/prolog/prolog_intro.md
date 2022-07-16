@@ -6,8 +6,7 @@
 Prolog is a [logic programming
 language](https://en.wikipedia.org/wiki/Logic_programming) developed in the
 early 1970s that is about objects and relations between them. It aims to be a
-[declarative programming
-language](https://en.wikipedia.org/wiki/Declarative_programming), i.e. Prolog
+[declarative programming language](https://en.wikipedia.org/wiki/Declarative_programming), i.e. Prolog
 programs often just say *what* they will do without specifying exactly *how*
 they will do it. To do this, Prolog has a built-in backtracking search that
 can solve pretty much any problem if you have enough time (naive Prolog
@@ -28,8 +27,8 @@ Some common applications of Prolog are:
   system](https://en.wikipedia.org/wiki/Expert_system), Prolog would be good.
 
 - **In-memory databases**. Prolog can create and query complex databases
-  inside of other languages. For instance, [Datomic]https://www.datomic.com/]
-  is a database that uses the a Prolog-like language
+  inside of other languages. For instance, [Datomic](https://www.datomic.com/)
+  is a database that uses the Prolog-like language
   [datalog](https://en.wikipedia.org/wiki/Datalog) to write queries.
 
 - Problems that require some sort of backtracking, such as scheduling or
