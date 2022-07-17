@@ -1,13 +1,12 @@
 # Prolog: Examples of Combinatorial Problems
 
-In these notes we'll see how Prolog can be used to solve various
-combinatorial problems. 
+In these notes we'll use to solve various combinatorial problems.
 
 
 ## Pythagorean Triples
 
 Three integers $(a, b, c)$ form a **Pythagorean triple** if $a^2 + b^2 = c^2$.
-Here's a Prolog functions that tests for Pythagorean triples:
+Here's a Prolog function that tests for Pythagorean triples:
 
 ```prolog
 is_triple(A, B, C) :- 
@@ -33,11 +32,7 @@ solve_triple1(A, B, C) :-
     member(B, [1,2,3,4,5,6,7,8,9,10]),
     member(C, [1,2,3,4,5,6,7,8,9,10]),
     is_triple(A, B, C).
-```
 
-And here are the results:
-
-```prolog
 ?- solve_triple1(A, B, C).
 A = 3,
 B = 4,
@@ -54,12 +49,12 @@ C = 10 ;
 false.
 ```
 
-This style of algorithm is sometimes referred to as **generate and test**. We
-generate a candidate solution, and then test it to determine if it is valid.
+This style of algorithm is called generate and test**. We *generate* a
+candidate solution, and then *test* if it is valid.
 
-Four different Pythagorean triples are calculated. However, (3, 4, 5) and (4,
-3, 5) are essentially the same, as are (6, 8, 10) and (8, 6, 10). So lets
-require that the triples be in order:
+In this example, four different Pythagorean triples are calculated. However,
+(3, 4, 5) and (4, 3, 5) are essentially the same, as are (6, 8, 10) and (8, 6,
+10). So lets require that the triples be in order:
 
 ```prolog
 solve_triple2(A, B, C) :-
@@ -69,11 +64,7 @@ solve_triple2(A, B, C) :-
     member(C, [1,2,3,4,5,6,7,8,9,10]),
     B =< C,
     is_triple(A, B, C).
-```
 
-The results are little easier to read:
-
-```prolog
 ?- solve_triple2(A, B, C).
 A = 3,
 B = 4,
@@ -98,7 +89,7 @@ solve_triple3(N, A, B, C) :-
     is_triple(A, B, C).
 ```
 
-`between(Lo, Hi, N)` is a standard function in SWI-Prolog that can generate
+`between(Lo, Hi, N)` is a standard SWI-Prolog function that can generate
 integers from `Lo` to `Hi` (inclusive). For example:
 
 ```prolog
@@ -110,9 +101,9 @@ N = 4.
 ```
 
 Many programmers are impressed by the brevity and clarity of these sorts of
-Prolog programs. But it's worth noting that we can implement this same style
-of generate and test straightforwardly in other languages. For instance, in
-Python we could write this:
+Prolog programs. But it's worth noting that we can implement generate and test
+straightforwardly in other languages. For instance, in Python we could write
+this:
 
 ```python
 def solve_triple(n):            # Python
@@ -125,11 +116,11 @@ def solve_triple(n):            # Python
                             print(a, b, c)
 ```
 
-While backtracking is not a built-in part of Python as in Prolog, the flow of
-control jumps around in the same way due to how and when loops terminate. Note
-that when the program is at the line `if is_triple(a, b, c)`, then there are
-four places the flow of control could jump to next: the `print` statement in
-its body, or back to one of the three earlier for-loops.
+While backtracking is not a built-in part of Python, the flow of control jumps
+around in the same way due to how and when the for-loops terminate. Note that
+when the program is at the line `if is_triple(a, b, c)`, then there are four
+places the flow of control could jump to next: the `print` statement in its
+body, or back to one of the three earlier for-loops.
 
 Go is similar:
 
@@ -168,7 +159,7 @@ func solve_triple(n int) {     // Go
 
 All of these examples do the simplest form of backtracking. For example, when
 they've looped through all values of `c`, they jump up to the `b` for-loop to
-get the next value of `b`. It's never the case that the jump from `c` to `a`.
+get the next value of `b`. It's never the case that they jump from `c` to `a`.
 This is a limitation, since in some problems it might be (vastly) more
 efficient to backtrack to some other value.
 
@@ -181,7 +172,7 @@ or goroutines in Go.
 ## Generating Bit Strings
 
 Suppose we want to generate a list of all bit strings of length n. One way to
-do this relies on this very small knowledge base:
+do this relies on this tiny knowledge base:
 
 ```prolog
 bit(0).
@@ -232,9 +223,8 @@ first value it finds is `0`, and so `C` gets assigned that. This gives the
 third bit string: `[0, 1, 0]`. Backtracking continues in this fashion until
 all bit strings have been generated.
 
-While this is a simple way to generate bit strings in Prolog, it would be more
-convenient to have a function that calculates all bit strings of length `N`,
-e.g.:
+While this is a simple way to generate bit strings in Prolog, it's more
+convenient to have a function that takes the number of bits `N` as input:
 
 ```prolog
 ?- nbits(3, Bits).
@@ -249,8 +239,7 @@ Bits = [1, 1, 1] ;
 false
 ```
 
-`nbits` is a little bit tricky to write for new Prolog programmers, but it is
-well worth the effort to understand:
+Here is an implementation of `nbits`:
 
 ```prolog
 nbits(1, [B]) :-     % base case
@@ -262,23 +251,26 @@ nbits(N, [B|Bs]) :-  % recursive case
   nbits(N1, Bs).
 ```
 
+While short and simple, this can be a tricky function to write from scratch.
+Every line must be written carefully.
+
+
 ## Four-by-four Sudoku
 
 [Sudoku](http://en.wikipedia.org/wiki/Sudoku) puzzles are a popular number
-puzzle that turn out to be easily representable in Prolog. Typically, they are
-played on a 9-by-9 grid of cells, where the goal is to put the numbers 1 to 9
-into each cell such that:
+puzzle. Typically, they are played on a 9-by-9 grid of cells, and the goal
+is to put the numbers 1 to 9 into each cell such that:
 
 - Each row is a permutation of 1 to 9.
 
 - Each column is a permutation of 1 to 9.
 
-- Each of the 9 3-by-3 sub-squares contain a permutation of 1 to 9.
+- Each of the nine 3-by-3 sub-squares is a permutation of 1 to 9.
 
 Sudoku puzzles start with some numbers already filled in, and then, through
 logical deduction, you try to fill in all the other numbers. It's possible
-that some puzzles might have more than one solution, but that's usually
-frowned upon by human solvers.
+that some puzzles might have more than one solution, or no solution at all,
+but those are usually frowned upon by human solvers.
 
 A four-by-four Sudoku puzzle is the same idea, except it is played on a 4-by-4
 grid instead of a 9-by-9, e.g.:
@@ -292,7 +284,7 @@ M N  O P
 ```
 
 Each row and column must be a permutation of the numbers 1, 2, 3, 4. Also, the
-4 2-by-2 sub-squares must also be permutations of 1, 2, 3,4.
+four 2-by-2 sub-squares must also be permutations of 1, 2, 3,4.
 
 Here's how we could solve this puzzle in Prolog:
 
@@ -358,7 +350,8 @@ printrow(P, Q, R, S) :-
     write(' '), write(R), write(' '), write(S), nl.
 ```
 
-To run it, supply a starting 4-by-4 Sudoku grid:
+To run it, give it a starting 4-by-4 Sudoku grid (recall that `_` is the
+anonymous variable):
 
 ```prolog
     ?- sudoku(
@@ -466,13 +459,13 @@ false.
 ```
 
 Importantly, as soon as values are assigned to variables, we enforce the
-not-equal constraints so that failure will happen as soon as possible. `\+` is
+not-equal constraints so that failure will happen as soon as possible. `\+`
 means "not", and in this case tells when a value is not member of a list. The
 predicate would run much more slowly if you put all the `\=` constraints in
 one group at the bottom of the function.
 
-An even more efficient approach is to mimic how people do addition digit by
-digit using carries:
+An even more efficient approach is to mimic digit by digit addition using
+carries, the way people do it:
 
 ```prolog
 alpha2(S, E, N, D, M, O, R, Y, [S, E, N, D, M, O, R, E, M, O, N, E, Y]) :-
@@ -530,7 +523,7 @@ computational problem. By a map is meant a
 [graph](http://en.wikipedia.org/wiki/Graph_theory), i.e. a set of vertices
 connected by edges.
 
-In a map coloring problem, the task is to assign to each vertex a color such
+In a map coloring problem, the task is to assign a color to each vertex such
 that no two edges connected by an edge share the same color. In general, this
 is a computationally challenging problem, i.e. determining whether or not a
 graph can be 3-colored is [NP-complete](http://en.wikipedia.org/wiki/NP-
@@ -556,23 +549,23 @@ neighbor(A, B) :-
     A \= B.
 
 %
-% for a map consisting of a given list of vertices,
-% we list the edges between the vertices
+% A, B, C, D are the cities
+% neighbor(X, Y) means city X is next to city Y
 %
 map1([A, B, C, D]) :-
-        neighbor(A, B),
-        neighbor(B, C),
-        neighbor(C, A),
-        neighbor(D, A),
-        neighbor(D, B),
-        neighbor(D, C).
+    neighbor(A, B),
+    neighbor(B, C),
+    neighbor(C, A),
+    neighbor(D, A),
+    neighbor(D, B),
+    neighbor(D, C).
 
 map2([A, B, C, D, E]) :-
-        neighbor(A, B),
-        neighbor(B, C),
-        neighbor(C, D),
-        neighbor(D, E),
-        neighbor(E, A).
+    neighbor(A, B),
+    neighbor(B, C),
+    neighbor(C, D),
+    neighbor(D, E),
+    neighbor(E, A).
 ```
 
 While this is a nice example of a Prolog program, it is *not* the most
@@ -583,9 +576,9 @@ to map coloring, it could run much quicker.
 
 ## Concluding Thoughts
 
-The example shown here suggest Prolog is a good way to *represent* many
-combinatorial problems, but not necessarily an efficient way to *solve* them.
-Relying solely on Prolog's depth-first backtracking is too slow for all but
+These examples suggest Prolog is a good way to *represent* many combinatorial
+problems, but not necessarily an efficient way to *solve* them. They all rely
+on Prolog's depth-first backtracking, which by itself is too slow for all but
 the smallest examples.
 
 To make faster solvers, you typically need to add lots of problem-specific

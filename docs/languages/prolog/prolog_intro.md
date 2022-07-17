@@ -5,26 +5,28 @@
 
 Prolog is a [logic programming
 language](https://en.wikipedia.org/wiki/Logic_programming) developed in the
-early 1970s that is about objects and relations between them. It aims to be a
+early 1970s. It aims to be a
 [declarative programming language](https://en.wikipedia.org/wiki/Declarative_programming), i.e. Prolog
-programs often just say *what* they will do without specifying exactly *how*
+programs often say *what* they will do without specifying exactly *how*
 they will do it. To do this, Prolog has a built-in backtracking search that
 can solve pretty much any problem if you have enough time (naive Prolog
-programs can be quite slow!). Other examples of declarative languages are
-[SQL](https://en.wikipedia.org/wiki/SQL), [regular
-expressions](https://en.wikipedia.org/wiki/Regular_expression), and HTML.
+programs can be quite slow!). 
+
+> Other examples of declarative languages are
+> [SQL](https://en.wikipedia.org/wiki/SQL), [regular
+> expressions](https://en.wikipedia.org/wiki/Regular_expression), and
+> [HTML](https://en.wikipedia.org/wiki/HTML).
 
 Some common applications of Prolog are:
 
-- **Grammars for natural language processing**. For instance, 
-  [the IBM Watson system used Prolog](https://www.cs.nmsu.edu/ALP/2011/03/natural-language-processing-with-prolog-in-the-ibm-watson-system/)
-  (among other languages) to help it answer natural language questions.
+- **Grammars for natural language processing**. For instance, [the IBM Watson
+  system used Prolog](https://www.cs.nmsu.edu/ALP/2011/03/natural-language-processing-with-prolog-in-the-ibm-watson-system/)
+  (among other languages) to answer questions posed in natural language.
 
 - **Symbolic Artificial Intelligence**. Prolog has good support for logic, and
-  symbolic computing. For instance, if you want to write a logic
-  theorem-prover to help with your homework, Prolog is a pretty good choice
-  for that. Or if you wanted to implement an [expert
-  system](https://en.wikipedia.org/wiki/Expert_system), Prolog would be good.
+  symbolic computing. For instance, is a good choice for writing a
+  theorem-prover to help with your math homework, or implementing an [expert
+  system](https://en.wikipedia.org/wiki/Expert_system).
 
 - **In-memory databases**. Prolog can create and query complex databases
   inside of other languages. For instance, [Datomic](https://www.datomic.com/)
@@ -32,54 +34,46 @@ Some common applications of Prolog are:
   [datalog](https://en.wikipedia.org/wiki/Datalog) to write queries.
 
 - Problems that require some sort of backtracking, such as scheduling or
-  timetabling problem from logistics, can often be nicely represented and
-  solved in Prolog.
+  time-tabling problem from
+  [logistics](https://en.wikipedia.org/wiki/Logistics), can often be nicely
+  represented and solved in Prolog.
 
 While Prolog can be used as a general-purpose programming language, it's not
 very popular for that since its syntax and semantics is unfamiliar to most
 programmers, and you need to learn a whole new bag of tricks to write
-efficient programs (even for some common programming problems). Furthermore,
-it does not have a standard implementation of objects or modules, both of
-which are important in large-scale software engineering.
+efficient programs (even for some simple programming problems).
 
 
 ## Relations and Computation
 
-> **Note** Much of what follows is based on the book [Programming in Prolog,
-> by Clocksin and
-> Mellish](https://www.amazon.ca/Programming-Prolog-Using-ISO-Standard/dp/3540006788).
-> It's a good book to get if you'd like to learn more Prolog.
-
 A helpful way to think about Prolog is that it is about **relational
-programming**. In mathematics, a **relation** is set of tuples. If $A$ and $B$
-are sets, then a relation is any subset of their cross product:
+programming**. In mathematics, a **relation** is set of tuples. If A and B are
+sets, then a relation is any subset of their cross product:
 
 $$A \times B = \{ (a, b) : a \in A, b \in B \}$$
 
-For example, if $A=\{ 2,3,6 \}$ and $B=\{ 2,4 \}$, then $A \times B =
-\{ (2,2), (2,4), (3,2), (3,4), (6,2), (6,4) \}$. Every subset $A \times B$ is
-a relation..
+For example, if A={2, 3, 6} and B={2, 4}, then A x B = {(2,2), (2,4), (3,2),
+(3,4), (6,2), (6,4)}. Every subset A x B is a relation.
 
-More generally, if $A_1, A_2, \ldots, A_n$ are all non-empty sets, then a
-relation on them is any subset of this cross-product:
+More generally, if A_1, A_2, ... , A_n are all non-empty sets, then a relation
+on them is any *subset* of this cross-product:
 
 $$A_1 \times A_2 \times \ldots \times A_n = \{ (a_1,a_2,\ldots,a_n) : a_1\in
 A_1, a_2\in A_2, \ldots, a_n \in A_n \}$$
 
-$(a_1,a_2,\ldots,a_n)$ is an n-tuple, i.e. an ordered collection of n
-different values. A relation is just a set of 0 or more n-tuples
+(a_1, a_2, ... , a_n) is an n-tuple, i.e. an ordered collection of n different
+values. A relation is just a set of 0 or more n-tuples
 
-For example, suppose the set $A= \{ 18,19,20 \} $, and the set $P= \{ \textrm{yi},
-\textrm{veronica}, \textrm{pat}, \textrm{gary} \} $. We could then define the
-*age* relation like this: $\{ (\textrm{veronica},19), (\textrm{pat},19),
-(\textrm{yi},18) \}$. This relation is a set of pairs, where the first element
-is from $A$, and the second element is from $P$. Another relation would be
-$ \{ (\textrm{yi},19), (\textrm{yi},20), (\textrm{yi},18) \} $. There is no
-requirement that all values from $A$ or $P$ be present.
+For example, suppose the set A = {18, 19, 20}, and the set P = {yi, veronica,
+pat, gary}. We could then define the *age* relation like this: {(veronica,
+19), (pat, 19), (yi, 18)}. This relation is a set of pairs, where the first
+element is from A, and the second element is from P. Another relation would be
+{(yi, 19), (yi,20), (yi,18)}. There is no requirement that all values from A
+or P be present.
 
-Relations are a provocative way of thinking about computation.
-For example, consider this relation on $A \times A \times B$, where
-$A=\{ 1,2,3 \}$ and $B=\{ 1,2,3,4,5,6 \}$:
+Relations are a provocative way of thinking about computation. For example,
+consider this relation on A x A x B, where A = {1, 2, 3} and B = {1, 2, 3, 4,
+5, 6}:
 
 ```
 x y z
@@ -96,8 +90,8 @@ x y z
 ```
 
 The relation consists of nine 3-tuples, and we've written it like a database
-table. It represents all values of $x,y,z$, in the range 1 to 6, that satisfy
-the equation $x+y=z$.
+table. It represents all values of x, y, z, in the range 1 to 6, that satisfy
+the equation x + y = z.
 
 Now we can answer some computational questions by searching this table:
 
@@ -123,32 +117,28 @@ define Prolog predicates.
 
 ## Structure of a Prolog Program
 
+> **Note** Much of what follows is based on the book [Programming in Prolog,
+> by Clocksin and
+> Mellish](https://www.amazon.ca/Programming-Prolog-Using-ISO-Standard/dp/3540006788).
+
 Prolog programs consist of these main elements:
 
 - **Facts** about values and their relationships. For example, *kia* and
-  *jody* are values representing people, and "Kia is Jody's mother" is a fact
+  *jody* are values representing people, and "kia is jody's mother" is a fact
   that relates them.
 
   A value could be anything, e.g. a number, a string, a list, a function, etc.
-  Prolog supports symbols, e.g. lowercase identifiers like *kia* and *jody*
-  are Prolog symbols.
+  Lowercase identifiers like *kia* and *jody* are Prolog symbols.
 
-  Sometimes we'll refer to values as *objects*, but please keep in mind
+  It common to refer to Prolog values as *objects*, but please keep in mind
   these are **not** objects in the sense of object-oriented programming.
-
-  There are two common ways to think about Prolog facts. You can think of them
-  as:
-
-  1. **logical predicates**, as in first-order quantified logic
-  
-  2. **rows** in a database table; this is a more implementation-oriented view
 
 - **Rules** about objects and their relationships. For example, you might have
   the rule "if X and Y have the same parents, then they're siblings".
 
 - **Questions** that can be asked about objects and their relationships. These
   are like *queries* in a database system. For example, you might ask "Who are
-  Jody's parents?"
+  jody's parents?"
 
 Facts and rules together form what is often called a **knowledge base**
 (**KB**). Many useful Prolog programs are structured as a knowledge base, plus
@@ -176,7 +166,7 @@ For built-in help, use ?- help(Topic). or ?- apropos(Word).
 ?- 
 ```
 
-The `?-` is the Prolog interpreter's prompt and means it's waiting for you
+`?-` is the Prolog interpreter's prompt and means it's waiting for you
 to assert a fact or rule, or ask it a question.
 
 Suppose you have a file named `intro.pl` with this content:
@@ -187,9 +177,8 @@ Suppose you have a file named `intro.pl` with this content:
 likes(john, mary).   % a fact asserting that john likes mary
 ```
 
-This file contains a single fact, `likes(john, mary).`, which we can interpret
-as meaning "john likes mary". `%` marks the start of a single-line source code
-comment.
+This file contains a single fact, `likes(john, mary).`, meaning "john likes
+mary". `%` marks the start of a single-line source code comment.
 
 Now lets load `intro.pl` into the Prolog interpreter (using `[` and `]`), and
 ask a few questions:
@@ -209,24 +198,26 @@ false.
 false.
 ```
 
-Our program *asserts* that it is a fact that `john` likes `mary`, and so when
-we ask it the "question" `likes(john, mary).`, it returns `true`.
+The program *asserts* the fact that `john` likes `mary`, and so when we ask it
+the "question" `likes(john, mary).` ("Does john like mary?"), it returns
+`true`.
 
 When we ask it if `mary` likes `john`, i.e. `likes(mary, john).`, Prolog
 returns `false` because that's *not* a fact it knows or can infer. It *may* in
-reality be true that `john` likes `mary`, Prolog doesn't know that.
+reality be true that `john` likes `mary`, but Prolog doesn't know that.
 
-The third question, `likes(john, iron_man).`, is interesting for a couple of
-reasons. The object `iron_man` is not mentioned anywhere in `intro.pl`. You
-might guess that this would cause an error, but it's no problem in this
-example. Since Prolog can't prove that `john` likes `iron_man`, it concludes
-that `john` doesn't like `iron_man`.
+The third question, `likes(john, iron_man).`, is different. The value
+`iron_man` is not mentioned anywhere in `intro.pl`. You might guess that this
+would cause an error, but it's no problem in this example. Since Prolog can't
+prove that `john` likes `iron_man`, it concludes that `john` *doesn't* like
+`iron_man`.
 
-But that's a pretty aggressive conclusion: more accurately, we simply don't
-know whether or not `john` likes `iron_man` because we don't know anything
-about that. So a more accurate answer would be "I don't know if `john` likes
-`iron_man`". But Prolog does not do that. Instead, **if Prolog cannot prove
-something is true, it assumes that it is false**.
+That's a pretty aggressive conclusion. More accurately, we simply don't know
+whether or not `john` likes `iron_man` because we know nothing about
+`iron_man`. So a better answer would be "I don't know if `john` likes
+`iron_man`". But Prolog does not do that. Instead:
+
+  **if Prolog cannot prove something is true, it assumes that it is false**.
 
 > **Note** Assuming something is false if it cannot be proven to be true is
 > known as the [closed world
@@ -262,7 +253,7 @@ Note the following:
   strings. All we can do is test if two symbols are the same or different ---
   we can't access their individual characters.
 
-- The dot character `.` must always come at the end of a fact.
+- The dot character `.` marks the end of a fact.
 
 Here are a few more examples of facts:
 
@@ -274,8 +265,7 @@ kicked(itchy, scratchy).     % itchy kicked scratchy
 stole(bart, donut, homer).   % bart stole the donut from homer
 ```
 
-We often refer to a list of facts as a **database**, or **knowledge base**
-(**KB**).
+Altogether, we would refer to this set of facts as a knowledge base.
 
 The particular names used here have no special meaning in Prolog, and could
 just as well been written like this:
@@ -291,7 +281,7 @@ i(e, j, b).
 Of course, this is much harder to read!
 
 **Exercise.** Translate each of the following facts into Prolog. Use English
-words and names to make them easy to read.
+words and names to make the facts easy to read.
 
 - Gold is valuable.
 
@@ -306,7 +296,7 @@ words and names to make them easy to read.
 - Randy stole the book from Stan and gave it to Kyle.
 
 
-**Solutions**.
+**Solutions**
 
 - `valuable(gold).`
 
@@ -470,6 +460,22 @@ false.
 This means that there is no fact in the knowledge base whose first argument is
 the same its second argument.
 
+**Exercise.** Translate each of the following questions into Prolog. Use
+English words and names to make the facts easy to read.
+
+- Does Mary like John?
+- Does John like himself?
+- Who likes John?
+- Who does John like?
+- Who likes themselves?
+
+**Solutions**
+
+- `likes(mary, john).`
+- `likes(john, john).`
+- `likes(X, john).`
+- `likes(john, X).`
+- `likes(X, X).`
 
 ## Conjunctions
 
@@ -519,182 +525,24 @@ If the user types `;` after this `X` is returned, then Prolog keeps searching
 through the knowledge base in the same way, but does not find any more
 matches, and so returns `false`.
 
+**Exercise.** Translate each of the following questions into Prolog. Use
+English words and names to make the facts easy to read.
 
-## Rules
+- Does Mary like John, and John like Mary?
+- Do John and Mary like themselves?
+- Who likes John and Mary?
+- Who do John and Mary both like?
+- Who does John like that likes Mary?
+- Who mutually likes each other?
 
-Rules let us encode things like "john likes anyone who likes cheese". For
-example:
+**Solutions**
 
-```prolog
-likes(john, X) :- likes(X, cheese). % the rule "john likes anyone who likes cheese"
-```
-
-The `:-` in a Prolog rule means "if". On the left of the `:-` is the **head**
-of the rule, and on the right is the **body** of the rule. As with facts, a
-rule must end with a `.`.
-
-Here's another rule:
-
-```prolog
-likes(john, X) :- likes(X, cheese), likes(X, food).    % a rule
-```
-
-This can be read "john likes anyone who likes both food and cheese". Or,
-equivalently, "john likes X if X likes cheese and X likes food".
-
-Lets see a more complex rule. We will use this knowledge base:
-
-```prolog
-male(bob).
-male(doug).
-
-female(val).
-female(ada).
-
-parents(doug, ada, bob).
-parents(val, ada, bob).
-```
-
-We define the `sister_of` rule as follows:
-
-```prolog
-sister_of(X, Y) :-
-    female(X),
-    parents(X, Mother, Father),   % Mother and Father are capitalized,
-    parents(Y, Mother, Father).   % and so they are variables
-```
-
-This encodes the rule "X is the sister of Y if X is female, and the mother and
-father of X is the same as the mother and father of Y".
-
-We can now ask questions like this
-
-```prolog
-?- sister_of(val, doug).
-true.
-```
-
-Tracing how this question gets answered is instructive:
-
-- The question `sister_of(val, doug).` unifies with the head of the
-  `sister_of` rule.
-
-- Next Prolog tries to satisfy each goal in the `sister_of` rule in the order
-  they're given. Since `X` is `val`, it checks that `female(val)` is true.
-
-- `female(val)` is a fact in the knowledge base, so Prolog moves to the next
-  goal in the rule and searches for the first fact that unifies with
-  `parents(val, Mother, Father)`.
-
-- Looking at the knowledge base, we can see that there is only one match:
-  `parents(val, ada, bob)`. Thus, at this point, `Mother` has the value `ada`,
-  and `Father` has the value `bob`.
-
-- Prolog now tries to unify `parents(Y, Mother, Father)` with a fact in the
-  knowledge base. Since `X` is `val`, `Y` is `doug`, `Mother` is `ada`, and
-  `Father` is `bob`, Prolog checks to see if `parents(doug, ada, bob)` is in
-  the knowledge base. And it is, so Prolog returns `true`.
-
-- Although we don't see it, Prolog actually *backtracks* in this rule to see
-  if there are any other ways to satisfy it. There's no other way to satisfy
-  `parents(doug, ada, bob)`, so Prolog goes back to `parents(val, Mother,
-  Father)` to see if there is some other fact in the knowledge base that
-  unifies with it. There isn't, so it backtracks again to `female(val)`, which
-  cannot be unified with anything else. Thus, Prolog has found the one and
-  only way to satisfy this rule.
-
-Let's try another question:
-
-```prolog
-?- sister_of(val, X).
-X = doug ;
-X = val.
-```
-
-The question `sister_of(val, X).` asks "Who has val as a sister?" (or "Who are
-val's siblings?"). As we can see from the results, it doesn't return quite the
-right answer. It correctly identifies that doug has val as a sister, but it
-also claims val is her owns sister! This is obviously not correct, but our
-rule allows it. Let's trace it to see why:
-
-- `sister_of(val, X)` unifies with the head of the `sister_of` rule,
-  `sister_of(X, Y)`. We need to be careful with the two `X` variables here.
-  The `X` in the rule header is assigned `val`, and so for the rest of the
-  trace we will replace that `X` by `val`. The `X` in the question is
-  different. It unifies with the variable `Y`. We say that `X` and `Y` are
-  **shared** variables, or that they **coreference** each other. What happens
-  is that once one of these two variables is assigned a value, the other
-  variable immediately gets the same value.
-
-- Now Prolog checks the individual goals in the body of the rule. The first
-  one, `female(val)`, succeeds.
-
-- Next Prolog tries to unify `parents(val, Mother, Father)`, and it finds the
-  (only) match `parents(val, ada, bob)`. Now `Mother` is `ada`, and `Father`
-  is `bob`.
-
-- Now Prolog tries to unify `parents(Y, ada, bob)`. The first fact in the
-  knowledge base that matches this is `parents(doug, ada, bob).` and so `Y`
-  gets the value `doug`. The variable `X` from the question (*not* the `X` in
-  the rule header!) shares the same value as `X`, and so the result of the
-  question is `X = doug`.
-
-- If the user types `;`, Prolog backtracks and tries to find another solution.
-  Prolog backtracks by unassigning the variables in the most recently
-  satisfied goal, i.e. it tries to find another fact to unify `parents(Y, ada,
-  bob)` with. And there is such a fact in our knowledge base: `parents(val,
-  ada, bob)`. So `Y` gets assigned `val`, and thus the shared `X` variable
-  (the one in the question, not the one in the rule head!) also gets assigned
-  `val`. This is how the second result of `X = val` is found.
-
-Intuitively, the problem with the `sister_of` rule is that it doesn't state
-that someone cannot be their own sister, i.e. it nowhere says that `X` and `Y`
-must be different. We can fix it like this:
-
-```prolog
-sister_of(X, Y) :-
-    female(X),
-    parents(X, Mother, Father),
-    parents(Y, Mother, Father),
-    X \= Y.  % X and Y must be different
-```
-
-`\=` means `X \= Y` succeeds only when `X` and `Y` *don't* unify with each
-other, i.e. they have different values:
-
-```prolog
-?- sister_of(val, X).
-X = doug ;
-false.
-```
-
-In general, getting rules that work correctly in all cases is quite tricky in
-Prolog: they must be *completely* precise.
-
-
-## Anonymous Variables
-
-Prolog lets you use `_` as a special **anonymous variable**. We use it when
-we must include a variable, but don't care about the value it is assigned. For
-example:
-
-```prolog
-?- sister_of(val, _).  % Is val the sister of someone?
-true 
-```
-
-Prolog tells us the question succeeded, but it does not return a value for
-`_`.
-
-An important detail is that the anonymous variable `_` does not corefer (i.e.
-share) with any other variable (even itself). So when `sister_of(val, _)`, `_`
-will *not* share the same value as the `X` variable in the `sister_of` rule.
-
-We can also use anonymous variables in facts. For instance:
-
-```prolog
-likes(_, food).   % everybody likes food
-```
+- `likes(mary, john), likes(john, mary).`
+- `likes(mary, mary), likes(john, john).`
+- `likes(X, john), likes(X, mary).`
+- `likes(john, X), likes(X, mary).`
+- `likes(john, X), likes(mary, X).`
+- `likes(X, Y), likes(Y, X).`
 
 
 ## Using Prolog as a Database
@@ -811,6 +659,186 @@ Other = pegmatite,
 OtherGrain = very_coarse.
 ```
 
+
+## Rules
+
+Rules let us encode things like "john likes anyone who likes painting". For
+example:
+
+```prolog
+likes(john, X) :- likes(X, painting). % the rule "john likes anyone who likes painting"
+```
+
+The `:-` in a Prolog rule means "if". On the left of the `:-` is the **head**
+of the rule, and on the right is the **body** of the rule. As with facts, a
+rule must end with a `.`.
+
+Here's another rule:
+
+```prolog
+likes(john, X) :- likes(X, painting), likes(X, food).    % a rule
+```
+
+This can be read "john likes anyone who likes both food and painting". Or,
+equivalently, "john likes X if X likes painting and X likes food".
+
+Lets see a more complex rule. We will use this knowledge base:
+
+```prolog
+male(bob).
+male(doug).
+
+female(val).
+female(ada).
+
+parents(doug, ada, bob).
+parents(val, ada, bob).
+```
+
+We define the `sister_of` rule as follows:
+
+```prolog
+sister_of(X, Y) :-
+    female(X),
+    parents(X, Mother, Father),   % Mother and Father are capitalized,
+    parents(Y, Mother, Father).   % and so they are variables
+```
+
+This encodes the rule "X is the sister of Y if X is female, and the mother and
+father of X is the same as the mother and father of Y".
+
+We can now ask questions like this
+
+```prolog
+?- sister_of(val, doug).  % Is val doug's sister?
+true.
+```
+
+Tracing how this question gets answered is instructive:
+
+- The question `sister_of(val, doug).` unifies with the head of the
+  `sister_of` rule.
+
+- Next Prolog tries to satisfy each goal in the `sister_of` rule in the order
+  they're given. Since `X` is `val`, it checks that `female(val)` is true.
+
+- `female(val)` is a fact in the knowledge base, so Prolog moves to the next
+  goal in the rule and searches for the first fact that unifies with
+  `parents(val, Mother, Father)`.
+
+- Looking at the knowledge base, we can see that there is only one match:
+  `parents(val, ada, bob)`. Thus, at this point, `Mother` has the value `ada`,
+  and `Father` has the value `bob`.
+
+- Prolog now tries to unify `parents(Y, Mother, Father)` with a fact in the
+  knowledge base. Since `X` is `val`, `Y` is `doug`, `Mother` is `ada`, and
+  `Father` is `bob`, Prolog checks to see if `parents(doug, ada, bob)` is in
+  the knowledge base. And it is, so Prolog returns `true`.
+
+- Although we don't see it, Prolog actually *backtracks* in this rule to see
+  if there are any other ways to satisfy it. There's no other way to satisfy
+  `parents(doug, ada, bob)`, so Prolog goes back to `parents(val, Mother,
+  Father)` to see if there is some other fact in the knowledge base that
+  unifies with it. There isn't, so it backtracks again to `female(val)`, which
+  cannot be unified with anything else. Thus, Prolog has found the one and
+  only way to satisfy this rule.
+
+Let's try another question:
+
+```prolog
+?- sister_of(val, X).  % Who has val as a sister?
+X = doug ;
+X = val.
+```
+
+The question `sister_of(val, X).` asks "Who has val as a sister?" (or "Who are
+val's siblings?"). As we can see from the results, it doesn't return quite the
+right answer. It correctly identifies that doug has val as a sister, but it
+also claims val is her owns sister! This is obviously not correct, but our
+rule allows it. Let's trace it to see why:
+
+- `sister_of(val, X)` unifies with the head of the `sister_of` rule,
+  `sister_of(X, Y)`. We need to be careful with the two `X` variables here.
+  The `X` in the rule header is assigned `val`, and so for the rest of the
+  trace we will replace that `X` by `val`. The `X` in the question is
+  different. It unifies with the variable `Y`. We say that `X` and `Y` are
+  **shared** variables, or that they **coreference** each other. What happens
+  is that once one of these two variables is assigned a value, the other
+  variable immediately gets the same value.
+
+- Now Prolog checks the individual goals in the body of the rule. The first
+  one, `female(val)`, succeeds.
+
+- Next Prolog tries to unify `parents(val, Mother, Father)`, and it finds the
+  (only) match `parents(val, ada, bob)`. Now `Mother` is `ada`, and `Father`
+  is `bob`.
+
+- Now Prolog tries to unify `parents(Y, ada, bob)`. The first fact in the
+  knowledge base that matches this is `parents(doug, ada, bob).` and so `Y`
+  gets the value `doug`. The variable `X` from the question (*not* the `X` in
+  the rule header!) shares the same value as `X`, and so the result of the
+  question is `X = doug`.
+
+- If the user types `;`, Prolog backtracks and tries to find another solution.
+  Prolog backtracks by unassigning the variables in the most recently
+  satisfied goal, i.e. it tries to find another fact to unify `parents(Y, ada,
+  bob)` with. And there is such a fact in our knowledge base: `parents(val,
+  ada, bob)`. So `Y` gets assigned `val`, and thus the shared `X` variable
+  (the one in the question, not the one in the rule head!) also gets assigned
+  `val`. This is how the second result of `X = val` is found.
+
+Intuitively, the problem with the `sister_of` rule is that it doesn't state
+that someone cannot be their own sister, i.e. it nowhere says that `X` and `Y`
+must be different. We can fix it like this:
+
+```prolog
+sister_of(X, Y) :-
+    female(X),
+    parents(X, Mother, Father),
+    parents(Y, Mother, Father),
+    X \= Y.  % X and Y must be different
+```
+
+`\=` means `X \= Y` succeeds only when `X` and `Y` *don't* unify with each
+other, i.e. they have different values:
+
+```prolog
+?- sister_of(val, X).
+X = doug ;
+false.
+```
+
+In general, getting rules that work correctly in all cases is quite tricky in
+Prolog: they must be *completely* precise.
+
+
+## Anonymous Variables
+
+Prolog lets you use `_` as a special **anonymous variable**. We use it when a
+variable is needed, but we don't care about the value it is assigned. For
+example:
+
+```prolog
+?- sister_of(val, _).  % Is val the sister of someone?
+true 
+```
+
+Prolog tells us the question succeeded, but it does not return a value for
+`_`.
+
+An important detail is that the anonymous variable `_` does not co-refer (i.e.
+share) with any other variable (even itself). So when `sister_of(val, _)`, `_`
+will *not* share the same value as the `X` variable in the `sister_of` rule.
+
+We can also use anonymous variables in facts. For instance:
+
+```prolog
+likes(_, food).   % everybody likes food
+likes(john, _).   % john likes everything
+likes(_, _).      % everything likes everything
+```
+
+
 ## Doing Simple Arithmetic with Prolog
 
 Prolog functions *don't* return values like functions in most other languages.
@@ -857,7 +885,7 @@ The radius *must* be provided, otherwise you'll get an error.
 ## Working with Lists
 
 Prolog provides good support for lists. Prolog lists begin with `[`, end with
-`]`, and separate values with `,`. For example, `[5, 7, 3]` and `[a, b, c]`
+`]`, and separate values with `,`. For example, `[5, 7, 3]` and `[a, b, c, d]`
 are both Prolog lists. Prolog provides a nice notation for easily accessing
 the first element of a list, and the rest of the elements:
 
@@ -867,9 +895,6 @@ Head = a,
 Rest = [b, c, d].
 ```
 
-We will frequently use this `|` notation for processing lists one element at a
-time.
-
 You can also get more than one at item at the head of the list like this:
 
 ```prolog
@@ -878,6 +903,10 @@ First = a,
 Second = b,
 Rest = [c, d].
 ```
+
+We will frequently use `|` notation for processing lists one element at a
+time.
+
 
 ## The Member Function
 
@@ -955,8 +984,7 @@ useful.
 
 ## The Length Function
 
-The Prolog function `length(Lst, N)` can be used to calculate the length of a
-list:
+The Prolog function `length(Lst, N)` calculates the length of a list:
 
 ```prolog
 ?- length([], N).
@@ -982,7 +1010,7 @@ true.
 false.
 ```
 
-Surprisingly,  `length` can also create lists of a given length for you, e.g.:
+Surprisingly, `length` can also create lists of a given length for you, e.g.:
 
 ```prolog
 ?- length(X, 2).
