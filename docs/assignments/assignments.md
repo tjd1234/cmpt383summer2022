@@ -3,8 +3,8 @@
 The assignments for the first 4 languages (Go, Ruby, Racket, Haskell) are all
 based on the same assignment template given below.
 
-Prolog is so different that there is [a special Prolog
-assignment](prolog_asn.md) that is *not* about rational numbers.
+**[Prolog assignment](prolog_asn.md)**: [The Prolog assignment](prolog_asn.md)
+is different, and is a collection of questions.
 
 **Please see Canvas for the due dates for each of the assignments**. Also,
 submit your work on Canvas.
