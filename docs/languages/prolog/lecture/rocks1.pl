@@ -1,5 +1,11 @@
-% rocks.pl
+% rocks2.pl
 
+%
+% Some facts about rocks.
+% https://www.thoughtco.com/rock-identification-tables-1441174
+%
+% Grouped by rock name. Prolog gives warnings the predicates are not together.
+%
 grain(obsidian, fine).
 color(obsidian, dark).
 composition(obsidian, laval_glass).

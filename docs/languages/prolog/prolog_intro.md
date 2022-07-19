@@ -601,6 +601,9 @@ Note that this query assumes that all rocks have a grain. We'd get the same
 result (for this knowledge base) if we replaced `grain` by `color` or
 `composition`.
 
+`_` is the **anonymous variable**, and it can be used when we a variable is
+required but we don't care about its value.
+
 *Which rocks have a light color?*
 
 ```prolog
