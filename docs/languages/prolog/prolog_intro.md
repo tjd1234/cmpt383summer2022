@@ -531,7 +531,7 @@ English words and names to make the facts easy to read.
 - Does Mary like John, and John like Mary?
 - Do John and Mary like themselves?
 - Who likes John and Mary?
-- Who do John and Mary both like?
+- Who/what do John and Mary both like?
 - Who does John like that likes Mary?
 - Who mutually likes each other?
 

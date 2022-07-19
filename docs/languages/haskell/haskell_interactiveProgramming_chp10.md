@@ -1,6 +1,7 @@
 **Note**: These notes are based in large part on chapter 10 of the excellent
 book [Programming in Haskell, 2nd
-edition](https://www.cs.nott.ac.uk/~pszgmh/pih.html) by Graham Hutton.
+edition](https://www.cs.nott.ac.uk/~pszgmh/pih.html) by Graham Hutton. You
+should buy a copy.
 
 
 ## The Problem

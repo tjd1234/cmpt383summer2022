@@ -1,4 +1,4 @@
-% intro.pl
+% sample_code.pl
 
 %
 % A small knowledge base of facts about who likes who, and what.
