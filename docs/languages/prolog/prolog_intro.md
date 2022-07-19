@@ -694,6 +694,7 @@ male(doug).
 female(val).
 female(ada).
 
+% parents(Child, Mother, Father)
 parents(doug, ada, bob).
 parents(val, ada, bob).
 ```

@@ -1,4 +1,4 @@
-% rocks2.pl
+% rocks1.pl
 
 %
 % Some facts about rocks.
