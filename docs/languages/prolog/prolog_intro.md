@@ -1,6 +1,5 @@
 # Introduction to Prolog
 
-
 ## What is Prolog?
 
 Prolog is a [logic programming

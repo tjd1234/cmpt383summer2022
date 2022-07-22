@@ -18,9 +18,9 @@ every element. For example, `[a, b, c].map {|x| f(x)}` returns a new array
 >> ["one", "two", "three"].map {|s| s[0] + s[-1]}
 => ["oe", "to", "te"]
 
->> ["cat", "dogs", "mice"].map {|s| if s[-1] == "s" 
-	                                then s 
-	                                else s + "s" end}
+>> ["cat", "dogs", "mice"].map {|s| if   s[-1] == "s" 
+	                                  then s 
+	                                  else s + "s" end}
 => ["cats", "dogs", "mices"]
 ```
 

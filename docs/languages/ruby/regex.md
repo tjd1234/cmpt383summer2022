@@ -56,9 +56,8 @@ nil
 `^` and `$` are special regular expression symbols. Instead of matching
 characters, they match *positions* in a string. `^` matches the *start* of a
 string, and `$` matches the *end* of a string. So the regular expression
-`/^5$/`
-matches *just* the string "5", i.e. the string where the character "5" is
-immediately after the start, and immediately before the end.
+`/^5$/` matches *just* the string "5", i.e. the string where the character "5"
+is immediately after the start, and immediately before the end.
 
 Now suppose we want to determine if a string *contains* a 5 *or* a 6, or both.
 In a regular expression the symbol `|` means "or", and the regular expression
