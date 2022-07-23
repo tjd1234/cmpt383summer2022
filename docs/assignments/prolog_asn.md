@@ -175,7 +175,7 @@ N = 15
 Here's another example:
 
 ```prolog
-?- magic([2,4,6,8,10,12,14,16,18], Result. N).
+?- magic([2,4,6,8,10,12,14,16,18], Result, N).
 Result = [2, 10, 18, 12, 14, 4, 16, 6, 8],
 N = 30
 ```
