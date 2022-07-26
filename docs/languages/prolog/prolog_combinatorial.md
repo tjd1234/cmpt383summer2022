@@ -380,6 +380,16 @@ true ;
 false.
 ```
 
+Here's a version that's easier to cut-and-paste into the Prolog interpreter:
+
+```prolog
+sudoku(1, 4, _, _,
+       _, _, 4, _,
+       2, _, _, _,
+       _, _, _, _
+      ).
+```
+
 Solving the 4-by-4 Sudoku puzzle is so straightforward that it is natural to
 try the same approach with the full 9-by-9 version. 
 
@@ -387,17 +397,17 @@ However, while it will work in principle, there are so many possibilities to
 search through in the 9-by-9 version that the program **won't** finish in a
 reasonable amount of time. 
 
-We can get a rough estimate of the number of different 9-by-9 Sudoku boards as
-follows. Each row has $9! = 362880$ possible permutations, and since there are
-9 rows there are $9!^9 \approx 1.1 \times 10^{51}$ possibilities for this
-generate-and-test program to try.
+To see why, lets estimate the number of different 9-by-9 Sudoku boards. Each
+row has $9! = 362880$ possible permutations, and since there are 9 rows there
+are $9!^9 \approx 1.1 \times 10^{51}$ possibilities for this generate-and-test
+program to try.
 
 Assuming we could generate a *trillion* ($10^{12}$) permutations per second,
 it would take on the order of $10^{39}$ seconds to solve, which is about $3
 \times 10^{29}$ *centuries*.
 
 People can obviously solve 9-by-9 puzzles much more quickly than that. They do
-it by using  Sudoku-specific knowledge to more efficiently figure out numbers.
+it by using Sudoku-specific knowledge to more efficiently figure out numbers.
 Our program has no knowledge about Sudoku other than what counts as a
 solution. With more work, it is possible to add extra knowledge to make it
 faster, but we don't do that here.
@@ -417,7 +427,7 @@ There are a couple of ways to solve this problem in Prolog. One way is like
 this:
 
 ```prolog
-alpha1(S, E, N, D, M, O, R, Y], Send, More, Money) :-
+alpha1([S, E, N, D, M, O, R, Y], Send, More, Money) :-
     between(1, 9, S),
     between(0, 9, E), S \= E,
     between(0, 9, N), \+ member(N, [S,E]),       % \+ means "not"
@@ -505,8 +515,8 @@ work of finding satisfying values.
 
 While good in theory, in practice this is usually too slow for problems where
 the range of the variables is big (the range of these variables is only 0 to
-9). Bigger problems like this typically require a lot of extra
-problem-specific knowledge to make them run efficiently.
+9). Bigger problems typically require a lot of extra problem-specific
+knowledge to make them run efficiently.
 
 
 ## Map Coloring
