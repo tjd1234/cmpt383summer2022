@@ -38,7 +38,7 @@ map1([A, B, C]) :-
 % No 3-colorings are possible.
 %
 map2([A, B, C, D]) :-
-    neighbor(A, B),
+    neighbor(A, B), % edges of the graph
     neighbor(B, C),
     neighbor(C, A),
     neighbor(D, A),

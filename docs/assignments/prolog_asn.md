@@ -54,8 +54,7 @@ L = [1, 2, 3, 4, 5]
 Implement your own version called `numlist2(Lo, Hi, Result)`. Of course, don't
 use `numlist` anywhere!
 
-[Here's some documentation for numlist, and other useful list functions]
-(http://www.swi-prolog.org/pldoc/man?section=lists).
+[Here's some documentation for numlist, and other useful list functions](http://www.swi-prolog.org/pldoc/man?section=lists).
 
 
 ## Question 3: min and max

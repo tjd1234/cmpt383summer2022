@@ -1,9 +1,10 @@
 % sudoku4.pl
 
-solution(A, B, C, D,
-         E, F, G, H,
-         I, J, K, L,
-         M, N, O, P) :-
+solution(A, B,  C, D,
+         E, F,  G, H,
+         
+         I, J,  K, L,
+         M, N,  O, P) :-
     % row constraints
     permutation([1, 2, 3, 4], [A, B, C, D]),
     permutation([1, 2, 3, 4], [E, F, G, H]),

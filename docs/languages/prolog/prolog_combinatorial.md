@@ -102,14 +102,31 @@ it's worth noting that we can implement generate and test straightforwardly in
 other languages. For instance, in Python we could write this:
 
 ```python
-def solve_triple(n):            # Python
-    for a in xrange(1, n + 1):
-        for b in xrange(1, n + 1):
+def is_triple(a, b, c):      # Python 3
+    return a**2 + b**2 == c
+
+def solve_triple1(n):
+    result = []
+    for a in range(1, n + 1):
+        for b in range(1, n + 1):
             if a < b:
-                for c in xrange(1, n + 1):
+                for c in range(1, n + 1):
                     if b < c:
                         if is_triple(a, b, c):
-                            print(a, b, c)
+                            result.append((a,b,c))
+```
+
+Or more neatly using list comprehensions:
+
+```python
+def solve_triple2(n):
+    return [(a,b,c)
+            for a in range(1, n + 1)
+            for b in range(1, n + 1)
+            if a < b
+            for c in range(1, n + 1)
+            if b < c
+            if is_triple(a, b, c)]
 ```
 
 While backtracking is not a built-in part of Python, the flow of control jumps

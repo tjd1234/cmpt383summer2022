@@ -28,3 +28,4 @@ For built-in help, use ?- help(Topic). or ?- apropos(Word).
 
 ### Lecture 6 - 7 Prolog: Combinatorial Problems
 - [Solving combinatorial problems with Prolog](prolog_combinatorial.md)
+- Optional: [Prolog cuts](prolog_cuts.md).
