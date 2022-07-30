@@ -31,3 +31,7 @@ We'll mainly be using `ghci`, a Haskell interpreter.
 
 ### Lecture 7 Haskell: Interactive Programming
 - [Interactive programming](haskell_interactiveProgramming_chp10.md)
+
+### Extra: Introduction to Monads
+
+- [Monads](haskell_monads_chp12.md)
