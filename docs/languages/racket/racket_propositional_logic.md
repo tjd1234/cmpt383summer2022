@@ -548,6 +548,11 @@ checks if it has the form of a simple `cond`. There are two cases depending on
 whether the else-clause uses `else` or `#t`. If `expr` is not a simple `cond`,
 then we use `map` to call `rewrite-simple-cond` on each value in `expr`.
 
+> **Be careful!** Sometimes we you may actually want a simple cond expression.
+> For example, in the definition of `rewrite-simple-cond` itself there are two
+> simples conds inside the `match` expression, and *don't* want those converte
+> to `if`s.
+
 When `expr` is a simple cond, it is returned as an if-statement. We call
 `rewrite-simple-cond` on `val1` and `val2` using a small trick:
 `rewrite-simple-cond` is called on every element of the resulting if-list,
@@ -565,6 +570,3 @@ using this trick, we would have had to have used this longer expression:
 
 Write a function that converts a Racket `if` form into an equivalent `cond`
 form.
-
-EBNF: https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form
-Go: https://golang.org/

@@ -1,6 +1,27 @@
 #lang racket
 
 ;;
+;; The following are functions for processing propositional boolean expressions
+;; such as (t and ((not t) or f)). In most of the functions t (true) and f (false)
+;; are the only literal terms.
+;;
+;; The language of propositional boolean expressions can be defined more formally
+;; in EBNF (extended Backaus-Naur form) like this:
+;;
+;;          expr =  bool-literal | not-expr 
+;;                | and-expr     | or-expr
+;;
+;;  bool-literal = "t" | "f"
+;;
+;;      not-expr = "(" "not" expr ")"
+;;
+;;      and-expr = "(" expr "and" expr ")"
+;;
+;;       or-expr = "(" expr "or" expr ")"
+;;
+;;
+
+;;
 ;; Checks for propositional boolean expressions of these forms:
 ;;
 ;;   t, f         boolean literals
@@ -42,6 +63,7 @@
 ;; whose only logical operator is nand.
 ;;
 ;; (a nand b) is true when a and b are both true, and false otherwise.
+;;
 (define (is-nand? expr)
   (match expr
     ['t            #t]

@@ -54,14 +54,16 @@ study after Racket), which more strictly forbids loops and mutating functions.
 ### Lecture 7 Racket: Macros
 - [Higher order functions continued](racket_higher_order_functions.md)
 
-### Skipped Topics
+### Extra Topics
 
-The following topics were **not** covered in lectures, and **won't** appear on
-quizzes or the final exam:
+The following topics were **not** covered in the main lectures, but were
+ covered as extra topics in the final week. They **won't** appear on quizzes
+ or the final exam:
 
-- [The Racket match form](racket_match_form.md)
+- [The Racket match form](racket_match_form.md) and [a propositional logic
+  case study](racket_propositional_logic.md)
 - [Racket macros](racket_macros.md)
 
-There are details in the notes that were **not** covered in the lectures, and
-so use the lectures as a guide for what topics might appear in quizzes and the
-final exam.
+There are also details in the notes that were **not** covered in the lectures,
+and so use the lectures as a guide for what topics might appear in quizzes and
+the final exam.

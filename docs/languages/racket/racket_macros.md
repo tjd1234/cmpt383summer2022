@@ -2,12 +2,12 @@
 
 ## Introduction
 
-Regular [Racket] functions evaluate their arguments *before* they're passed
-into the function. For example, if `f` is a function then `(f (+ 2 3) (- 4
-1))` is the same as `(f 5 3)`. For most operations, this style of evaluation
-is efficient and works well.
+Regular Racket functions evaluate their arguments *before* they're passed into
+the function. For example, if `f` is a function then `(f (+ 2 3) (- 4 1))` is
+the same as `(f 5 3)`. For most operations, this style of evaluation is
+efficient and works well.
 
-But some [Racket] forms don't work this way. For instance, `define` isn't a
+But some Racket forms don't work this way. For instance, `define` isn't a
 function:
 
 ```scheme
@@ -29,7 +29,7 @@ don't necessarily evaluate all their arguments. For example:
 ```
 
 An `if` form evaluates only one possibility, never both. If `if` were a
-regular [Racket] function, then no matter the value of `code` both
+regular Racket function, then no matter the value of `code` both
 `(launch-missiles)` and `(do-not-launch-missiles)` would be evaluated.
 
 One last example: `let`-environments introduce new variables into a scope:
@@ -44,17 +44,17 @@ If `let` were a regular function, then `([a 1] [b 2])` would be evaluated,
 which would mostly likely cause an error since `a` and `b` are not defined.
 
 These examples show that regular functions *can't* implement some of the forms
-we see in [Racket]. Many programmers are okay with that: most other languages
+we see in Racket. Many programmers are okay with that: most other languages
 don't let you create new kinds of if-statements, or new ways to define
 functions.
 
-But for those programmers who do want to implement such things, [Racket]
-provides **macros**. [Racket]'s macros are much more useful than the
+But for those programmers who do want to implement such things, Racket
+provides **macros**. Racket's macros are quite different than the
 string-oriented macros you might have seen in C/C++. If you want to implement
 your own language features --- or even your own language --- macros will help
 you do this.
 
-Macros are a relatively complex feature of [Racket], and here we will only
+Macros are a relatively complex feature of Racket, and here we will only
 discuss a few basic examples. If you are curious to learn more, check out some
 on-line resources such as [Let Over Lambda](https://letoverlambda.com/) and
 [Beautiful Racket](https://beautifulracket.com/).
@@ -70,7 +70,7 @@ if `bool-expr` evaluates to `#t`, but, if `expr` is `#f`, prints an error
 message with the *unevaluated* `bool-expr` in it. Such a macro can be useful
 during program development.
 
-Implementing it as a [Racket] function doesn't work:
+Implementing it as a Racket function doesn't work:
 
 ```scheme
 (define (assert-bad expr)
@@ -140,9 +140,10 @@ even? ==> #<procedure:even?>
 ```
 
 This macro could be used for debugging, or in a program that makes quiz
-questions to help beginning programmers evaluate [Racket] expressions.
+questions to help beginning programmers evaluate Racket expressions.
 
-In the call `(print-val (+ 1 2))`, `(+ 1 2)` is *not* quoted. If it was, we'd get this:
+In the call `(print-val (+ 1 2))`, `(+ 1 2)` is *not* quoted. If it was, we'd
+get this:
 
 ```scheme
 > (print-val '(+ 1 2))
@@ -192,7 +193,7 @@ In general, macro calls always go through this two-step procedure: first
 ## Hygienic Macros
 
 Suppose we wanted to write our own `or` macro. For simplicity, lets restrict
-it to exactly two inputs ([Racket]s built-in `or` takes 0 or more inputs).
+it to exactly two inputs (Rackets built-in `or` takes 0 or more inputs).
 Here's a first attempt:
 
 ```scheme
@@ -247,17 +248,17 @@ numbers).
 So it seems `(my-or #f (= x 5))` *should* cause an error. But it doesn't: it
 *correctly* returns `#t`.
 
-What's happening here is that [Racket] has automatically *renamed* the `x`
+What's happening here is that Racket has automatically *renamed* the `x`
 variable in the `assert` macro to a name different than any other variable in
 `expr`. It does this precisely to avoid having a local variable "capture" a
 passed-in variable with the same name as has happened in this example.
 
-Since the macro system in [Racket] *automatically* does this renaming,
-[Racket] macros are called **hygienic macros**. With hygienic macros, you
+Since the macro system in Racket *automatically* does this renaming,
+Racket macros are called **hygienic macros**. With hygienic macros, you
 don't need to worry about variable name clashes.
 
-How does [Racket] get a new variable name that is not used anywhere else?
-Conceptually, you can imagine that [Racket] uses the built-in `gensym`
+How does Racket get a new variable name that is not used anywhere else?
+Conceptually, you can imagine that Racket uses the built-in `gensym`
 function:
 
 ```scheme
@@ -269,9 +270,10 @@ function:
 ```
 
 Every time `gensym` is called, it returns a new **uninterned** symbol, i.e. a
-symbol that is not yet used anywhere in [Racket] and thus is guaranteed to be
+symbol that is not yet used anywhere in Racket and thus is guaranteed to be
 unique. So the local `x` in `my-or` can be thought of as being renamed to a
 new `gensysm`-created variable.
+
 
 ## Example: Non-hygienic Macros in C++
 
@@ -308,5 +310,3 @@ Since `INCI` happens to use `a` as its index variable, the first do-loop
 doesn't actually modify the `a` variable defined in `main`. Of course, you
 could fix this by renaming the variable `a` in `INC` to, say, `i`. But then
 you'll get the same problem if you call `INC(i)`.
-
-[Racket]: https://racket-lang.org/
