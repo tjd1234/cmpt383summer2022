@@ -4,8 +4,8 @@ Lets write some functions that process **literal boolean propositional
 expressions** like `(t and (not f))` and `((f or f) and ((not t) and f))`. The
 symbols `t` and `f` stand for *true* and *false* respectively, and, at least
 to start, we will not have any variables. We are *not* using the built-in
-[Racket] boolean values (`#t` and `#f`) since this is our own little language
-different from [Racket].
+Racket boolean values (`#t` and `#f`) since this is our own little language
+different from Racket.
 
 
 ## Checking Valid Expressions
@@ -69,6 +69,7 @@ for valid expressions:
 Implement `(is-expr2? e)` that does the same thing as `'is-expr`, but instead
 of `cond` use `or`.
 
+
 ## Evaluating Propositions
 
 Given a valid propositional expression, `eval-prop-bool` determines if it is
@@ -96,8 +97,8 @@ true or false:
 f
 ```
 
-`eval-prop-bool` returns [Racket] boolean values, i.e. `#t` and `#f`. We do
-this for convenience so that we can use the built-in [Racket] forms `and`,
+`eval-prop-bool` returns Racket boolean values, i.e. `#t` and `#f`. We do
+this for convenience so that we can use the built-in Racket forms `and`,
 `or`, and `not`. If instead we returned `'t` and `'f`, we'd have to write
 special-purpose versions of `and`, `or`, and `not` that work with `'t` and
 `'f`.
@@ -107,28 +108,28 @@ special-purpose versions of `and`, `or`, and `not` that work with `'t` and
 `is-expr?` and `eval-prop` can be implemented using `match`:
 
 ```scheme
-(define (is-expr2? e)
+(define (is-expr? e)
   (match e
     ['t           #t]
     ['f           #t]
-    [`(not ,a)    (is-expr2? a)]
-    [`(,a or ,b)  (and (is-expr2? a)
-                       (is-expr2? b))]
-    [`(,a and ,b) (and (is-expr2? a)
-                       (is-expr2? b))]
+    [`(not ,a)    (is-expr? a)]
+    [`(,a or ,b)  (and (is-expr? a)
+                       (is-expr? b))]
+    [`(,a and ,b) (and (is-expr? a)
+                       (is-expr? b))]
     [_            #f]
     ))
 
-(define (eval-prop-bool2 expr)
+(define (eval-prop-bool expr)
   (match expr
     ['t           #t]
     ['f           #f]
-    [`(not ,a)    (not (eval-prop-bool2 a))]
-    [`(,a or ,b)  (or (eval-prop-bool2 a)
-                      (eval-prop-bool2 b))]
-    [`(,a and ,b) (and (eval-prop-bool2 a)
-                       (eval-prop-bool23 b))]
-    [_ (error "eval-prop-bool3: syntax error")]
+    [`(not ,a)    (not (eval-prop-bool a))]
+    [`(,a or ,b)  (or (eval-prop-bool a)
+                      (eval-prop-bool b))]
+    [`(,a and ,b) (and (eval-prop-bool a)
+                       (eval-prop-bool b))]
+    [_ (error "eval-prop-bool: syntax error")]
     ))
 ```
 
@@ -143,23 +144,23 @@ literal expression. It defines the legal expressions in a small language.
 
 A more common way to specify a language is to use [Extended Backus-Naur
 Formalism](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form),
-or [EBNF] for short. [EBNF] is a language designed for precisely defining the
+or EBNF for short. EBNF is a language designed for precisely defining the
 *syntax* (not semantics!) of programming languages.
 
 **Syntax** is the grammatical structure of the language. For example, `(define
-x 3)` is a syntactically valid [Racket] expression, but `define x 3)` and `(x
+x 3)` is a syntactically valid Racket expression, but `define x 3)` and `(x
 is 3)` are not syntactically valid. The **semantics** of a language is it's
 meaning. For example, the semantics of `(define x 3)` is something like "make
 a new variable called `x` and initialize it to 3".
 
-An [EBNF] description consists of a series of named **productions**, which are
+An EBNF description consists of a series of named **productions**, which are
 rules of this general form:
 
 ```
 production-name = body .
 ```
 
-Whenever you see a `production-name` in an [EBNF] rule, you can replace it
+Whenever you see a `production-name` in an EBNF rule, you can replace it
 with the `body` of its rule. The `.` at the end marks the end of the rule. A
 set of productions is called a **grammar**, and grammars can precisely define
 the syntax of a language. This greatly aids in the creation of language
@@ -169,7 +170,7 @@ processing tools like
 
 We'll use the [Go EBNF notation](https://golang.org/ref/spec#Notation), which
 is designed specifically for use in text. For example, here is the production
-that [Go] uses to define its assignment operator:
+that Go uses to define its assignment operator:
 
 ```
 assign_op = [ add_op | mul_op ] "=" .
@@ -177,10 +178,10 @@ assign_op = [ add_op | mul_op ] "=" .
 
 Anything in ""-marks indicates a **token** or symbol that appears as-is in the
 language. So in this production, the `"="` at the end means a `=` character
-appears in the [Go] program, while the `=` near the start is part of the
-[EBNF] rule.
+appears in the Go program, while the `=` near the start is part of the
+EBNF rule.
 
-Two other [EBNF] operators appear in this production. `|` is the
+Two other EBNF operators appear in this production. `|` is the
 **alternation** operator, and indicates a choices between two alternatives.
 `add_op | mul_op` means you can chose either `add_op` or `mul_up` (but not
 both). `add_op` is also defined with the alternation operator:
@@ -197,7 +198,7 @@ times. The expression `[ add_op | mul_op ]` means that the entire expression
 can appear, or not appear. If it does occur, then, because of the `|`, either
 `add_op` or `mul_op` is chosen.
 
-Another [EBNF] operator is `{}`, which indicates **repetition** 0, or more,
+Another EBNF operator is `{}`, which indicates **repetition** 0, or more,
 times. For example:
 
 ```
@@ -208,7 +209,7 @@ decimal_digit  = "0" ... "9" .
 decimal_digits = decimal_digit { [ "_" ] decimal_digit } .
 ```
 
-This describes legal identifiers in [Go], i.e. the legal names for variables,
+This describes legal identifiers in Go, i.e. the legal names for variables,
 functions, structs, types, and so on. It says that an identifier must start
 with a `letter`, and then be followed by 0 or more letters or digits.
 
@@ -221,12 +222,12 @@ decimal_digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" .
 ```
 
 The `identifier` rule lets us check if a sequence of characters is a legal
-identifier name. For example, `up2` is a legal [Go] identifier. We can verify
+identifier name. For example, `up2` is a legal Go identifier. We can verify
 this by tracing the `identifier` production. The first character, `u`, is a
 valid `letter`, and the next character is a valid `letter`. The 2 is a valid
 digit, and so the entire identifier is valid.
 
-Now consider `4xyz`, which is *not* a valid [Go] identifier. It starts with
+Now consider `4xyz`, which is *not* a valid Go identifier. It starts with
 `4`, but according to the `letter` production `4` is *not* a valid starting
 letter. So `4xyz` is *not* an `identifier`.
 
@@ -237,7 +238,7 @@ explicitly.
 
 ## Example: EBNF Rules for Literal Propositional Expressions
 
-Now lets write an [EBNF] grammar to describe the boolean literal expressions
+Now lets write an EBNF grammar to describe the boolean literal expressions
 recognized by `(is-expr? e)`:
 
 ```
@@ -253,16 +254,16 @@ bool-literal = "t" | "f" .
      or-expr = "(" expr "or" expr ")" .
 ```
 
-This [EBNF] grammar closely mimics the implementation of `is-expr?`, and so if
+This EBNF grammar closely mimics the implementation of `is-expr?`, and so if
 you start with the grammar it is often straightforward to create the
 corresponding checking function.
 
-[EBNF] *doesn't* require the productions to appear in any particular order.
+EBNF *doesn't* require the productions to appear in any particular order.
 But, for humans, we usually group related productions together, and often put
 them in order from either from most general to specific, or most specific to
 general.
 
-The syntax of this propositional expression language is very [Racket]-like,
+The syntax of this propositional expression language is very Racket-like,
 and every expression is fully-bracketed. This means we don't need to define
 the precedence of operators, since the brackets always make that explicit.
 
@@ -290,7 +291,7 @@ this automatically is called a **parser**.
 
 ## Example: EBNF for Racket cond Expressions
 
-Here's an [EBNF] description for a [Racket] `cond` expression:
+Here's an EBNF description for a Racket `cond` expression:
 
 ```scheme
 cond-expr = "(" "cond" { test-val } [else-val] ")" .
@@ -307,7 +308,7 @@ value     = any Racket expression that evaluates to
 ```
 
 Note that the ()-brackets in the `else-val` production are *not* in "-marks.
-Unquoted ()-brackets are used for **grouping** in Go's [EBNF], and in
+Unquoted ()-brackets are used for **grouping** in Go's EBNF, and in
 `else-val` they are needed to precisely indicate the right structure:
 
 ```scheme
@@ -318,10 +319,10 @@ else-val  = "else" | ( "#t" value ) .  // wrong
 else-val  = "else" | "#t" value .      // ambiguous
 ```
 
-This is *not* the official definition of a [Racket] `cond`. See the
+This is *not* the official definition of a Racket `cond`. See the
 [documentation on
 if-statements](https://docs.racket-lang.org/reference/if.html) for the
-official syntax. [Racket] uses a different formal notation for describing
+official syntax. Racket uses a different formal notation for describing
 syntax, but it is conceptually very similar to what we're using.
 
 
@@ -333,7 +334,7 @@ the standard logical operators. `(p nand q)` is true just when `p` and `q` are
 not both *true*, and false otherwise. In other words, `(p nand q)` is
 logically equivalent to `(not (p and q))`.
 
-Here's an [EBNF] description of a nand-only language:
+Here's an EBNF description of a nand-only language:
 
 ```
 expr = "t" | "f" | nand .
@@ -390,10 +391,10 @@ And here's a function that *evaluates* a nand-only expression:
 
 ## Rewriting Racket Code
 
-The following examples show how [Racket] can **rewrite** code. Compared to
-most other programming languages, this is relatively easy to do since [Racket]
-is [homoiconic](https://en.wikipedia.org/wiki/Homoiconicity), i.e. [Racket]
-programs are represented as [Racket] lists, and [Racket] has good support for
+The following examples show how Racket can **rewrite** code. Compared to
+most other programming languages, this is relatively easy to do since Racket
+is [homoiconic](https://en.wikipedia.org/wiki/Homoiconicity), i.e. Racket
+programs are represented as Racket lists, and Racket has good support for
 list processing.
 
 
@@ -467,6 +468,7 @@ Together, `to-nand` and `eval-nand` can implement `eval-prop-bool`:
 This version compiles the expression to nand-only one, and then evaluates that
 using `eval-nand`.
 
+
 ### Simplifying a Propositional Expression
 
 Sometimes we can rewrite a propositional expression as a shorter but logically
@@ -474,8 +476,8 @@ equivalent expression. For example, the **double negation elimination rule**
 says that any expression of the form `(not (not p))` is logically equivalent
 to `p`.
 
-Lets write an **expression simplifier** that applies this one particular rule
-to propositional expressions:
+Lets write an **expression simplifier** that applies this one simplification
+rule to an propositional expression:
 
 ```scheme
 ;; double negation elimination
@@ -504,7 +506,7 @@ a))` before `(not a)`.
 
 ### Converting `cond` to `if`
 
-After you've written a few [Racket] programs, you may have noticed that these
+After you've written a few Racket programs, you may have noticed that these
 two expressions are equivalent:
 
 ```scheme
@@ -522,7 +524,7 @@ have only one test, and so it's wise to use `cond` everywhere. After your
 program is done you could always go back and re-write single-condition `cond`s
 as equivalent if-expressions, but that is tedious and error-prone.
 
-Lets write a [Racket] function to do the work for us. We'll call
+Lets write a Racket function to do the work for us. We'll call
 single-condition `cond` expressions **simple conds**:
 
 ```scheme
@@ -561,12 +563,8 @@ using this trick, we would have had to have used this longer expression:
 
 ### Challenge: if to cond
 
-Write a function that converts a [Racket] `if` form into an equivalent `cond`
+Write a function that converts a Racket `if` form into an equivalent `cond`
 form.
 
-[Scheme]: https://en.wikipedia.org/wiki/Scheme_(programming_language)
-[Racket]: https://racket-lang.org/
-[LISP]: https://en.wikipedia.org/wiki/Lisp_(programming_language)
-[Java]: https://en.wikipedia.org/wiki/Java
-[EBNF]: https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form
-[Go]: https://golang.org/
+EBNF: https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form
+Go: https://golang.org/
