@@ -8,7 +8,7 @@
 ;; The language of propositional boolean expressions can be defined more formally
 ;; in EBNF (extended Backaus-Naur form) like this:
 ;;
-;;          expr =  bool-literal | not-expr 
+;;          expr =  bool-literal | not-expr        | means "or"
 ;;                | and-expr     | or-expr
 ;;
 ;;  bool-literal = "t" | "f"
@@ -18,60 +18,42 @@
 ;;      and-expr = "(" expr "and" expr ")"
 ;;
 ;;       or-expr = "(" expr "or" expr ")"
-;;
 
+(define expr1 '(t or (not f)))
+(define expr2 '((not (t and f)) or (not (not t))))
 
-
-
-
-
-
-
-
-
-
-;;
-;; Checks for propositional boolean expressions of these forms:
-;;
-;;   t, f         boolean literals
-;;   (not e)      e is a propositional boolean expression
-;;   (e1 and e2)  e1, e2 are propositional boolean expression
-;;   (e1 or e2)   e1, e2 are propositional boolean expression 
-;;
 (define (is-expr? e)
   (match e
-    ['t           #t]
-    ['f           #t]
-    [`(not ,a)    (is-expr? a)]
-    [`(,a or ,b)  (and (is-expr? a)
-                       (is-expr? b))]
-    [`(,a and ,b) (and (is-expr? a)
-                       (is-expr? b))]
-    [_            #f]
-    ))
+    ['t   #t]
+    ['f   #t]
+    ;; (not a)
+    [`(not ,a)  (is-expr? a)]
+    ;; (a or b)
+    [`(,a or ,b) (and (is-expr? a) (is-expr? b))]
+    ;; (a and b)
+    [`(,a and ,b) (and (is-expr? a) (is-expr? b))]
+    [_ #f]))
 
-;;
-;; Evaluates the given propositional boolean expression,
-;; returning #t or #f.
-;;
-(define (eval-prop-bool expr)
-  (match expr
-    ['t           #t]
-    ['f           #f]
-    [`(not ,a)    (not (eval-prop-bool a))]
-    [`(,a or ,b)  (or (eval-prop-bool a)
-                      (eval-prop-bool b))]
-    [`(,a and ,b) (and (eval-prop-bool a)
-                       (eval-prop-bool b))]
-    [_ (error "eval-prop-bool: syntax error")]
-    ))
+(define (eval-prop-bool e)
+  (match e
+    ['t  #t]
+    ['f  #f]
+    ;; (not a)
+    [`(not ,a) (not (eval-prop-bool a))]
+    ;; (a or b)
+    [`(,a or ,b) (or (eval-prop-bool a) (eval-prop-bool b))]
+    ;; (a and b)
+    [`(,a and ,b) (and (eval-prop-bool a) (eval-prop-bool b))]
+    [_ (error "invalid syntax")]))
 
+(define (eval-prop e)
+  (if (eval-prop-bool e) 't 'f))
 
 ;;
 ;; A nand-only expression is a propositional boolean expression
 ;; whose only logical operator is nand.
 ;;
-;; (a nand b) is true when a and b are both true, and false otherwise.
+;; (a nand b) is true when a and b are not both true, and false otherwise.
 ;;
 (define (is-nand-only? expr)
   (match expr
@@ -81,7 +63,6 @@
                         (is-nand-only? b))]
     [_             #f]
     ))
-
 
 ;;
 ;; Returns the value of expr, given that its a nand-only expression.
@@ -94,6 +75,7 @@
                              (eval-nand b)))]
     [_ (error "eval-nand: syntax error")]
     ))
+
 
 ;;
 ;; Converts a propositional expression into a logically equivalent one that uses only
@@ -126,30 +108,6 @@
                         (make-nand nanb nanb))]
         [_ (error "nand-rewrite syntax error")]
         )))
-
-;;
-;; We can now evaluate a propositional boolean expression by converting to
-;; nand-only and then calling eval-nand.
-;;
-(define (eval-prop-bool2 e)
-  (eval-nand (to-nand e)))
-
-;;
-;; Simplifying a propositional expression by re-writing expressions of the form
-;; (not (not a)) to a.
-;;
-;; double negation elimination
-;; (not (not expr)) <==> expr
-(define (simplify expr)
-  (match expr
-    ['t              't]
-    ['f              'f]
-    [`(not (not ,a)) (simplify a)]
-    [`(not ,a)       (list 'not (simplify a))]
-    [`(,a or ,b)     (list (simplify a) 'or (simplify b)) ]
-    [`(,a and ,b)    (list (simplify a) 'and (simplify b))]
-    [_ (error "simplify: syntax error")]
-    ))
 
 ;;
 ;; Convert expressions of this form:
@@ -192,4 +150,3 @@
                            (#t ,val2))   (map rewrite-simple-cond 
                                               (list 'if test val1 val2))]
                    [_ (map rewrite-simple-cond expr)])])))
-

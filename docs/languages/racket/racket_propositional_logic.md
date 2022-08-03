@@ -148,13 +148,13 @@ or EBNF for short. EBNF is a language designed for precisely defining the
 *syntax* (not semantics!) of programming languages.
 
 **Syntax** is the grammatical structure of the language. For example, `(define
-x 3)` is a syntactically valid Racket expression, but `define x 3)` and `(x
-is 3)` are not syntactically valid. The **semantics** of a language is it's
-meaning. For example, the semantics of `(define x 3)` is something like "make
-a new variable called `x` and initialize it to 3".
+x 3)` is a syntactically valid Racket expression, but `define x 3)` and `(x is
+3)` are not. The **semantics** of a language is it's meaning. For example, the
+semantics of `(define x 3)` is something like "make a new variable called `x`
+and initialize it to 3".
 
-An EBNF description consists of a series of named **productions**, which are
-rules of this general form:
+An EBNF description consists of a series of named **productions**, or
+**rules**, which are rules of this general form:
 
 ```
 production-name = body .
@@ -355,47 +355,47 @@ to help avoid ambiguity, i.e. each of the 3 lines in the production describe
 one kind of string.
 
 Now let's implement some helper functions based on this grammar. First,
-`(is-nand? expr)` tests if `expr` is a valid nand-only expression:
+`(is-nand-only? expr)` tests if `expr` is a valid nand-only expression:
 
 ```scheme
-(define (is-nand? expr)
+(define (is-nand-only? expr)
   (match expr
     ['t            #t]
     ['f            #t]
-    [`(,a nand ,b) (and (is-nand? a)
-                        (is-nand? b))]
+    [`(,a nand ,b) (and (is-nand-only? a)
+                        (is-nand-only? b))]
     [_             #f]
     ))
 
-> (is-nand? '((t nand f) nand (t nand t)))
+> (is-nand-only? '((t nand f) nand (t nand t)))
 #t 
-> (is-nand? '((t and f) nand (t nand t)))
+> (is-nand-only? '((t and f) nand (t nand t)))
 #f
 ```
 
 And here's a function that *evaluates* a nand-only expression:
 
 ```scheme
-(define (eval-nand expr)
+(define (eval-nand-only expr)
   (match expr
     ['t            #t]
     ['f            #f]
-    [`(,a nand ,b) (not (and (eval-nand a)
-                             (eval-nand b)))]
-    [_ (error "eval-nand: syntax error")]
+    [`(,a nand ,b) (not (and (eval-nand-only a)
+                             (eval-nand-only b)))]
+    [_ (error "eval-nand-only: syntax error")]
     ))
 
-> (eval-nand '((t nand f) nand (t nand t)))
+> (eval-nand-only '((t nand f) nand (t nand t)))
 #t
 ```
 
 ## Rewriting Racket Code
 
-The following examples show how Racket can **rewrite** code. Compared to
-most other programming languages, this is relatively easy to do since Racket
-is [homoiconic](https://en.wikipedia.org/wiki/Homoiconicity), i.e. Racket
-programs are represented as Racket lists, and Racket has good support for
-list processing.
+The following examples show how Racket can **rewrite** code. Compared to most
+other programming languages, this is relatively easy to do since Racket is
+[homoiconic](https://en.wikipedia.org/wiki/Homoiconicity), i.e. Racket
+programs are represented as Racket lists, and Racket has good support for list
+processing.
 
 
 ### Rewriting an Expression Using Just nand
@@ -415,7 +415,8 @@ equivalent `nand`-only expression:
 By repeatedly apply these rules we can transform any propositional expression
 into a logically equivalent one using only `nand`.
 
-Here we will *allow* variables, like `p` or `q`, in expressions we want to simplify:
+Here we will *allow* variables, like `p` or `q`, in expressions we want to
+simplify:
 
 ```scheme
 (define (make-nand a b) (list a 'nand b))
@@ -453,11 +454,11 @@ expression, and so `to-nand` is an example of a compiler.
 > In general, a **compiler** is a program that translates one language into
 > another. For example, a C++ compiler translates C++ into machine code.
 
-Together, `to-nand` and `eval-nand` can implement `eval-prop-bool`:
+Together, `to-nand` and `eval-nand-only` can implement `eval-prop-bool`:
 
 ```scheme
 (define (eval-prop-bool e)
-  (eval-nand (to-nand e)))
+  (eval-nand-only (to-nand e)))
   
 > (eval-prop-bool '(t or f))
 #t
@@ -465,8 +466,8 @@ Together, `to-nand` and `eval-nand` can implement `eval-prop-bool`:
 #f
 ```
 
-This version compiles the expression to nand-only one, and then evaluates that
-using `eval-nand`.
+This version compiles the expression to a nand-only one, and then evaluates it
+using `eval-nand-only`.
 
 
 ### Simplifying a Propositional Expression

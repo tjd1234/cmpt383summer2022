@@ -75,7 +75,7 @@ Implementing it as a Racket function doesn't work:
 ```scheme
 (define (assert-bad expr)
     (when (not expr)
-        (error 'assert "assertion fail: ~s" expr))
+        (error 'assert "assertion fail: ~s" expr)))
 
 > (assert-bad (= 2 2))  ;; does nothing if expr is #t
 > (assert-bad (= 1 2))
