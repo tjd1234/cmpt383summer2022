@@ -60,8 +60,8 @@ The following topics were **not** covered in the main lectures, but were
  covered as extra topics in the final week. They **won't** appear on quizzes
  or the final exam:
 
-- [The Racket match form](racket_match_form.md) and [a propositional logic
-  case study](racket_propositional_logic.md)
+- [The Racket match form](racket_match_form.md) and 
+  [a propositional logic case study](racket_propositional_logic.md)
 - [Racket macros](racket_macros.md)
 
 There are also details in the notes that were **not** covered in the lectures,
